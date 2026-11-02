@@ -1,0 +1,8 @@
+# Perguntas com resposta-ouro para o domínio. Ver spec/05-evals.md
+- id: <dominio>-001
+  question: "<pergunta como alguém do time faria>"
+  answer: "<resposta-ouro curta>"
+  grader: contains           # exact | contains | llm
+  source: <de onde a resposta foi tirada: repo:caminho#símbolo, URL ou ID>
+  concepts:
+    - domains/<dominio>/<pasta>/<conceito>.md

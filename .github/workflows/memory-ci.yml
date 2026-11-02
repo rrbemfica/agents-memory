@@ -1,0 +1,28 @@
+name: memory-ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"   # segunda 06:00 UTC: acusa conceitos expirados
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r tools/requirements.txt
+      - name: Validar bundles
+        run: python tools/validate.py ${{ github.event_name == 'schedule' && '--strict' || '' }}
+      - name: Gerar grafo
+        run: python tools/build_graph.py
+      - name: Grafo commitado está atualizado?
+        run: |
+          git diff --exit-code -- graph/ || {
+            echo "::error::graph/ desatualizado. Rode 'python tools/build_graph.py' e commite o resultado."
+            exit 1
+          }

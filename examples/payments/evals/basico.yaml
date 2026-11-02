@@ -1,0 +1,42 @@
+# Perguntas reais (fictícias neste exemplo) com resposta-ouro. Ver spec/05-evals.md
+- id: pay-001
+  question: "Qual o valor mínimo para uma cobrança usar Pix parcelado?"
+  answer: "R$ 100"
+  grader: contains
+  source: payments-api:src/rules/installments.ts#validateMinimumAmount
+  concepts:
+    - examples/payments/rules/pix-parcelado-minimo.md
+
+- id: pay-002
+  question: "Posso colocar retry no adapter da Cielo?"
+  answer: "Não. Retry é feito pela fila; o adapter envia idempotency-key (ADR-0042)."
+  grader: llm
+  source: https://github.com/example-org/payments-api/pull/412
+  concepts:
+    - examples/payments/decisions/0042-idempotencia-adquirente.md
+
+- id: pay-003
+  question: "Qual a diferença entre estorno e chargeback?"
+  answer: "Estorno é iniciado por nós; chargeback é a contestação do portador junto ao banco emissor."
+  grader: llm
+  source: https://example.org/glossario-financeiro#chargeback
+  concepts:
+    - examples/payments/terms/estorno.md
+    - examples/payments/terms/chargeback.md
+
+- id: pay-004
+  question: "Por que não fazemos mais parcelamento financiado por nós?"
+  answer: "Risco de crédito; foi substituído pelo Pix parcelado (ADR-0057 substitui ADR-0031)."
+  grader: llm
+  source: examples/payments/meetings/2026-w44-produto.md
+  concepts:
+    - examples/payments/decisions/0057-pix-parcelado.md
+    - examples/payments/decisions/0031-parcelamento-proprio.md
+
+- id: pay-005
+  question: "Qual o timeout da integração com a Cielo?"
+  answer: "15 s"
+  grader: contains
+  source: payments-api:config/acquirers.yaml#cielo.timeout
+  concepts:
+    - examples/payments/services/cielo.md

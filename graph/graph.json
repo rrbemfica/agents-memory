@@ -1,0 +1,397 @@
+{
+  "nodes": {
+    "examples/payments/decisions/0031-parcelamento-proprio.md": {
+      "type": "Decision",
+      "title": "ADR-0031: Parcelamento financiado pela própria empresa",
+      "status": "superseded",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/decisions/0042-idempotencia-adquirente.md": {
+      "type": "Decision",
+      "title": "ADR-0042: Idempotency-key obrigatória em chamadas a adquirentes",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/decisions/0057-pix-parcelado.md": {
+      "type": "Decision",
+      "title": "ADR-0057: Pix parcelado com mínimo de R$ 100",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/incidents/2026-10-14-timeout-cielo.md": {
+      "type": "Incident",
+      "title": "2026-10-14: Timeout na Cielo derrubou cobranças de cartão",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/index.md": {
+      "type": "Domain",
+      "title": "Pagamentos (exemplo)",
+      "status": null,
+      "trust": null,
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/meetings/2026-w44-produto.md": {
+      "type": "Meeting",
+      "title": "Produto Pagamentos, semana 44/2026",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/rules/idempotency-key-obrigatoria.md": {
+      "type": "BusinessRule",
+      "title": "Idempotency-key obrigatória em chamadas a adquirentes",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/rules/pix-parcelado-minimo.md": {
+      "type": "BusinessRule",
+      "title": "Pix parcelado exige valor mínimo de R$ 100",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/runbooks/rollback-pix.md": {
+      "type": "Runbook",
+      "title": "Rollback de cobranças Pix",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/services/cielo.md": {
+      "type": "Service",
+      "title": "Cielo (adquirente)",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/services/ledger.md": {
+      "type": "Service",
+      "title": "ledger",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/services/payments-api.md": {
+      "type": "Service",
+      "title": "payments-api",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/terms/chargeback.md": {
+      "type": "Term",
+      "title": "Chargeback",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/terms/estorno.md": {
+      "type": "Term",
+      "title": "Estorno",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "examples/payments/terms/pix-parcelado.md": {
+      "type": "Term",
+      "title": "Pix parcelado",
+      "status": "active",
+      "trust": "inferred",
+      "owner": "time-pagamentos",
+      "bundle": "examples/payments"
+    },
+    "org/decisions/0001-agents-md-e-okf.md": {
+      "type": "Decision",
+      "title": "ADR-0001: AGENTS.md nos repos de projeto e bundles OKF por domínio",
+      "status": "active",
+      "trust": "canonical",
+      "owner": "plataforma",
+      "bundle": "org"
+    },
+    "org/index.md": {
+      "type": "Domain",
+      "title": "Organização",
+      "status": null,
+      "trust": null,
+      "owner": "plataforma",
+      "bundle": "org"
+    }
+  },
+  "edges": [
+    {
+      "from": "examples/payments/decisions/0031-parcelamento-proprio.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/decisions/0042-idempotencia-adquirente.md",
+      "rel": "decidesAbout",
+      "to": "examples/payments/rules/idempotency-key-obrigatoria.md"
+    },
+    {
+      "from": "examples/payments/decisions/0042-idempotencia-adquirente.md",
+      "rel": "decidesAbout",
+      "to": "examples/payments/services/payments-api.md"
+    },
+    {
+      "from": "examples/payments/decisions/0042-idempotencia-adquirente.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/decisions/0057-pix-parcelado.md",
+      "rel": "decidesAbout",
+      "to": "examples/payments/rules/pix-parcelado-minimo.md"
+    },
+    {
+      "from": "examples/payments/decisions/0057-pix-parcelado.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/decisions/0057-pix-parcelado.md",
+      "rel": "supersedes",
+      "to": "examples/payments/decisions/0031-parcelamento-proprio.md"
+    },
+    {
+      "from": "examples/payments/decisions/0057-pix-parcelado.md",
+      "rel": "usesTerm",
+      "to": "examples/payments/terms/pix-parcelado.md"
+    },
+    {
+      "from": "examples/payments/incidents/2026-10-14-timeout-cielo.md",
+      "rel": "causedBy",
+      "to": "examples/payments/services/cielo.md"
+    },
+    {
+      "from": "examples/payments/incidents/2026-10-14-timeout-cielo.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/incidents/2026-10-14-timeout-cielo.md",
+      "rel": "produced",
+      "to": "examples/payments/runbooks/rollback-pix.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/decisions/0031-parcelamento-proprio.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/decisions/0042-idempotencia-adquirente.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/decisions/0057-pix-parcelado.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/incidents/2026-10-14-timeout-cielo.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/rules/idempotency-key-obrigatoria.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/rules/pix-parcelado-minimo.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/runbooks/rollback-pix.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/services/cielo.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/services/ledger.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/services/payments-api.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/terms/chargeback.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/terms/estorno.md"
+    },
+    {
+      "from": "examples/payments/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/terms/pix-parcelado.md"
+    },
+    {
+      "from": "examples/payments/meetings/2026-w44-produto.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/meetings/2026-w44-produto.md",
+      "rel": "produced",
+      "to": "examples/payments/decisions/0057-pix-parcelado.md"
+    },
+    {
+      "from": "examples/payments/meetings/2026-w44-produto.md",
+      "rel": "produced",
+      "to": "examples/payments/terms/pix-parcelado.md"
+    },
+    {
+      "from": "examples/payments/rules/idempotency-key-obrigatoria.md",
+      "rel": "mentions",
+      "to": "examples/payments/decisions/0042-idempotencia-adquirente.md"
+    },
+    {
+      "from": "examples/payments/rules/idempotency-key-obrigatoria.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/rules/pix-parcelado-minimo.md",
+      "rel": "mentions",
+      "to": "examples/payments/decisions/0057-pix-parcelado.md"
+    },
+    {
+      "from": "examples/payments/rules/pix-parcelado-minimo.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/rules/pix-parcelado-minimo.md",
+      "rel": "usesTerm",
+      "to": "examples/payments/terms/pix-parcelado.md"
+    },
+    {
+      "from": "examples/payments/runbooks/rollback-pix.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/runbooks/rollback-pix.md",
+      "rel": "usesTerm",
+      "to": "examples/payments/terms/estorno.md"
+    },
+    {
+      "from": "examples/payments/services/cielo.md",
+      "rel": "mentions",
+      "to": "examples/payments/incidents/2026-10-14-timeout-cielo.md"
+    },
+    {
+      "from": "examples/payments/services/cielo.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/services/ledger.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/services/payments-api.md",
+      "rel": "dependsOn",
+      "to": "examples/payments/services/cielo.md"
+    },
+    {
+      "from": "examples/payments/services/payments-api.md",
+      "rel": "dependsOn",
+      "to": "examples/payments/services/ledger.md"
+    },
+    {
+      "from": "examples/payments/services/payments-api.md",
+      "rel": "implements",
+      "to": "examples/payments/rules/idempotency-key-obrigatoria.md"
+    },
+    {
+      "from": "examples/payments/services/payments-api.md",
+      "rel": "implements",
+      "to": "examples/payments/rules/pix-parcelado-minimo.md"
+    },
+    {
+      "from": "examples/payments/services/payments-api.md",
+      "rel": "mentions",
+      "to": "examples/payments/decisions/0042-idempotencia-adquirente.md"
+    },
+    {
+      "from": "examples/payments/services/payments-api.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/terms/chargeback.md",
+      "rel": "mentions",
+      "to": "examples/payments/terms/estorno.md"
+    },
+    {
+      "from": "examples/payments/terms/chargeback.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/terms/estorno.md",
+      "rel": "mentions",
+      "to": "examples/payments/terms/chargeback.md"
+    },
+    {
+      "from": "examples/payments/terms/estorno.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "examples/payments/terms/pix-parcelado.md",
+      "rel": "partOf",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "org/decisions/0001-agents-md-e-okf.md",
+      "rel": "partOf",
+      "to": "org/index.md"
+    },
+    {
+      "from": "org/index.md",
+      "rel": "mentions",
+      "to": "examples/payments/index.md"
+    },
+    {
+      "from": "org/index.md",
+      "rel": "mentions",
+      "to": "org/decisions/0001-agents-md-e-okf.md"
+    }
+  ]
+}

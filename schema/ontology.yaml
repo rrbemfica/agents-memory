@@ -1,0 +1,77 @@
+# Ontologia do agents-memory — fonte de verdade para tools/validate.py.
+# Mudanças aqui exigem PR revisado pelos donos de org/ e atualização de spec/02 e spec/03.
+version: 0.1
+
+enums:
+  status: [candidate, active, superseded, deprecated]
+  trust: [canonical, inferred]
+  source_kind: [code, pr, adr, meeting, doc, ticket, url, incident]
+  log_action: [added, updated, superseded, deprecated, removed, verified]
+  grader: [exact, contains, llm]
+
+# Campos exigidos por categoria de tipo
+fields:
+  base: [type, title]
+  described: [description, owner, timestamp]   # todos exceto Log
+  concept: [status, trust, sources]            # todos exceto Domain e Log
+
+types:
+  Domain:
+    filename: index.md
+    category: navigation
+  Log:
+    filename: log.md
+    category: log
+  Decision:
+    folder: decisions
+    sections: [Contexto, Decisão, Alternativas rejeitadas, Consequências]
+  BusinessRule:
+    folder: rules
+    sections: [Regra, Motivo]
+  Term:
+    folder: terms
+    sections: [Definição, Exemplo, Não confundir com]
+  Service:
+    folder: services
+    required: [resource]
+    sections: [Responsabilidade]
+  Runbook:
+    folder: runbooks
+    sections: [Quando usar, Passos, Como verificar]
+  Incident:
+    folder: incidents
+    sections: [Resumo, Impacto, Causa, Lições]
+  Meeting:
+    folder: meetings
+    required: [expires]
+
+# Relações: de quais tipos podem sair e para quais podem apontar ("*" = qualquer conceito)
+relations:
+  partOf:       {from: "*", to: [Domain]}
+  dependsOn:    {from: [Service], to: [Service]}
+  implements:   {from: [Service], to: [BusinessRule]}
+  decidesAbout: {from: [Decision], to: [Service, BusinessRule, Runbook, Term]}
+  supersedes:   {from: [Decision], to: [Decision]}
+  usesTerm:     {from: "*", to: [Term]}
+  causedBy:     {from: [Incident], to: [Service, Decision]}
+  produced:     {from: [Incident, Meeting], to: "*"}
+  relatesTo:    {from: "*", to: "*"}
+
+# Nome da relação inversa, usada apenas no grafo gerado
+inverse:
+  partOf: hasPart
+  dependsOn: dependencyOf
+  implements: implementedBy
+  decidesAbout: decidedBy
+  supersedes: supersededBy
+  usesTerm: usedBy
+  causedBy: caused
+  produced: producedBy
+  relatesTo: relatesTo
+
+limits:
+  body_words_warn: 400
+  index_lines_warn: 60
+
+# Pastas que contêm bundles (as demais são ignoradas pelo validador)
+bundle_roots: [org, domains, examples]
