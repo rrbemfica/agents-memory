@@ -5,7 +5,7 @@
 **Semana 1 — Fundação**
 - [ ] Escolher o domínio piloto e o time dono.
 - [ ] `AGENTS.md` escrito à mão nos 2–3 repos mais ativos do domínio (template em [`templates/AGENTS.md`](../templates/AGENTS.md)), com `CLAUDE.md` → `@AGENTS.md`.
-- [ ] Criar `domains/<dominio>/` a partir de `examples/payments/`.
+- [ ] Criar `knowledge/domains/<dominio>/` a partir de `examples/payments/`.
 - [ ] 20 perguntas de eval a partir de dúvidas reais (Slack, onboarding, reviews).
 
 **Semana 2 — Semear**
@@ -37,9 +37,9 @@
 | Revisão vira gargalo ou carimbo | Fila envelhecendo, ou aceitação > 90% | Limite de candidatos, auto-merge para baixo risco, guardião rotativo |
 | Agentes não consultam o bundle | Poucas leituras além do `AGENTS.md` | Linha de ponte no `AGENTS.md`, plugin/hook que injeta o `index.md` |
 | Começo vazio → abandono | Perguntas sem resposta no bundle | Semear pelas dúvidas mais repetidas, não por completude |
-| Memória errada que parece certa | Evals caindo, contradições no uso | Fonte por símbolo, reverificação quando a fonte muda, amostragem mensal |
+| Memória errada que parece certa | Evals caindo, contradições no uso | Fonte por símbolo, reverificação quando a fonte muda, `stale_after`, amostragem mensal |
 | Duas fontes de verdade (AGENTS.md × bundle) | Contradições | Cada fato em um lugar; o outro só aponta |
-| Expiração mata conhecimento raro | Conceito útil some | Prazos por tipo; `Incident` e `Decision` não expiram |
+| `stale_after` mata conhecimento raro | Conceito útil some | Prazos por tipo; `Incident` e `Decision` sem `stale_after` |
 | "Já foi rejeitado" vira dogma | Discussões encerradas pelo ADR | Seção `Revisitar quando` |
 
 ## Depois do piloto

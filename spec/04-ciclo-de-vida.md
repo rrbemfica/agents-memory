@@ -1,102 +1,109 @@
 # 04 · Ciclo de vida de um conceito
 
 ```
- CAPTURAR ──► PROPOR ──► VERIFICAR ──► MERGE ──► USAR ──► MANTER
-   fontes      PR com     lint +        inferred   agente     gardener:
-   brutas      candidato  evals         ou         confirma   fonte mudou?
-                                        canonical  no uso     expirou?
+ CAPTURAR ──► PROPOR ──► CHECAR ──► MERGE ──► USAR ──► MANTER
+   fontes      PR com     validador   entra no   agente     fonte mudou?
+   brutas      conceito   + evals     nível de   confirma   passou do
+                                      confiança  no uso     stale_after?
      ▲                                                          │
      └──────────────────────────────────────────────────────────┘
 ```
 
-## Níveis de confiança
+## Níveis de confiança (OKF v0.2)
 
-| `trust` | Significa | Como o agente trata |
+Não declaramos confiança: ela é **derivada** de `generated` e `verified` (OKF §5.2–5.3).
+
+| Nível | Como chega lá | Exemplo de `verified` |
 |---|---|---|
-| `canonical` | Confirmado por humano **ou** por verificação automática forte (ver abaixo) | Pode seguir como regra |
-| `inferred` | Escrito por agente, com fonte, passou nas checagens, ainda não confirmado | **Pista**: verifica a fonte antes de agir; expira se não for confirmado |
+| **não verificado** | Agente escreveu e ninguém confirmou | (ausente) |
+| **confirmado por máquina** | Evals do conceito passaram, ou outro agente confirmou contra a fonte no uso | `{ by: process:memory-evals, at: … }` |
+| **revisado por humano** | Uma pessoa confirmou (no review do PR ou depois) | `{ by: human:joana, at: … }` |
 
-Material bruto (transcrição, log) **não** é conceito e nunca é servido como instrução.
+- Atores (OKF §7): `human:<id>` para pessoas, `process:<id>` para jobs (`process:memory-evals`, `process:memory-gardener`) e `<agente>/<versão>` para agentes (`claude-code/claude-opus-5-5`).
+- **Conceito escrito por pessoa** (`generated.by: human:…`) é confiável para quem o escreveu, mas só chega a "revisado por humano" quando aparece em `verified`. O normal é o revisor do PR se registrar ali.
+- **Conceito gerado por agente sem `verified` precisa de `stale_after`** (padrão: +30 dias). Se ninguém confirmar até lá, ele fica velho e sai.
+
+## Quando exigir humano
+
+Exigir revisão humana em tudo cria fila, e fila vira carimbo. Não exigir em nada abre espaço para memória envenenada. A regra é exigir humano **onde o erro é caro ou a verificação automática não alcança**:
+
+| Situação | Exige humano? | Por quê | Como é garantido |
+|---|---|---|---|
+| `Decision` `stable` | ✅ | Intenção e escolha não se verificam no código | Validador: `human:` em `generated.by` ou `verified`. Em `draft`, agentes podem propor. |
+| Tags `security`, `compliance`, `money` | ✅ | Erro caro | Validador: `verified` por `human:` (exceto em `draft`) |
+| Conteúdo de fonte externa (cliente, ticket público, web) | ✅ | Principal vetor de envenenamento | Validador: tag `external-source` exige `verified` por `human:` (exceto em `draft`) |
+| Descontinuar ou substituir conceito revisado por humano | ✅ | Perde histórico confiável | Revisão do PR pelo `CODEOWNERS` do domínio |
+| Conflito entre dois conceitos revisados por humano | ✅ | Nenhum sistema resolve bem conflitos | Revisão do PR |
+| `Term`, `Business Rule`, `Service`, `Runbook`, `Incident`, `Meeting` gerados por agente, com fonte | ❌ | Os evals verificam contra a fonte | Entram como não verificados, com `stale_after`, e sobem de nível pelos evals e pelo uso |
+| Atualizar `Service` a partir do código | ❌ | Derivado do código | Regenerado; evals confirmam |
+
+`draft` é a forma de um agente propor algo que exige humano: o conceito existe, aparece como proposta e não vale como regra até alguém revisar.
+
+Resultado esperado: a revisão humana fica concentrada em decisões e no que é arriscado, que deve ser uma fração pequena do volume.
 
 ## 1. Capturar
 
-Gatilhos que geram candidatos:
-
-| Gatilho | Candidato típico |
+| Gatilho | Conceito típico |
 |---|---|
-| Fim de sessão de agente | "O que aprendi que não está escrito?" → no máximo **2** candidatos por sessão |
-| Plano de feature concluído | `Decision` candidata, com alternativas rejeitadas |
-| Comentário de review aceito | `BusinessRule` ou linha de `AGENTS.md` |
-| Reunião (com consentimento) | `Term`, `Decision` candidatos + `Meeting` curto |
+| Fim de sessão de agente | "O que aprendi que não está escrito?" → no máximo **2** conceitos por sessão |
+| Plano de feature concluído | `Decision` em `draft`, com alternativas rejeitadas (vai para revisão humana) |
+| Comentário de review aceito | `Business Rule` ou linha de `AGENTS.md` |
+| Reunião (com consentimento) | `Term`, `Decision` em `draft` e um `Meeting` curto |
 | Postmortem fechado | `Incident` + lições como conceitos |
-| Merge que muda contrato/dependência | Atualização de `Service` |
+| Merge que muda contrato ou dependência | Atualização de `Service` |
 
 ## 2. Propor
 
-- Todo candidato entra **por PR** neste repo, com `status: candidate` ou `trust: inferred`.
-- Antes de criar, procurar conceito existente: se já existe, propor **delta** nele (ou só renovar `last_verified`), não um novo.
-- **Nunca reescrever um conceito inteiro** com LLM. Mudanças são pontuais e revisáveis no diff.
-- Conflito com conceito `canonical` → o PR **não** sobrescreve; abre como conflito (ver "o que exige humano").
-- Registrar no `log.md` do bundle.
+- Todo conceito entra **por PR** neste repo.
+- Antes de criar, procure conceito existente. Se ele já existe, proponha um **delta** (ou só um novo item em `verified`), não um conceito novo.
+- **Nunca reescreva um conceito inteiro** com LLM: mudanças são pontuais e revisáveis no diff.
+- Conflito com conceito revisado por humano: o PR **não** sobrescreve; ele vai para revisão humana.
+- Registre a mudança no `log.md` do domínio.
 
-## 3. Verificar (automático, no CI)
+## 3. Checar (automático, no CI)
 
-| Checagem | O que garante | Status |
+| Checagem | Garante | Status |
 |---|---|---|
-| `validate.py` | Estrutura, tipo, campos, relações válidas, links, seções, segredos | ✅ implementado |
-| Grounding | Cada `quote` existe literalmente na fonte | 📐 planejado (hoje: obrigatoriedade do campo) |
-| Evals unitários | O conceito responde certo e agrega valor (com vs. sem) | 📐 ver [05](05-evals.md) |
-| Evals do domínio | Nada piorou no domínio | 📐 ver [05](05-evals.md) |
+| `validate.py` | Conformidade OKF v0.2, campos, tipos, relações, links, seções, regras de humano, segredos | ✅ implementado |
+| Grounding | Cada `quote` existe literalmente na fonte | 📐 planejado |
+| Evals do conceito | Responde certo e agrega valor (com e sem memória) → acrescenta `verified: process:memory-evals` | 📐 ver [05](05-evals.md) |
+| Evals do domínio | Nada piorou | 📐 ver [05](05-evals.md) |
 
-## 4. Merge
+## 4. Usar
 
-| Situação | Quem aprova | Resultado |
-|---|---|---|
-| Candidato de agente, risco baixo, checagens ok | Ninguém (auto-merge) | `trust: inferred`, `expires` = +30 dias |
-| Conceito escrito por humano em PR revisado | Revisor do PR | `trust: canonical` |
-| Conceito derivado de algo já aprovado (PR merged, ADR aceito, postmortem fechado) com `quote` | Ninguém | `trust: canonical` — a aprovação já aconteceu na fonte |
-| Risco alto (ver abaixo) | Dono do domínio/segurança | conforme revisão |
-
-### O que sempre exige humano
-
-1. Regras de **segurança, compliance ou dinheiro**.
-2. Conteúdo vindo de **fonte externa** (cliente, ticket público, web).
-3. **Conflito** entre conceitos `canonical`.
-4. **Substituir ou remover** conceito `canonical`.
-5. `Decision` nova **sem fonte humana**.
-
-## 5. Usar
-
-Ordem de leitura do agente (do mais barato ao mais caro):
+Ordem de leitura do agente, do mais barato ao mais caro:
 
 1. `AGENTS.md` do repo (automático).
 2. `index.md` do domínio indicado.
-3. Conceitos específicos linkados (sob demanda).
-4. Busca/grafo (MCP) se ainda faltar.
+3. Conceitos linkados, sob demanda.
+4. Busca ou grafo (MCP), se ainda faltar.
 
-Ao usar um conceito `inferred`, o agente confere a fonte. Confirmou → pode propor renovação (`last_verified`, `expires`). Contradito → propõe correção.
+Regras de uso:
+- **não verificado** → conferir a fonte antes de agir;
+- **passou do `stale_after`** → tratar como desatualizado e avisar;
+- **`deprecated`** → não usar; seguir `supersededBy` no grafo.
 
-**Promoção a `canonical`:** 3 confirmações independentes no uso sem contradição, ou aprovação humana.
+Se o agente confirmar o conceito contra a fonte, ele pode propor um item em `verified` com o próprio ator. Se for contradito, propõe a correção.
 
-## 6. Manter (gardener)
+## 5. Manter (gardener)
 
-Job agendado (📐 especificado; a expiração já é checada pelo validador):
+Job agendado (📐 especificado; `stale_after` vencido já é checado pelo validador):
 
-- **Fonte mudou?** Se o símbolo/arquivo citado em `sources` mudou, marcar para reverificação (rodar os evals do conceito).
-- **Expirou?** `inferred` ou `Meeting` com `expires` no passado → remover (ou renovar se confirmado).
-- **Órfão?** Conceito que nenhum `index.md` ou relação alcança → avisar o dono.
-- **Sem dono ativo?** `owner` que não existe mais → avisar `org/`.
-- **Grafo e backlinks** regenerados (`build_graph.py`).
+- **A fonte mudou?** Rodar de novo os evals do conceito. Passou: renova `verified` e `stale_after`. Falhou: abre PR de correção.
+- **Passou do `stale_after`?** Renovar se confirmado; senão, remover.
+- **Órfão?** Conceito que nenhum `index.md` lista e nenhuma relação alcança → avisar o dono.
+- **Dono não existe mais?** Avisar os donos de `org/`.
+- Regenerar grafo e backlinks (`build_graph.py`).
 
-## Prazos padrão
+## Prazos padrão de `stale_after`
 
-| Tipo | `inferred` expira em | Reverificação de `canonical` |
+| Tipo | Gerado por agente, sem `verified` | Depois de verificado |
 |---|---|---|
-| `Service` | 30 dias | quando a fonte muda |
-| `BusinessRule`, `Term` | 60 dias | 180 dias |
-| `Decision` | — (exige fonte humana) | não expira; só é substituída |
-| `Runbook` | 60 dias | 180 dias ou quando falhar em uso |
-| `Incident` | — | não expira |
-| `Meeting` | sempre 90 dias | — |
+| `Service` | +30 dias | +90 dias, ou quando a fonte mudar |
+| `Business Rule`, `Term` | +60 dias | +180 dias |
+| `Decision` | — (exige humano) | sem `stale_after`; só é substituída |
+| `Runbook` | +60 dias | +180 dias, ou quando falhar em uso |
+| `Incident` | — | sem `stale_after` |
+| `Meeting` | +90 dias | +90 dias |
 
 Estes valores são **hipóteses iniciais**. Devem ser recalibrados pela meia-vida medida nos evals ([05](05-evals.md)).

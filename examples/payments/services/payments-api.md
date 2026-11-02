@@ -2,29 +2,30 @@
 type: Service
 title: payments-api
 description: Recebe cobranças de cartão e Pix, chama o adquirente e registra no ledger.
-tags: [api]
-timestamp: 2026-10-30
 resource: https://github.com/example-org/payments-api
-owner: time-pagamentos
-status: active
-trust: canonical
-last_verified: 2026-11-01
+tags: [api]
+status: stable
+generated: { by: human:tl-pagamentos, at: 2026-10-30T12:00:00Z }
+verified:
+  - { by: human:tl-pagamentos, at: 2026-10-30T12:00:00Z }
+  - { by: process:memory-evals, at: 2026-11-01T06:00:00Z }
+stale_after: 2027-01-30T00:00:00Z
 sources:
-  - kind: code
-    ref: payments-api:src/routes/charge.ts#createCharge
+  - id: charge-route
+    resource: payments-api:src/routes/charge.ts#createCharge
+owner: team:pagamentos
 relations:
-  partOf: [examples/payments/index.md]
-  dependsOn: [examples/payments/services/ledger.md, examples/payments/services/cielo.md]
-  implements:
-    - examples/payments/rules/pix-parcelado-minimo.md
-    - examples/payments/rules/idempotency-key-obrigatoria.md
+  dependsOn: [/services/ledger, /services/cielo]
+  implements: [/rules/pix-parcelado-minimo, /rules/idempotency-key-obrigatoria]
 ---
-## Responsabilidade
-Ponto de entrada de toda cobrança. Valida, chama o adquirente e registra o resultado no [ledger](ledger.md). Não calcula tarifas (isso é do billing).
+# Responsabilidade
+Ponto de entrada de toda cobrança. Valida, chama o adquirente e registra o resultado no [ledger](ledger.md). Não calcula tarifas (isso é do billing).[^charge-route]
 
-## Interfaces
+# Interfaces
 - Entrada: `POST /charges`
 - Saída: chamada ao adquirente; evento `charge.completed` na fila
 
-## Armadilhas
+# Armadilhas
 - Retry é feito pela fila, não no adapter do adquirente ([ADR-0042](../decisions/0042-idempotencia-adquirente.md)).
+
+[^charge-route]: payments-api, rota de cobrança

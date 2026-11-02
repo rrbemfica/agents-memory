@@ -1,28 +1,24 @@
----
-type: Domain
-title: <Domínio>
-description: <uma frase: o que este domínio cobre>
-owner: <time>
-timestamp: YYYY-MM-DD
-tags: []
----
-## O que é
-<Duas ou três frases.>
+# <Domínio>
 
-## Serviços
-- [<servico>](services/<servico>.md): <uma linha>
+* [Dono](<link>) - team:<time>
+* [Repo <nome>](<URL>) - <uma linha>
 
-## Decisões vigentes
-- [ADR-NNNN](decisions/NNNN-<slug>.md): <uma linha>
+# Serviços
 
-## Regras de negócio
-- [<regra>](rules/<slug>.md)
+* [<servico>](services/<servico>.md) - <descrição do conceito>
 
-## Termos-chave
-- [<termo>](terms/<slug>.md)
+# Decisões vigentes
 
-## Runbooks
-- [<runbook>](runbooks/<slug>.md)
+* [ADR-NNNN](decisions/NNNN-<slug>.md) - <descrição>
 
-## Repos
-- <repo>: <URL>
+# Regras de negócio
+
+* [<regra>](rules/<slug>.md) - <descrição>
+
+# Termos
+
+* [<termo>](terms/<slug>.md) - <descrição>
+
+# Runbooks e incidentes
+
+* [<runbook>](runbooks/<slug>.md) - <descrição>

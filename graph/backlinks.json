@@ -1,238 +1,106 @@
 {
-  "examples/payments/decisions/0031-parcelamento-proprio.md": [
+  "examples/payments/decisions/0031-parcelamento-proprio": [
     {
-      "from": "examples/payments/decisions/0057-pix-parcelado.md",
+      "from": "examples/payments/decisions/0057-pix-parcelado",
       "rel": "supersededBy"
-    },
-    {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
     }
   ],
-  "examples/payments/decisions/0042-idempotencia-adquirente.md": [
+  "examples/payments/decisions/0042-idempotencia-adquirente": [
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
+      "from": "examples/payments/rules/idempotency-key-obrigatoria",
+      "rel": "linkedFrom"
     },
     {
-      "from": "examples/payments/rules/idempotency-key-obrigatoria.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/services/payments-api.md",
-      "rel": "mentionedBy"
+      "from": "examples/payments/services/payments-api",
+      "rel": "linkedFrom"
     }
   ],
-  "examples/payments/decisions/0057-pix-parcelado.md": [
+  "examples/payments/decisions/0057-pix-parcelado": [
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/meetings/2026-w44-produto.md",
+      "from": "examples/payments/meetings/2026-w44-produto",
       "rel": "producedBy"
     },
     {
-      "from": "examples/payments/rules/pix-parcelado-minimo.md",
-      "rel": "mentionedBy"
+      "from": "examples/payments/rules/pix-parcelado-minimo",
+      "rel": "linkedFrom"
     }
   ],
-  "examples/payments/incidents/2026-10-14-timeout-cielo.md": [
+  "examples/payments/rules/idempotency-key-obrigatoria": [
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/services/cielo.md",
-      "rel": "mentionedBy"
-    }
-  ],
-  "examples/payments/index.md": [
-    {
-      "from": "examples/payments/decisions/0031-parcelamento-proprio.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/decisions/0042-idempotencia-adquirente.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/decisions/0057-pix-parcelado.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/incidents/2026-10-14-timeout-cielo.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/meetings/2026-w44-produto.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/rules/idempotency-key-obrigatoria.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/rules/pix-parcelado-minimo.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/runbooks/rollback-pix.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/services/cielo.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/services/ledger.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/services/payments-api.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/terms/chargeback.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/terms/estorno.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "examples/payments/terms/pix-parcelado.md",
-      "rel": "hasPart"
-    },
-    {
-      "from": "org/index.md",
-      "rel": "mentionedBy"
-    }
-  ],
-  "examples/payments/rules/idempotency-key-obrigatoria.md": [
-    {
-      "from": "examples/payments/decisions/0042-idempotencia-adquirente.md",
+      "from": "examples/payments/decisions/0042-idempotencia-adquirente",
       "rel": "decidedBy"
     },
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/services/payments-api.md",
+      "from": "examples/payments/services/payments-api",
       "rel": "implementedBy"
     }
   ],
-  "examples/payments/rules/pix-parcelado-minimo.md": [
+  "examples/payments/rules/pix-parcelado-minimo": [
     {
-      "from": "examples/payments/decisions/0057-pix-parcelado.md",
+      "from": "examples/payments/decisions/0057-pix-parcelado",
       "rel": "decidedBy"
     },
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/services/payments-api.md",
+      "from": "examples/payments/services/payments-api",
       "rel": "implementedBy"
     }
   ],
-  "examples/payments/runbooks/rollback-pix.md": [
+  "examples/payments/runbooks/rollback-pix": [
     {
-      "from": "examples/payments/incidents/2026-10-14-timeout-cielo.md",
+      "from": "examples/payments/incidents/2026-10-14-timeout-cielo",
       "rel": "producedBy"
-    },
-    {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
     }
   ],
-  "examples/payments/services/cielo.md": [
+  "examples/payments/services/cielo": [
     {
-      "from": "examples/payments/incidents/2026-10-14-timeout-cielo.md",
+      "from": "examples/payments/incidents/2026-10-14-timeout-cielo",
       "rel": "caused"
     },
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/services/payments-api.md",
+      "from": "examples/payments/services/payments-api",
       "rel": "dependencyOf"
     }
   ],
-  "examples/payments/services/ledger.md": [
+  "examples/payments/services/ledger": [
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/services/payments-api.md",
+      "from": "examples/payments/services/payments-api",
       "rel": "dependencyOf"
     }
   ],
-  "examples/payments/services/payments-api.md": [
+  "examples/payments/services/payments-api": [
     {
-      "from": "examples/payments/decisions/0042-idempotencia-adquirente.md",
+      "from": "examples/payments/decisions/0042-idempotencia-adquirente",
       "rel": "decidedBy"
-    },
-    {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
     }
   ],
-  "examples/payments/terms/chargeback.md": [
+  "examples/payments/terms/chargeback": [
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/terms/estorno.md",
-      "rel": "mentionedBy"
+      "from": "examples/payments/terms/estorno",
+      "rel": "linkedFrom"
     }
   ],
-  "examples/payments/terms/estorno.md": [
+  "examples/payments/terms/estorno": [
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/runbooks/rollback-pix.md",
+      "from": "examples/payments/runbooks/rollback-pix",
       "rel": "usedBy"
     },
     {
-      "from": "examples/payments/terms/chargeback.md",
-      "rel": "mentionedBy"
+      "from": "examples/payments/terms/chargeback",
+      "rel": "linkedFrom"
     }
   ],
-  "examples/payments/terms/pix-parcelado.md": [
+  "examples/payments/terms/pix-parcelado": [
     {
-      "from": "examples/payments/decisions/0057-pix-parcelado.md",
+      "from": "examples/payments/decisions/0057-pix-parcelado",
       "rel": "usedBy"
     },
     {
-      "from": "examples/payments/index.md",
-      "rel": "mentionedBy"
-    },
-    {
-      "from": "examples/payments/meetings/2026-w44-produto.md",
+      "from": "examples/payments/meetings/2026-w44-produto",
       "rel": "producedBy"
     },
     {
-      "from": "examples/payments/rules/pix-parcelado-minimo.md",
+      "from": "examples/payments/rules/pix-parcelado-minimo",
       "rel": "usedBy"
-    }
-  ],
-  "org/decisions/0001-agents-md-e-okf.md": [
-    {
-      "from": "org/index.md",
-      "rel": "mentionedBy"
-    }
-  ],
-  "org/index.md": [
-    {
-      "from": "org/decisions/0001-agents-md-e-okf.md",
-      "rel": "hasPart"
     }
   ]
 }

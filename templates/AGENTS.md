@@ -1,7 +1,7 @@
 # <nome-do-repo>
 
 <Uma frase: o que este repo faz.>
-Domínio: <dominio> → <link para agents-memory/domains/<dominio>/index.md>
+Domínio: <dominio> → <link para agents-memory/knowledge/domains/<dominio>/index.md>
 Dono: <time> · Canal: <#canal>
 
 ## Comandos
@@ -26,5 +26,5 @@ Dono: <time> · Canal: <#canal>
 - Antes de mexer em `<pasta>/`, leia `<pasta>/AGENTS.md`
 
 ## Veja também
-- Domínio: <link para index.md>
+- Domínio: <link para knowledge/domains/<dominio>/index.md>
 - Decisões: <links para ADRs relevantes>

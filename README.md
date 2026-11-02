@@ -6,9 +6,9 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 ┌──────────────────────────────┐        ┌───────────────────────────────────┐
 │  Repos de projeto            │        │  agents-memory (este repo)        │
 │                              │        │                                   │
-│  AGENTS.md  ← instruções     │ ─────► │  org/            bundle da empresa│
-│  (comandos, armadilhas,      │ aponta │  domains/<nome>/ bundle por domínio│
-│   limites)                   │  para  │     index.md  log.md  conceitos   │
+│  AGENTS.md  ← instruções     │ ─────► │  knowledge/  bundle OKF v0.2      │
+│  (comandos, armadilhas,      │ aponta │    org/            transversal    │
+│   limites)                   │  para  │    domains/<nome>/ por domínio    │
 │  lido automaticamente        │        │     evals/                        │
 └──────────────────────────────┘        └───────────────────────────────────┘
                                               │ gerado no CI
@@ -17,7 +17,7 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 ```
 
 - **Repos de projeto** usam [`AGENTS.md`](spec/01-agents-md.md): instruções curtas e locais, carregadas automaticamente pelos agentes.
-- **Conhecimento do time e do domínio** (decisões, regras de negócio, termos, serviços, runbooks, incidentes) vive aqui, em bundles no formato [**Open Knowledge Format (OKF)**](spec/02-formato.md) com extensões nossas para relações tipadas, confiança e fonte.
+- **Conhecimento do time e do domínio** (decisões, regras de negócio, termos, serviços, runbooks, incidentes) vive aqui, no bundle `knowledge/`, no formato [**Open Knowledge Format (OKF) v0.2**](spec/02-formato.md). Origem, confiança e frescor usam os campos do padrão (`sources`, `generated`, `verified`, `status`, `stale_after`); nossas extensões são só `owner`, `relations` tipadas e `sources[].quote`.
 - **Qualidade é medida**, não presumida: toda nota cita sua fonte e cada domínio tem [evals](spec/05-evals.md) que medem acurácia.
 
 ## Por onde começar
@@ -37,7 +37,7 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 ```bash
 pip install -r tools/requirements.txt
 python tools/validate.py        # valida frontmatter, tipos, relações, links, evals e segredos
-python tools/build_graph.py     # gera graph/ (graph.json, backlinks.json, Mermaid por domínio)
+python tools/build_graph.py     # gera graph/ (graph.json, backlinks.json, Mermaid por área)
 ```
 
 O CI (`.github/workflows/memory-ci.yml`) roda os dois em todo PR e falha se o grafo commitado estiver desatualizado.
@@ -46,9 +46,9 @@ O CI (`.github/workflows/memory-ci.yml`) roda os dois em todo PR e falha se o gr
 
 | Peça | Status |
 |---|---|
-| Especificação (`spec/`) | ✅ v0.1 |
+| Especificação (`spec/`) | ✅ v0.2 (alinhada à OKF v0.2) |
 | Templates e domínio de exemplo | ✅ |
 | Validador e gerador de grafo + CI | ✅ |
 | Servidor MCP de leitura (`search`, `get`, `neighbors`, `impact`) | 📐 especificado em [06](spec/06-grafo-e-acesso.md), não implementado |
 | Runner de evals com/sem memória | 📐 especificado em [05](spec/05-evals.md), não implementado |
-| Gardener noturno (verificação de fontes, expiração) | 📐 especificado em [04](spec/04-ciclo-de-vida.md), parcial (expiração é checada no validador) |
+| Gardener noturno (verificação de fontes, expiração) | 📐 especificado em [04](spec/04-ciclo-de-vida.md), parcial (`stale_after` é checado no validador) |

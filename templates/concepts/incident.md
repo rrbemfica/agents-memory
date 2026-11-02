@@ -1,28 +1,32 @@
 ---
 type: Incident
-title: "YYYY-MM-DD: <resumo do incidente>"
+title: "AAAA-MM-DD: <resumo do incidente>"
 description: <uma frase>
 tags: []
-timestamp: YYYY-MM-DD
-owner: <time>
-status: active
-trust: canonical
+status: draft                # draft | stable | deprecated
+generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:ssZ }
+# verified:                  # quem confirmou; human: = revisado por humano
+#   - { by: human:<id>, at: AAAA-MM-DDThh:mm:ssZ }
+# stale_after: AAAA-MM-DDThh:mm:ssZ   # obrigatório se gerado por agente sem verified
 sources:
-  - kind: doc
-    ref: <link do postmortem original>
+  - id: postmortem
+    resource: <link do postmortem original>
+    title: Postmortem original
+owner: team:<time>
 relations:
-  partOf: [domains/<dominio>/index.md]
   causedBy: []
   produced: []               # conceitos gerados pelas lições
 ---
-## Resumo
-<O que aconteceu.>
+# Resumo
+<O que aconteceu.>[^postmortem]
 
-## Impacto
-<Quem/quanto foi afetado.>
+# Impacto
+<Quem e quanto foi afetado.>
 
-## Causa
+# Causa
 <Causa raiz.>
 
-## Lições
+# Lições
 - <lição> → <link para o conceito gerado>
+
+[^postmortem]: Postmortem original

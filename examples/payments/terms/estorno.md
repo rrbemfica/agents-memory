@@ -3,21 +3,21 @@ type: Term
 title: Estorno
 description: Devolução de valor iniciada pela própria empresa.
 tags: [refund, devolucao]
-timestamp: 2026-09-01
-owner: time-pagamentos
-status: active
-trust: canonical
+status: stable
+generated: { by: human:tl-pagamentos, at: 2026-09-01T12:00:00Z }
+verified: { by: human:tl-pagamentos, at: 2026-09-01T12:00:00Z }
 sources:
-  - kind: code
-    ref: payments-api:src/routes/refund.ts#createRefund
-relations:
-  partOf: [examples/payments/index.md]
+  - id: refund
+    resource: payments-api:src/routes/refund.ts#createRefund
+owner: team:pagamentos
 ---
-## Definição
-Nós decidimos devolver o valor ao cliente, total ou parcialmente.
+# Definição
+Nós decidimos devolver o valor ao cliente, total ou parcialmente.[^refund]
 
-## Exemplo
+# Exemplo
 "Fizemos estorno parcial porque um item não foi entregue."
 
-## Não confundir com
+# Não confundir com
 - [Chargeback](chargeback.md): reversão forçada pelo banco emissor.
+
+[^refund]: payments-api, createRefund

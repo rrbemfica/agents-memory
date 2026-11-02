@@ -4,5 +4,4 @@
   answer: "<resposta-ouro curta>"
   grader: contains           # exact | contains | llm
   source: <de onde a resposta foi tirada: repo:caminho#símbolo, URL ou ID>
-  concepts:
-    - domains/<dominio>/<pasta>/<conceito>.md
+  concepts: [/domains/<dominio>/<pasta>/<conceito>]

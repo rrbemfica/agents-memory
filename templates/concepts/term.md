@@ -3,21 +3,24 @@ type: Term
 title: <Termo>
 description: <definição em uma frase>
 tags: []                     # sinônimos
-timestamp: YYYY-MM-DD
-owner: <time>
-status: active
-trust: canonical
+status: draft                # draft | stable | deprecated
+generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:ssZ }
+# verified:                  # quem confirmou; human: = revisado por humano
+#   - { by: human:<id>, at: AAAA-MM-DDThh:mm:ssZ }
+# stale_after: AAAA-MM-DDThh:mm:ssZ   # obrigatório se gerado por agente sem verified
 sources:
-  - kind: doc
-    ref: <ID ou URL>
-relations:
-  partOf: [domains/<dominio>/index.md]
+  - id: <chave>
+    resource: <URL ou ID>
+    title: <rótulo>
+owner: team:<time>
 ---
-## Definição
-<O que significa neste domínio.>
+# Definição
+<O que significa neste domínio.>[^<chave>]
 
-## Exemplo
+# Exemplo
 <Uso em uma frase real.>
 
-## Não confundir com
+# Não confundir com
 - <outro termo>: <diferença>
+
+[^<chave>]: <rótulo>

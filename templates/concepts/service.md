@@ -2,26 +2,29 @@
 type: Service
 title: <nome-do-servico>
 description: <uma frase: o que faz>
-tags: []                     # use [external] para sistemas de terceiros
-timestamp: YYYY-MM-DD
 resource: <URL do repo ou do sistema>
-owner: <time>
-status: active
-trust: canonical
+tags: []                     # use [external] para sistemas de terceiros
+status: draft                # draft | stable | deprecated
+generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:ssZ }
+# verified:                  # quem confirmou; human: = revisado por humano
+#   - { by: human:<id>, at: AAAA-MM-DDThh:mm:ssZ }
+# stale_after: AAAA-MM-DDThh:mm:ssZ   # obrigatório se gerado por agente sem verified
 sources:
-  - kind: code
-    ref: <repo>:<caminho>
+  - id: codigo
+    resource: <repo>:<caminho>
+owner: team:<time>
 relations:
-  partOf: [domains/<dominio>/index.md]
   dependsOn: []
   implements: []
 ---
-## Responsabilidade
-<O que este serviço faz e o que NÃO faz.>
+# Responsabilidade
+<O que este serviço faz e o que NÃO faz.>[^codigo]
 
-## Interfaces
-- Entrada: <API/fila/evento>
-- Saída: <API/fila/evento>
+# Interfaces
+- Entrada: <API, fila ou evento>
+- Saída: <API, fila ou evento>
 
-## Armadilhas
+# Armadilhas
 - <o que já deu problema>
+
+[^codigo]: <repo>

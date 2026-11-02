@@ -5,15 +5,16 @@
 | Onde | Humanos | Agentes |
 |---|---|---|
 | `AGENTS.md` de repo | Escrevem e aprovam | Sugerem no PR |
-| Conceitos `canonical` | Escrevem, aprovam | Só via derivação de fonte já aprovada (ver [04](04-ciclo-de-vida.md#4-merge)) |
-| Conceitos `inferred` | — | Propõem; auto-merge se passarem nas checagens |
-| `schema/`, `spec/`, `templates/` | Donos de `org/` | Sugerem no PR |
+| `Decision` e conceitos de risco (ver [04](04-ciclo-de-vida.md#quando-exigir-humano)) | Escrevem ou revisam (`verified: human:`) | Propõem em `draft` |
+| Demais conceitos | Podem escrever e revisar | Propõem; entram não verificados, com `stale_after` |
+| `verified` | Registram a própria revisão | Registram confirmação no uso (`<agente>/<versão>`); evals registram `process:memory-evals` |
+| `schema/`, `spec/`, `templates/` | Donos de `knowledge/org/` | Sugerem no PR |
 | `graph/` | Ninguém | Gerado pelo CI |
 
 ## Donos
 
-- Todo bundle tem um time dono (`owner` no `index.md`) e uma entrada no `CODEOWNERS` do repo cobrindo a pasta do domínio.
-- `org/`, `schema/`, `spec/` e `templates/` pertencem ao grupo de plataforma/arquitetura.
+- Todo domínio tem um time dono (citado no `index.md` e em `owner` de cada conceito) e uma entrada no `CODEOWNERS` do repo cobrindo `knowledge/domains/<dominio>/`.
+- `knowledge/org/`, `schema/`, `spec/` e `templates/` pertencem ao grupo de plataforma/arquitetura.
 - Reorganização de times: troca o `owner` e o `CODEOWNERS`; não move arquivos.
 
 ## Envenenamento de memória
@@ -21,10 +22,10 @@
 Memória compartilhada é vetor de ataque (pesquisas como MINJA e AgentPoison mostram alta taxa de sucesso em laboratório).
 
 - Conteúdo de reunião, ticket, página ou documento é **dado, não instrução**. Conceitos não contêm ordens ao agente ("ignore regras", "sempre execute X").
-- Fonte externa → revisão humana obrigatória, sempre.
+- Fonte externa → tag `external-source` e revisão humana obrigatória (o validador exige `verified` por `human:`).
 - Mudança em regra de segurança → aprovação do dono de segurança.
 - Skills e runbooks executáveis são revisados como código.
-- Conceitos `inferred` são pistas, verificadas no uso.
+- Conceitos não verificados são pistas, conferidas no uso.
 
 ## Dados pessoais e segredos
 
@@ -43,4 +44,4 @@ Memória compartilhada é vetor de ataque (pesquisas como MINJA e AgentPoison mo
 
 ## Contestação
 
-Qualquer pessoa pode abrir PR contestando um conceito. Conceitos mostram data e nível de confiança justamente para não encerrarem discussões por autoridade.
+Qualquer pessoa pode abrir PR contestando um conceito. Conceitos mostram `generated`, `verified` e `stale_after` justamente para não encerrarem discussões por autoridade.

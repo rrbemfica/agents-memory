@@ -3,21 +3,22 @@ type: Term
 title: Chargeback
 description: Contestação de uma transação feita pelo portador do cartão junto ao banco emissor.
 tags: [contestacao]
-timestamp: 2026-09-01
-owner: time-pagamentos
-status: active
-trust: canonical
+status: stable
+generated: { by: human:tl-pagamentos, at: 2026-09-01T12:00:00Z }
+verified: { by: human:tl-pagamentos, at: 2026-09-01T12:00:00Z }
 sources:
-  - kind: doc
-    ref: https://example.org/glossario-financeiro#chargeback
-relations:
-  partOf: [examples/payments/index.md]
+  - id: glossario
+    resource: https://example.org/glossario-financeiro#chargeback
+    title: Glossário financeiro
+owner: team:pagamentos
 ---
-## Definição
-O portador do cartão contesta a compra no banco emissor, e o valor é revertido à força.
+# Definição
+O portador do cartão contesta a compra no banco emissor, e o valor é revertido à força.[^glossario]
 
-## Exemplo
+# Exemplo
 "O cliente abriu chargeback alegando que não reconhece a compra."
 
-## Não confundir com
+# Não confundir com
 - [Estorno](estorno.md): devolução iniciada por nós, não pelo banco.
+
+[^glossario]: Glossário financeiro

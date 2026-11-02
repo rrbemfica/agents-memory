@@ -1,6 +1,6 @@
 # 00 · Visão geral
 
-> Especificação v0.1 · 2026-11-02
+> Especificação v0.2 · 2026-11-02 · alinhada à [OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
 
 ## Problema
 
@@ -13,11 +13,11 @@ Duas camadas, cada uma com um padrão aberto:
 | Camada | Onde | Padrão | Papel | Carregamento |
 |---|---|---|---|---|
 | **Instrução local** | Cada repo de projeto | [AGENTS.md](https://agents.md) | *Como trabalhar aqui*: comandos, arquivos-chave, armadilhas, limites | Automático, por toda ferramenta |
-| **Conhecimento compartilhado** | Este repo, um bundle por domínio | [Open Knowledge Format (OKF) v0.1](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) + extensões | *O que é verdade*: decisões, regras, termos, serviços, runbooks, incidentes | Sob demanda (link, MCP, plugin) |
+| **Conhecimento compartilhado** | Este repo, bundle `knowledge/` com um diretório por domínio | [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) + poucas extensões | *O que é verdade*: decisões, regras, termos, serviços, runbooks, incidentes | Sob demanda (link, MCP, plugin) |
 
 A ponte entre as duas é uma linha no `AGENTS.md` de cada repo apontando para o `index.md` do domínio a que ele pertence.
 
-Ver a decisão completa em [org/decisions/0001-agents-md-e-okf.md](../org/decisions/0001-agents-md-e-okf.md).
+Ver a decisão completa em [knowledge/org/decisions/0001-agents-md-e-okf.md](../knowledge/org/decisions/0001-agents-md-e-okf.md) (em `draft`, aguardando revisão humana).
 
 ## Princípios
 
@@ -38,9 +38,10 @@ agents-memory/
 ├── spec/                     # esta especificação
 ├── schema/ontology.yaml      # tipos e relações permitidos (fonte do validador)
 ├── templates/                # AGENTS.md de projeto + um template por tipo de conceito
-├── org/                      # bundle da empresa (padrões, termos e decisões transversais)
-├── domains/<dominio>/        # um bundle OKF por domínio
-├── examples/payments/        # domínio de exemplo completo (referência)
+├── knowledge/                # bundle OKF v0.2 (index.md raiz com okf_version)
+│   ├── org/                  #   padrões, termos e decisões transversais
+│   └── domains/<dominio>/    #   um diretório por domínio
+├── examples/payments/        # bundle de exemplo completo (referência)
 ├── graph/                    # GERADO: grafo, backlinks, Mermaid
 └── tools/                    # validate.py, build_graph.py
 ```
@@ -52,7 +53,7 @@ agents-memory/
 | 01 | [AGENTS.md](01-agents-md.md) | Padrão para repos de projeto |
 | 02 | [Formato](02-formato.md) | OKF + extensões: frontmatter, relações, bundles, `index.md`, `log.md` |
 | 03 | [Tipos](03-tipos.md) | Cada tipo de conceito, campos e seções obrigatórias |
-| 04 | [Ciclo de vida](04-ciclo-de-vida.md) | Captura → verificação → merge → manutenção → expiração; níveis de confiança |
+| 04 | [Ciclo de vida](04-ciclo-de-vida.md) | Captura → verificação → manutenção → `stale_after`; níveis de confiança da OKF; quando exigir humano |
 | 05 | [Evals](05-evals.md) | Como medir acurácia (3 níveis) |
 | 06 | [Grafo e acesso](06-grafo-e-acesso.md) | Grafo gerado, MCP, canais de entrega |
 | 07 | [Governança](07-governanca.md) | Segurança, PII, o que exige humano |
@@ -61,7 +62,7 @@ agents-memory/
 ## Referências que embasam este desenho
 
 - AGENTS.md — padrão aberto, arquivos aninhados por pasta: https://agents.md
-- OKF v0.1 (Google Cloud, jun/2026): https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
+- OKF v0.2 (Google Cloud, jul/2026): https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
 - Vocabulário de relações do Backstage: https://backstage.io/docs/features/software-catalog/well-known-relations
 - Meta — contexto curto, verificado e auto-reparado: https://engineering.fb.com/2026/04/06/developer-tools/how-meta-used-ai-to-map-tribal-knowledge-in-large-scale-data-pipelines
 - GitHub Copilot Memory — citações verificadas no uso, expiração: https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot

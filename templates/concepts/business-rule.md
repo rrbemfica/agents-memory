@@ -1,22 +1,24 @@
 ---
-type: BusinessRule
+type: Business Rule
 title: <regra em uma frase>
 description: <uma frase>
 tags: []
-timestamp: YYYY-MM-DD
-owner: <time>
-status: active
-trust: canonical             # inferred se escrito por agente sem confirmação
-# expires: YYYY-MM-DD        # obrigatório se trust: inferred
+status: draft                # draft | stable | deprecated
+generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:ssZ }
+# verified:                  # quem confirmou; human: = revisado por humano
+#   - { by: human:<id>, at: AAAA-MM-DDThh:mm:ssZ }
+# stale_after: AAAA-MM-DDThh:mm:ssZ   # obrigatório se gerado por agente sem verified
 sources:
-  - kind: code
-    ref: <repo>:<caminho>#<símbolo>
+  - id: codigo
+    resource: <repo>:<caminho>#<símbolo>
+owner: team:<time>
 relations:
-  partOf: [domains/<dominio>/index.md]
   usesTerm: []
 ---
-## Regra
-<Uma frase verificável.>
+# Regra
+<Uma frase verificável.>[^codigo]
 
-## Motivo
+# Motivo
 <Por que a regra existe.>
+
+[^codigo]: <repo>, <símbolo>

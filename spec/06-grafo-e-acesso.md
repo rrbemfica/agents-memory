@@ -2,17 +2,17 @@
 
 ## Grafo gerado
 
-O Markdown é a fonte de verdade; o grafo é um **índice gerado** (`tools/build_graph.py`) a partir de `relations` e dos links do corpo.
+O Markdown é a fonte de verdade; o grafo é um **índice gerado** (`tools/build_graph.py`) que junta as `relations` tipadas (extensão nossa) e os links do corpo (o grafo não tipado da OKF, que vira a aresta `links`).
 
 | Arquivo gerado | Conteúdo |
 |---|---|
-| `graph/graph.json` | Nós (id, tipo, título, status, trust, owner) e arestas tipadas |
+| `graph/graph.json` | Nós (bundle, ID, tipo, título, status, nível de confiança, owner, stale_after) e arestas |
 | `graph/backlinks.json` | Para cada conceito, quem aponta para ele ("citado por") e as relações inversas |
-| `graph/<bundle>.md` | Diagrama Mermaid por bundle (o GitHub renderiza) |
+| `graph/<bundle>--<area>.md` | Diagrama Mermaid por área (`org`, cada domínio). O GitHub renderiza. |
 
 Regras:
 - **Não edite `graph/` à mão.** O CI falha se o grafo commitado estiver desatualizado.
-- Relações inversas (`hasPart`, `dependencyOf`, `supersededBy`, `implementedBy`…) existem só no grafo.
+- Relações inversas (`dependencyOf`, `supersededBy`, `implementedBy`, `linkedFrom`…) existem só no grafo.
 
 ## Canais de entrega
 
@@ -33,7 +33,7 @@ Ferramentas pequenas — agente recebe só o necessário.
 | Ferramenta | Entrada | Saída |
 |---|---|---|
 | `memory_domain(name)` | nome do domínio | `index.md` + subgrafo de 1 salto |
-| `memory_get(id)` | ID do conceito | conteúdo + trust + backlinks |
+| `memory_get(id)` | ID do conceito | conteúdo + nível de confiança + `stale_after` + backlinks |
 | `memory_search(query, type?, domain?)` | texto | lista de IDs com título e descrição |
 | `memory_neighbors(id, depth=1, relation?)` | ID | vizinhos tipados |
 | `memory_impact(id)` | ID | tudo que depende transitivamente (inversos de `dependsOn`, `decidesAbout`, `implements`) |

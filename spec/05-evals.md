@@ -6,21 +6,21 @@ Não avaliamos se uma nota *parece* boa (rubrica). Avaliamos se ela **produz a r
 
 | Nível | Pergunta | Resposta-ouro vem de | Onde fica | Status |
 |---|---|---|---|---|
-| **Domínio** | O agente responde certo às perguntas reais do time? | Humanos, a partir de dúvidas reais (Slack, onboarding, reviews) | `domains/<d>/evals/*.yaml` | ✅ formato definido e validado |
-| **Unitário** | Este conceito está certo e agrega valor? | Gerada da fonte citada, sem ver o conceito | `domains/<d>/evals/unit/*.yaml` | 📐 planejado |
+| **Domínio** | O agente responde certo às perguntas reais do time? | Humanos, a partir de dúvidas reais (Slack, onboarding, reviews) | `knowledge/domains/<d>/evals/*.yaml` | ✅ formato definido e validado |
+| **Unitário** | Este conceito está certo e agrega valor? | Gerada da fonte citada, sem ver o conceito | `knowledge/domains/<d>/evals/unit/*.yaml` | 📐 planejado |
 | **Tarefa** (replay) | O agente resolve tarefas antigas melhor com a memória? | O diff que foi merged de verdade | fora deste repo | 📐 planejado |
 
 ## Formato (domínio e unitário)
 
 ```yaml
-# domains/payments/evals/basico.yaml
+# knowledge/domains/payments/evals/basico.yaml
 - id: pay-001
   question: "Qual o valor mínimo para Pix parcelado?"
   answer: "R$ 100"
   grader: contains            # exact | contains | llm
   source: payments-api:src/rules/installments.ts#validateMinimumAmount
-  concepts:                   # conceitos que deveriam bastar para responder
-    - domains/payments/rules/pix-parcelado-minimo.md
+  concepts:                   # IDs dos conceitos que deveriam bastar para responder
+    - /domains/payments/rules/pix-parcelado-minimo
 ```
 
 | Campo | Obrigatório | Regra |
@@ -29,8 +29,8 @@ Não avaliamos se uma nota *parece* boa (rubrica). Avaliamos se ela **produz a r
 | `question` | ✅ | Pergunta como alguém do time faria |
 | `answer` | ✅ | Resposta-ouro, curta |
 | `grader` | ✅ | `exact` / `contains` sempre que possível; `llm` só para respostas abertas |
-| `source` | ✅ | De onde a resposta-ouro foi tirada (mesmo formato de `sources.ref`) |
-| `concepts` | recomendado | IDs que devem existir (o validador checa) |
+| `source` | ✅ | De onde a resposta-ouro foi tirada (mesmo formato de `sources[].resource`) |
+| `concepts` | recomendado | IDs relativos ao bundle; o validador checa que existem |
 
 ## Como rodar (runner — 📐 a implementar)
 
@@ -46,7 +46,7 @@ Interpretação por conceito (evals unitários):
 
 | Com o conceito | Sem o conceito | Veredito |
 |---|---|---|
-| ✅ | ❌ | Correto e útil → mantém |
+| ✅ | ❌ | Correto e útil → mantém e registra `verified: { by: process:memory-evals, at: … }` |
 | ✅ | ✅ | Redundante (derivável do código) → remover |
 | ❌ | — | Errado ou desatualizado → corrigir ou remover |
 
@@ -63,9 +63,10 @@ Interpretação por conceito (evals unitários):
 |---|---|---|
 | Acurácia do domínio (com memória) | ≥ 90% | Se a memória responde certo |
 | Ganho vs. sem memória | > 0, crescente | Se a memória agrega |
-| Acurácia de conceitos `canonical` (amostra mensal) | ≥ 98% | Se a promoção é rigorosa |
-| Acurácia de conceitos `inferred` | ≥ 85% | Se as checagens automáticas bastam |
-| Meia-vida | medir | Calibra os prazos de [04](04-ciclo-de-vida.md#prazos-padrão) |
+| Acurácia de conceitos revisados por humano (amostra mensal) | ≥ 98% | Se a revisão é rigorosa |
+| Acurácia de conceitos confirmados por máquina | ≥ 90% | Se os evals bastam como verificação |
+| Acurácia de conceitos não verificados | ≥ 85% | Se as checagens de entrada bastam |
+| Meia-vida | medir | Calibra os prazos de `stale_after` em [04](04-ciclo-de-vida.md#prazos-padrão-de-stale_after) |
 | Recall de erros plantados | ≥ 90% | Se o sistema detecta erro |
 
 ## Quem escreve evals de domínio

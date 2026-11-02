@@ -3,21 +3,24 @@ type: Runbook
 title: <Como fazer X>
 description: <uma frase>
 tags: []
-timestamp: YYYY-MM-DD
-owner: <time>
-status: active
-trust: canonical
+status: draft                # draft | stable | deprecated
+generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:ssZ }
+# verified:                  # quem confirmou; human: = revisado por humano
+#   - { by: human:<id>, at: AAAA-MM-DDThh:mm:ssZ }
+# stale_after: AAAA-MM-DDThh:mm:ssZ   # obrigatório se gerado por agente sem verified
 sources:
-  - kind: incident
-    ref: <ID do incidente ou doc de origem>
-relations:
-  partOf: [domains/<dominio>/index.md]
+  - id: origem
+    resource: <ID do incidente, doc ou skill>
+    title: <rótulo>
+owner: team:<time>
 ---
-## Quando usar
-<Sintoma ou situação.>
+# Quando usar
+<Sintoma ou situação.>[^origem]
 
-## Passos
+# Passos
 1. <passo verificável>
 
-## Como verificar
+# Como verificar
 <Como saber que deu certo.>
+
+[^origem]: <rótulo>
