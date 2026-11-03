@@ -70,12 +70,14 @@ Quando existirem, o jardineiro e o runner de evals ([04](04-lifecycle.md#5-mante
 
 ## Instalar
 
-**Claude Code** (este repo é um plugin e um marketplace):
+**Claude Code** (este repo é um plugin e um marketplace), no terminal:
 
+```bash
+claude plugin marketplace add rrbemfica/agents-memory
+claude plugin install agents-memory@agents-memory
 ```
-/plugin marketplace add rrbemfica/agents-memory
-/plugin install agents-memory@agents-memory
-```
+
+Dentro de uma sessão interativa do `claude` no terminal, `/plugin` faz o mesmo. No app desktop, use os comandos acima no terminal. Depois de instalar, abra uma sessão nova. Para atualizar: `claude plugin marketplace update agents-memory`.
 
 Repo privado: o Claude Code usa as credenciais do git da máquina. No GitLab, use a URL git completa no `marketplace add`.
 

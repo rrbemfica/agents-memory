@@ -38,9 +38,12 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 
 A skill [`agent-memory-skill`](spec/10-skills.md) operacionaliza o padrão: consultar, registrar, fechar a sessão, revisar, criar domínio e escrever o `AGENTS.md`. Segue o padrão aberto Agent Skills. No Claude Code:
 
+```bash
+claude plugin marketplace add rrbemfica/agents-memory
+claude plugin install agents-memory@agents-memory
 ```
-/plugin install agents-memory --marketplace rrbemfica/agents-memory
-```
+
+Rode no terminal. Depois, abra uma sessão nova para a skill aparecer.
 
 ## Comandos
 
