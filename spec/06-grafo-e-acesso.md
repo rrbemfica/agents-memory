@@ -24,7 +24,7 @@ Uma fonte, vários canais. Nunca edite conhecimento direto num canal — eles s�
 | Quem | Canal | Como |
 |---|---|---|
 | Agente num repo de projeto | `AGENTS.md` | Linha `Domínio: …` aponta para o `index.md` |
-| Agente de código (qualquer repo) | Plugin do time + MCP | Skills de consulta e o servidor MCP abaixo |
+| Agente de código (qualquer repo) | Plugin do time + MCP | [Skill](10-skills.md) `agent-memory-skill` e o servidor MCP abaixo |
 | Pessoas não técnicas | Claude Project por domínio | Base de conhecimento sincronizada deste repo |
 | Outras ferramentas (Cursor, Codex, ChatGPT) | MCP | Mesmo servidor |
 | Humanos | GitHub ou GitLab | Leitura e PR/MR |

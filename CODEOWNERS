@@ -9,3 +9,5 @@
 /schema/               @rrbemfica
 /spec/                 @rrbemfica
 /templates/            @rrbemfica
+/skills/               @rrbemfica
+/.claude-plugin/       @rrbemfica

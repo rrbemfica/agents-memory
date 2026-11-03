@@ -11,6 +11,7 @@ generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:
 sources:
   - id: codigo
     resource: <repo>:<caminho>#<símbolo>
+    title: <repo>, <símbolo>
 ---
 # Regra
 <Uma frase verificável.>[^codigo]
@@ -21,4 +22,4 @@ sources:
 # Relacionados
 - Usa o termo [<termo>](../terms/<slug>.md)
 
-[^codigo]: <repo>, <símbolo>
+[^codigo]: <repo>, <símbolo>: "<linha ou comentário citado>"

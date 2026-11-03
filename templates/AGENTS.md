@@ -1,7 +1,8 @@
 # <nome-do-repo>
 
 <Uma frase: o que este repo faz.>
-Domínio: <dominio> → <link para agents-memory/knowledge/domains/<dominio>/index.md>
+Domínio: <dominio> → <URL completa de agents-memory/knowledge/domains/<dominio>/index.md na forja>
+Memória: antes de mexer em regra de negócio, consulte o domínio com a skill `agent-memory-skill`; ao terminar, use-a para fechar a sessão.
 
 <!-- Todas as seções são opcionais (spec/01). Apague as que não têm nada que o agente não descobriria sozinho. -->
 

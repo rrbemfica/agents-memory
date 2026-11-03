@@ -1,0 +1,8 @@
+{
+  "name": "agents-memory",
+  "version": "0.1.0",
+  "description": "Skill para consultar e manter a memória do time: AGENTS.md nos repos e bundles OKF v0.2 por domínio",
+  "author": { "name": "plataforma" },
+  "repository": "https://github.com/rrbemfica/agents-memory",
+  "keywords": ["memory", "okf", "agents-md", "knowledge"]
+}

@@ -4,8 +4,9 @@
 
 **Semana 1 — Fundação**
 - [ ] Escolher o domínio piloto e o time dono.
+- [ ] Instalar o plugin com a [skill](10-skills.md) `agent-memory-skill` nas máquinas do time.
+- [ ] Criar o domínio com a skill (procedimento novo-dominio).
 - [ ] `AGENTS.md` escrito à mão nos 2–3 repos mais ativos do domínio (template em [`templates/AGENTS.md`](../templates/AGENTS.md)), com `CLAUDE.md` → `@AGENTS.md`.
-- [ ] Criar `knowledge/domains/<dominio>/` a partir de `examples/payments/`.
 - [ ] 20 perguntas de eval a partir de dúvidas reais (Slack, onboarding, reviews).
 
 **Semana 2 — Semear**
@@ -14,8 +15,8 @@
 - [ ] CI verde (`tools/ci.sh`).
 
 **Semanas 3–4 — Usar e medir**
-- [ ] Hábito de fim de sessão: agente sugere no máximo 2 candidatos.
-- [ ] Revisão semanal de 15 min do domínio (candidatos, conflitos, expirados).
+- [ ] Hábito de fim de sessão: agente sugere no máximo 2 candidatos (skill, procedimento fechar-sessao).
+- [ ] Revisão semanal de 15 min do domínio (candidatos, conflitos, expirados) com a skill (procedimento revisar).
 - [ ] Rodar as perguntas de eval com e sem memória (manualmente, até o runner existir).
 
 ## Critérios (definidos antes de começar)
@@ -47,5 +48,5 @@
 1. Servidor MCP de leitura.
 2. Runner de evals (com/sem memória) no CI.
 3. Gardener (reverificação quando a fonte muda, expiração).
-4. Canais: plugin do time, Claude Project por domínio.
+4. Canais: Claude Project por domínio (o plugin com a skill já existe, ver [10](10-skills.md)).
 5. Segundo e terceiro domínios.

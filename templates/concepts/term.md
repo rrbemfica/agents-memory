@@ -22,4 +22,4 @@ sources:
 # Não confundir com
 - <outro termo>: <diferença>
 
-[^<chave>]: <rótulo>
+[^<chave>]: <rótulo>: "<trecho literal da fonte, quando der>"

@@ -32,7 +32,7 @@ knowledge/                      # raiz do bundle
 
 - **Por domínio, não por time.** Times mudam; o dono de cada pasta fica no [`CODEOWNERS`](../CODEOWNERS), que também pede a revisão dele nos PRs (ver [09](09-forjas.md) sobre quando a forja bloqueia).
 - **Cada domínio tem sua linguagem.** Se "cliente" significa coisas diferentes em dois domínios, cada um tem seu `Term`. O `org/` só tem os termos realmente comuns.
-- **Criar um domínio:** copie a estrutura de [`examples/payments/`](../examples/payments/) para `knowledge/domains/<dominio>/`, ajuste os índices e os IDs de fontes internas (`/decisions/...` vira `/domains/<dominio>/decisions/...`), adicione o time no `CODEOWNERS` e liste o domínio em `knowledge/domains/index.md`.
+- **Criar um domínio:** crie `knowledge/domains/<dominio>/index.md` e `log.md` a partir de [`templates/concepts/`](../templates/concepts/), adicione o time no `CODEOWNERS` e liste o domínio em `knowledge/domains/index.md`. A [skill](10-skills.md) faz isso passo a passo. [`examples/payments/`](../examples/payments/) mostra um domínio completo; se copiar conceitos de lá, os IDs de fontes internas mudam (`/decisions/...` vira `/domains/<dominio>/decisions/...`).
 
 ## Identidade e links
 

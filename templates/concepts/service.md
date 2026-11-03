@@ -12,6 +12,7 @@ generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:
 sources:
   - id: codigo
     resource: <repo>:<caminho>
+    title: <repo>
 ---
 # Responsabilidade
 <O que este serviço faz e o que NÃO faz.>[^codigo]
@@ -27,4 +28,4 @@ sources:
 - Depende de [<servico>](<servico>.md)
 - Implementa [<regra>](../rules/<slug>.md)
 
-[^codigo]: <repo>
+[^codigo]: <repo>: "<trecho citado, quando der>"

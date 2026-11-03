@@ -10,7 +10,7 @@ O padrão só define o arquivo: Markdown livre, na raiz, com arquivos aninhados 
 
 1. **Um `AGENTS.md` na raiz de cada repo de projeto**, partindo do [template](../templates/AGENTS.md).
 2. **Agente escreve, pessoa aprova.** O normal é um agente propor o arquivo ou as linhas novas no PR, e uma pessoa do time aprovar no review. Quem aprova corta toda linha que não passa no [teste abaixo](#teste-para-cada-linha). O que piora o desempenho dos agentes não é o autor ser um LLM, e sim o arquivo repetir o que o agente descobriria sozinho.
-3. **Uma linha de ponte** para o domínio: `Domínio: <nome> → <link para agents-memory/knowledge/domains/<nome>/index.md>`.
+3. **Duas linhas de ponte** para o domínio: `Domínio: <nome> → <URL do index.md do domínio>` e `Memória: …`, que diz ao agente para consultar com a [skill](10-skills.md) antes e fechar a sessão com ela no fim. A skill não depende de gatilho automático para ser usada.
 4. **`CLAUDE.md` contendo apenas `@AGENTS.md`**, para o Claude Code ler o mesmo arquivo sem duplicar conteúdo.
 5. **Arquivos aninhados** (`src/ledger/AGENTS.md`) só onde há regras realmente diferentes, e **o arquivo da raiz lista cada um** na seção "Regras por área": nem toda ferramenta desce na árvore sozinha (o Codex só carrega da raiz até a pasta onde a sessão começou).
 6. **Muda junto com o código.** PR que altera comando ou cria armadilha nova atualiza o `AGENTS.md` no mesmo PR.
@@ -22,7 +22,7 @@ Todas opcionais. Se uma seção não tem nada que o agente não descobriria sozi
 
 | Seção | Conteúdo | De onde vem |
 |---|---|---|
-| Cabeçalho | Uma frase sobre o repo · `Domínio:` | agents.md (visão geral), em uma linha por causa da ETH |
+| Cabeçalho | Uma frase sobre o repo · `Domínio:` · `Memória:` | agents.md (visão geral), em poucas linhas por causa da ETH |
 | Comandos | Setup, rodar local, testes **com flags**, como rodar um teste só, o que rodar antes do PR. Logo no começo do arquivo | agents.md, GitHub |
 | Testes | Onde ficam, o que precisa de teste, o que não mockar | agents.md, GitHub |
 | Estilo de código | Só o que o linter não pega, com **um trecho curto de exemplo** | agents.md, GitHub |

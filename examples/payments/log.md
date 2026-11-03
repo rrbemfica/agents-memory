@@ -1,6 +1,7 @@
 # Log · Pagamentos (exemplo)
 
 ## 2026-11-02
+* **Atualização**: [Pix parcelado](terms/pix-parcelado.md) passa a citar a ata, onde está o trecho literal, e linka a reunião em Relacionados.
 * **Atualização**: runbook de rollback Pix trocado por [reconciliar cobranças de cartão](runbooks/reconciliar-cartao-falha-adquirente.md), coerente com o incidente da Cielo.
 * **Atualização**: [ADR-0057](decisions/0057-pix-parcelado.md) passa a citar a ata original, não o resumo da reunião.
 * **Atualização**: todos os conceitos sem campos fora da OKF; relações viraram a seção Relacionados.

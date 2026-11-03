@@ -44,6 +44,8 @@ agents-memory/
 ├── examples/payments/        # bundle de exemplo completo (referência)
 ├── graph/                    # GERADO sob demanda, não versionado (.gitignore)
 ├── tools/                    # validate.py, build_graph.py, ci.sh
+├── skills/agent-memory-skill/ # Agent Skill para consultar, registrar e revisar (spec/10)
+├── .claude-plugin/           # este repo como plugin e marketplace do Claude Code
 ├── CODEOWNERS                # dono de cada pasta (GitHub e GitLab)
 ├── .github/workflows/        # CI no GitHub (chama tools/ci.sh)
 └── .gitlab-ci.yml            # CI no GitLab (chama tools/ci.sh)
@@ -64,6 +66,7 @@ agents-memory/
 | 07 | [Governança](07-governanca.md) | Segurança, PII, o que pede humano |
 | 08 | [Adoção](08-adocao.md) | Piloto, métricas, critérios de parada |
 | 09 | [Forjas](09-forjas.md) | GitHub e GitLab: o que é igual, o que muda, aprovação do dono |
+| 10 | [Skill](10-skills.md) | A skill que operacionaliza o padrão e o fluxo do dia a dia |
 
 ## Referências que embasam este desenho
 

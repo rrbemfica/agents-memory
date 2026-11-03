@@ -31,7 +31,16 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 | Saber como uma nota entra e sai | [spec/04-ciclo-de-vida.md](spec/04-ciclo-de-vida.md) |
 | Medir se a memória funciona | [spec/05-evals.md](spec/05-evals.md) |
 | Usar no GitLab | [spec/09-forjas.md](spec/09-forjas.md) |
+| Usar a skill (consultar, registrar, revisar, AGENTS.md) | [spec/10-skills.md](spec/10-skills.md) |
 | Ver um domínio completo | [examples/payments/index.md](examples/payments/index.md) |
+
+## Skill
+
+A skill [`agent-memory-skill`](spec/10-skills.md) operacionaliza o padrão: consultar, registrar, fechar a sessão, revisar, criar domínio e escrever o `AGENTS.md`. Segue o padrão aberto Agent Skills. No Claude Code:
+
+```
+/plugin install agents-memory --marketplace rrbemfica/agents-memory
+```
 
 ## Comandos
 
@@ -50,6 +59,7 @@ O CI roda `tools/ci.sh` em todo PR/MR: valida os bundles e publica o grafo como 
 | Especificação (`spec/`) | ✅ v0.3 (OKF v0.2 pura, sem extensões) |
 | Templates e domínio de exemplo | ✅ |
 | Validador e gerador de grafo + CI | ✅ |
+| Skill `agent-memory-skill` (plugin do Claude Code, padrão Agent Skills) | ✅ v0.1 |
 | Servidor MCP de leitura (`search`, `get`, `neighbors`, `history`) | 📐 especificado em [06](spec/06-grafo-e-acesso.md), não implementado |
 | Runner de evals com/sem memória | 📐 especificado em [05](spec/05-evals.md), não implementado |
 | Gardener noturno (verificação de fontes, expiração) | 📐 especificado em [04](spec/04-ciclo-de-vida.md), parcial (`stale_after` é checado no validador) |

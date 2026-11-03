@@ -10,7 +10,7 @@ O núcleo não depende de forja: conceitos são Markdown com OKF, e `tools/valid
 | Grafo como artefato | As duas publicam `graph/` como artefato da pipeline; o Mermaid renderiza nas duas |
 | `sources[].resource` | `repo:caminho#símbolo` é neutro; URLs de qualquer forja valem |
 | `AGENTS.md` dos repos de projeto | Aponta para o domínio por URL |
-| Plugin de skills do time | Um marketplace de plugins pode ser qualquer URL git |
+| [Skill](10-skills.md) e plugin do time | Um marketplace de plugins pode ser qualquer URL git; a skill escolhe `gh` ou `glab` pelo `origin` |
 
 ## O que muda
 

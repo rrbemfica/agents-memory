@@ -1,5 +1,7 @@
 # <Domínio>
 
+<Uma frase: o que o domínio cobre.>
+
 * [Repo <nome>](<URL>) - <uma linha>
 
 # Serviços

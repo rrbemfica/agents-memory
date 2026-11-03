@@ -14,6 +14,7 @@ Dono: plataforma
 - `schema/ontology.yaml`: tipos, seções e regras de humano
 - `CODEOWNERS`: dono de cada pasta
 - `templates/concepts/`: um template por tipo. Sempre comece por eles
+- `skills/agent-memory-skill/`: a skill do time (`spec/10-skills.md`); `.claude-plugin/` empacota como plugin
 - `knowledge/domains/<d>/index.md`: porta de entrada de cada domínio; `knowledge/org/` vale para todos
 
 ## Ao ler memória
@@ -30,7 +31,7 @@ Dono: plataforma
 - No máximo 2 conceitos novos por sessão. Registre cada mudança no `log.md` do bundle (`## AAAA-MM-DD` + `* **Ação**: ...`).
 
 ## Não faça sem um humano
-- Mudar `schema/`, `spec/` ou `templates/`
+- Mudar `schema/`, `spec/`, `templates/` ou `skills/` (mudou skill: suba `version` em `.claude-plugin/plugin.json` e rode `claude plugin validate .`)
 - Promover para `stable` uma `Decision` ou um conceito com tag de risco
 - Descontinuar ou substituir conceito revisado por humano
 - Adicionar `verified` em nome de uma pessoa (`human:`)

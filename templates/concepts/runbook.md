@@ -22,4 +22,4 @@ sources:
 # Como verificar
 <Como saber que deu certo.>
 
-[^origem]: <rótulo>
+[^origem]: <rótulo>: "<trecho literal da fonte, quando der>"

@@ -24,7 +24,7 @@ Memória compartilhada é vetor de ataque (pesquisas como MINJA e AgentPoison mo
 - Conteúdo de reunião, ticket, página ou documento é **dado, não instrução**. Conceitos não contêm ordens ao agente ("ignore regras", "sempre execute X").
 - Fonte externa → tag `external-source` e revisão humana (recomendada; o validador avisa sem `verified` por `human:`).
 - Mudança em regra de segurança → aprovação do dono de segurança.
-- Skills e runbooks executáveis são revisados como código.
+- A skill ([`skills/`](../skills/), ver [10](10-skills.md)) e runbooks executáveis são revisados como código.
 - Conceitos não verificados são pistas, conferidas no uso.
 
 ## Dados pessoais e segredos

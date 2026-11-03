@@ -1,0 +1,11 @@
+{
+  "name": "agents-memory",
+  "owner": { "name": "plataforma" },
+  "plugins": [
+    {
+      "name": "agents-memory",
+      "source": "./",
+      "description": "Skill para consultar e manter a memória do time (AGENTS.md + OKF v0.2)"
+    }
+  ]
+}
