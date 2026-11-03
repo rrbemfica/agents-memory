@@ -1,0 +1,11 @@
+# Dono de cada área da memória. Lido pelo GitHub e pelo GitLab (por isso fica na raiz).
+# Use só a sintaxe comum às duas forjas: "/caminho/ @usuario-ou-grupo". Sem [Seções] do GitLab.
+# Ao criar um domínio, adicione uma linha com o time dono, por exemplo:
+#   /knowledge/domains/pagamentos/  @<grupo>/time-pagamentos
+# Aprovação obrigatória do dono: GitHub (proteção de branch) ou GitLab Premium. Ver spec/09-forjas.md.
+*                      @rrbemfica
+/knowledge/org/        @rrbemfica
+/examples/payments/    @rrbemfica
+/schema/               @rrbemfica
+/spec/                 @rrbemfica
+/templates/            @rrbemfica

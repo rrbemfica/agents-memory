@@ -17,7 +17,7 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 ```
 
 - **Repos de projeto** usam [`AGENTS.md`](spec/01-agents-md.md): instruções curtas e locais, carregadas automaticamente pelos agentes.
-- **Conhecimento do time e do domínio** (decisões, regras de negócio, termos, serviços, runbooks, incidentes) vive aqui, no bundle `knowledge/`, no formato [**Open Knowledge Format (OKF) v0.2**](spec/02-formato.md). Só campos do padrão, sem extensões: origem, confiança e frescor usam `sources`, `generated`, `verified`, `status` e `stale_after`; o dono de cada pasta fica no [`CODEOWNERS`](.github/CODEOWNERS).
+- **Conhecimento do time e do domínio** (decisões, regras de negócio, termos, serviços, runbooks, incidentes) vive aqui, no bundle `knowledge/`, no formato [**Open Knowledge Format (OKF) v0.2**](spec/02-formato.md). Só campos do padrão, sem extensões: origem, confiança e frescor usam `sources`, `generated`, `verified`, `status` e `stale_after`; o dono de cada pasta fica no [`CODEOWNERS`](CODEOWNERS).
 - **Qualidade é medida**, não presumida: toda nota cita sua fonte e cada domínio tem [evals](spec/05-evals.md) que medem acurácia.
 
 ## Por onde começar
@@ -30,6 +30,7 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 | Criar um domínio novo | [spec/02-formato.md](spec/02-formato.md#bundles) · copie [examples/payments/](examples/payments/) |
 | Saber como uma nota entra e sai | [spec/04-ciclo-de-vida.md](spec/04-ciclo-de-vida.md) |
 | Medir se a memória funciona | [spec/05-evals.md](spec/05-evals.md) |
+| Usar no GitLab | [spec/09-forjas.md](spec/09-forjas.md) |
 | Ver um domínio completo | [examples/payments/index.md](examples/payments/index.md) |
 
 ## Comandos
@@ -40,7 +41,7 @@ python tools/validate.py        # valida frontmatter, tipos, fontes, links, eval
 python tools/build_graph.py     # gera graph/ (graph.json, backlinks.json, Mermaid por área)
 ```
 
-O CI (`.github/workflows/memory-ci.yml`) roda os dois em todo PR e falha se o grafo commitado estiver desatualizado.
+O CI roda `tools/ci.sh` (validação + grafo) em todo PR/MR e falha se o grafo commitado estiver desatualizado. Funciona no GitHub (`.github/workflows/memory-ci.yml`) e no GitLab (`.gitlab-ci.yml`); ver [spec/09-forjas.md](spec/09-forjas.md).
 
 ## Status
 

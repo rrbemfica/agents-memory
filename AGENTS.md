@@ -7,11 +7,12 @@ Dono: plataforma
 - Instalar: `pip install -r tools/requirements.txt`
 - Validar: `python tools/validate.py` (rodar antes de todo commit)
 - Gerar grafo: `python tools/build_graph.py` (commitar o `graph/` gerado)
+- Tudo o que o CI roda (GitHub ou GitLab): `tools/ci.sh`
 
 ## Onde está o quê
 - `spec/`: a especificação. Leia `spec/02-formato.md` e `spec/03-tipos.md` antes de criar conceitos
 - `schema/ontology.yaml`: tipos, seções e regras de humano
-- `.github/CODEOWNERS`: dono de cada pasta
+- `CODEOWNERS`: dono de cada pasta
 - `templates/concepts/`: um template por tipo. Sempre comece por eles
 - `knowledge/domains/<d>/index.md`: porta de entrada de cada domínio; `knowledge/org/` vale para todos
 

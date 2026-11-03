@@ -1,6 +1,6 @@
 # Organização
 
-* [Dono](../../.github/CODEOWNERS) - plataforma
+* [Dono](../../CODEOWNERS) - plataforma
 
 # Decisões
 

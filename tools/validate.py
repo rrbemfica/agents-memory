@@ -22,6 +22,7 @@ SECRET_PATTERNS = {
     "chave AWS": re.compile(r"AKIA[0-9A-Z]{16}"),
     "chave privada": re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
     "token GitHub": re.compile(r"gh[pousr]_[A-Za-z0-9]{36,}"),
+    "token GitLab": re.compile(r"\bgl(pat|dt|rt|cbt|ptt|ft|imt|agent|oas|soat)-[A-Za-z0-9_-]{20,}"),
     "token Slack": re.compile(r"xox[abprs]-[A-Za-z0-9-]{10,}"),
     "chave de API": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}"),
 }

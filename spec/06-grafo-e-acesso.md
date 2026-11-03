@@ -8,7 +8,7 @@ O Markdown é a fonte de verdade; o grafo é um **índice gerado** (`tools/build
 |---|---|
 | `graph/graph.json` | Nós (bundle, ID, tipo, título, status, nível de confiança, stale_after) e arestas |
 | `graph/backlinks.json` | Para cada conceito, quem linka para ele (`linkedFrom`) e quem o usa como fonte (`citedBy`) |
-| `graph/<bundle>--<area>.md` | Diagrama Mermaid por área (`org`, cada domínio). O GitHub renderiza. |
+| `graph/<bundle>--<area>.md` | Diagrama Mermaid por área (`org`, cada domínio). GitHub e GitLab renderizam. |
 
 Regras:
 - **Não edite `graph/` à mão.** O CI falha se o grafo commitado estiver desatualizado.
@@ -25,7 +25,7 @@ Uma fonte, vários canais. Nunca edite conhecimento direto num canal — eles s�
 | Agente de código (qualquer repo) | Plugin do time + MCP | Skills de consulta e o servidor MCP abaixo |
 | Pessoas não técnicas | Claude Project por domínio | Base de conhecimento sincronizada deste repo |
 | Outras ferramentas (Cursor, Codex, ChatGPT) | MCP | Mesmo servidor |
-| Humanos | GitHub | Leitura e PR |
+| Humanos | GitHub ou GitLab | Leitura e PR/MR |
 
 ## Servidor MCP (📐 especificado, não implementado)
 

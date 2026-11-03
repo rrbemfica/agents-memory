@@ -1,0 +1,17 @@
+# Casca fina: a lógica está em tools/ci.sh (a mesma do GitHub Actions).
+# Agendamento semanal: crie em Build > Pipeline schedules (ex.: "0 6 * * 1", branch main).
+# Pipelines agendadas rodam em modo estrito e acusam conceitos com stale_after vencido.
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+memory-ci:
+  image: python:3.12-slim
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq git > /dev/null
+    - pip install -q -r tools/requirements.txt
+  script:
+    - if [ "$CI_PIPELINE_SOURCE" = "schedule" ]; then tools/ci.sh --strict; else tools/ci.sh; fi

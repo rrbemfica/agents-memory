@@ -1,11 +1,12 @@
 name: memory-ci
+# Casca fina: a lógica está em tools/ci.sh (a mesma do .gitlab-ci.yml).
 
 on:
   pull_request:
   push:
     branches: [main]
   schedule:
-    - cron: "0 6 * * 1"   # segunda 06:00 UTC: acusa conceitos expirados
+    - cron: "0 6 * * 1"   # segunda 06:00 UTC: modo estrito acusa conceitos com stale_after vencido
 
 jobs:
   validate:
@@ -16,13 +17,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r tools/requirements.txt
-      - name: Validar bundles
-        run: python tools/validate.py ${{ github.event_name == 'schedule' && '--strict' || '' }}
-      - name: Gerar grafo
-        run: python tools/build_graph.py
-      - name: Grafo commitado está atualizado?
-        run: |
-          git diff --exit-code -- graph/ || {
-            echo "::error::graph/ desatualizado. Rode 'python tools/build_graph.py' e commite o resultado."
-            exit 1
-          }
+      - run: tools/ci.sh ${{ github.event_name == 'schedule' && '--strict' || '' }}

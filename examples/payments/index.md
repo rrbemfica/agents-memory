@@ -3,7 +3,7 @@ okf_version: "0.2"
 ---
 # Pagamentos (exemplo fictício)
 
-* [Dono](../../.github/CODEOWNERS) - pagamentos
+* [Dono](../../CODEOWNERS) - pagamentos
 * [Repo payments-api](https://github.com/example-org/payments-api) - entrada de cobranças
 * [Repo ledger](https://github.com/example-org/ledger) - registro contábil
 

@@ -30,7 +30,7 @@ knowledge/                      # raiz do bundle
         └── evals/              # .yaml, fora da regra de conformidade (não é .md)
 ```
 
-- **Por domínio, não por time.** Times mudam; o dono de cada pasta fica no [`CODEOWNERS`](../.github/CODEOWNERS), que também exige a revisão dele nos PRs.
+- **Por domínio, não por time.** Times mudam; o dono de cada pasta fica no [`CODEOWNERS`](../CODEOWNERS), que também pede a revisão dele nos PRs (ver [09](09-forjas.md) sobre quando a forja bloqueia).
 - **Cada domínio tem sua linguagem.** Se "cliente" significa coisas diferentes em dois domínios, cada um tem seu `Term`. O `org/` só tem os termos realmente comuns.
 - **Criar um domínio:** copie a estrutura de [`examples/payments/`](../examples/payments/) para `knowledge/domains/<dominio>/`, ajuste os índices e os IDs de fontes internas (`/decisions/...` vira `/domains/<dominio>/decisions/...`), adicione o time no `CODEOWNERS` e liste o domínio em `knowledge/domains/index.md`.
 
@@ -38,7 +38,7 @@ knowledge/                      # raiz do bundle
 
 - **ID do conceito** (OKF §2): o caminho do arquivo dentro do bundle, sem `.md`. Ex.: `/domains/payments/decisions/0057-pix-parcelado`.
 - Nomes de arquivo em `kebab-case`, sem acentos. ADRs e incidentes com prefixo ordenável (`0057-…`, `2026-10-14-…`).
-- **Links no corpo:** links Markdown normais. Use **links relativos** (`[ADR-0042](../decisions/0042-idempotencia-adquirente.md)`). A OKF recomenda `/` (relativo à raiz do bundle), mas o GitHub interpreta `/` como raiz do repo e o link quebra na navegação. O validador aceita as duas formas.
+- **Links no corpo:** links Markdown normais. Use **links relativos** (`[ADR-0042](../decisions/0042-idempotencia-adquirente.md)`). A OKF recomenda `/` (relativo à raiz do bundle), mas GitHub e GitLab interpretam `/` como raiz do repo e o link quebra na navegação. O validador aceita as duas formas.
 - **IDs em `sources[].resource` internos:** use a forma relativa ao bundle, com `/` (`/domains/payments/terms/estorno`).
 
 ## Frontmatter
@@ -142,7 +142,7 @@ Só links Markdown no corpo, como a OKF define. **Não usamos relações tipadas
 ```markdown
 # Pagamentos
 
-* [Dono](../../../.github/CODEOWNERS) - pagamentos
+* [Dono](../../../CODEOWNERS) - pagamentos
 
 # Decisões vigentes
 
@@ -170,7 +170,7 @@ Ações usadas: **Criação** · **Atualização** · **Verificação** · **Des
 | Frontmatter, `type`, `title`, `description`, `resource`, `tags` | OKF | — |
 | `generated`, `verified`, níveis de confiança, `status`, `stale_after`, `sources` | OKF v0.2 | — |
 | `index.md`, `log.md`, links, IDs, notas de rodapé | OKF | — |
-| Dono por pasta | `CODEOWNERS` do GitHub | Memória sem dono apodrece; a OKF não define propriedade |
+| Dono por pasta | `CODEOWNERS` (GitHub e GitLab) | Memória sem dono apodrece; a OKF não define propriedade |
 | Seção `# Relacionados` com verbos | convenção de texto | Dá sentido aos links sem sair do padrão |
 | Trecho literal na nota de rodapé | convenção de texto | Permite conferir a fonte |
 | Seções obrigatórias por tipo | convenção local | Garante conceitos completos; a OKF não exige seções |

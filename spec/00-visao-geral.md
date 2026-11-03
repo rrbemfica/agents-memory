@@ -43,10 +43,15 @@ agents-memory/
 │   └── domains/<dominio>/    #   um diretório por domínio
 ├── examples/payments/        # bundle de exemplo completo (referência)
 ├── graph/                    # GERADO: grafo, backlinks, Mermaid
-└── tools/                    # validate.py, build_graph.py
+├── tools/                    # validate.py, build_graph.py, ci.sh
+├── CODEOWNERS                # dono de cada pasta (GitHub e GitLab)
+├── .github/workflows/        # CI no GitHub (chama tools/ci.sh)
+└── .gitlab-ci.yml            # CI no GitLab (chama tools/ci.sh)
 ```
 
 ## Índice da especificação
+
+> **Terminologia:** "PR" nesta especificação é o pedido de mudança da forja: *pull request* no GitHub, *merge request* (MR) no GitLab.
 
 | # | Documento | Conteúdo |
 |---|---|---|
@@ -58,6 +63,7 @@ agents-memory/
 | 06 | [Grafo e acesso](06-grafo-e-acesso.md) | Grafo gerado, MCP, canais de entrega |
 | 07 | [Governança](07-governanca.md) | Segurança, PII, o que exige humano |
 | 08 | [Adoção](08-adocao.md) | Piloto, métricas, critérios de parada |
+| 09 | [Forjas](09-forjas.md) | GitHub e GitLab: o que é igual, o que muda, aprovação obrigatória |
 
 ## Referências que embasam este desenho
 

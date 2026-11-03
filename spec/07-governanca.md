@@ -13,7 +13,7 @@
 
 ## Donos
 
-- Todo domínio tem um time dono, definido **só** no [`CODEOWNERS`](../.github/CODEOWNERS) (`/knowledge/domains/<dominio>/ @org/time`). O GitHub exige a revisão desse time nos PRs da pasta. O `index.md` do domínio aponta para lá.
+- Todo domínio tem um time dono, definido **só** no [`CODEOWNERS`](../CODEOWNERS) (`/knowledge/domains/<dominio>/ @org/time`). A forja pede a revisão desse time nos PRs da pasta; se ela **bloqueia** depende da forja e do plano ([09](09-forjas.md)). O `index.md` do domínio aponta para lá.
 - `knowledge/org/`, `schema/`, `spec/` e `templates/` pertencem ao grupo de plataforma/arquitetura.
 - Reorganização de times: troca uma linha do `CODEOWNERS`; não move nem edita conceitos.
 

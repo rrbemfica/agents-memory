@@ -1,6 +1,6 @@
 # <Domínio>
 
-* [Dono](../../../.github/CODEOWNERS) - <time> (fonte da verdade: CODEOWNERS)
+* [Dono](../../../CODEOWNERS) - <time> (fonte da verdade: CODEOWNERS)
 * [Repo <nome>](<URL>) - <uma linha>
 
 # Serviços

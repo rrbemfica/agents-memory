@@ -1,7 +1,7 @@
 # Convenções do agents-memory — fonte de verdade para tools/validate.py.
 # Só OKF v0.2 (https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md), sem campos próprios.
 # O que está aqui são regras de USO do padrão (tipos, seções, quando exigir humano), não extensões do formato.
-# Mudanças aqui exigem PR revisado pelos donos de schema/ (ver .github/CODEOWNERS) e atualização de spec/02 e spec/03.
+# Mudanças aqui exigem PR revisado pelos donos de schema/ (ver CODEOWNERS) e atualização de spec/02 e spec/03.
 version: 0.3
 okf_version: "0.2"
 
