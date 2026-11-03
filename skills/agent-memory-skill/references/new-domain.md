@@ -53,7 +53,7 @@ Não crie pastas vazias (o git não as guarda). Cada pasta de tipo nasce com o p
 
 ## 5. Sugerir os próximos passos
 
-Do piloto em `spec/08-adocao.md`. Cada um vai num branch próprio, depois que o domínio for aceito (ou empilhado sobre o branch do domínio, avisando no PR/MR):
+Do piloto em `spec/08-adoption.md`. Cada um vai num branch próprio, depois que o domínio for aceito (ou empilhado sobre o branch do domínio, avisando no PR/MR):
 1. `AGENTS.md` nos 2 ou 3 repos mais ativos, com a linha `Domínio:` apontando para o novo `index.md` ([agents-md.md](agents-md.md)).
-2. Cerca de 20 perguntas reais do time (Slack, onboarding, reviews) em `knowledge/domains/<slug>/evals/basico.yaml`, a partir de `templates/concepts/eval.yaml`.
-3. Semear uns 20 conceitos que respondem a essas perguntas: os ADRs mais discutidos, termos que confundem, regras que já causaram bug ([registrar.md](registrar.md)). Semeie pelas dúvidas, não por completude.
+2. Cerca de 20 perguntas reais do time (Slack, onboarding, reviews) em `knowledge/domains/<slug>/evals/basic.yaml`, a partir de `templates/concepts/eval.yaml`.
+3. Semear uns 20 conceitos que respondem a essas perguntas: os ADRs mais discutidos, termos que confundem, regras que já causaram bug ([record.md](record.md)). Semeie pelas dúvidas, não por completude.

@@ -74,9 +74,9 @@ Resultado esperado: a revisão humana fica concentrada em decisões e no que é 
 Ordem de leitura do agente, do mais barato ao mais caro:
 
 1. `AGENTS.md` do repo (automático).
-2. `index.md` do domínio indicado.
-3. Conceitos linkados, sob demanda.
-4. Busca ou grafo (MCP), se ainda faltar.
+2. Entrada guiada no domínio indicado: `tools/memory.py search` ou `tree` (o `index.md` é o índice curado).
+3. Conceitos abertos com `read` e ligações seguidas com `neighbors`, sob demanda, com teto por pergunta.
+4. MCP com as mesmas operações, para ferramentas que não rodam comandos ([06](06-graph-and-access.md)).
 
 Regras de uso:
 - **não verificado** → conferir a fonte antes de agir;

@@ -7,3 +7,5 @@ cd "$(dirname "$0")/.."
 python tools/validate.py "$@"
 # O grafo não é versionado: é gerado aqui só para o CI publicar como artefato.
 python tools/build_graph.py
+# Navegação usada pela skill: garante que ela continua rodando sobre os bundles atuais.
+python tools/memory.py queue --all > /dev/null

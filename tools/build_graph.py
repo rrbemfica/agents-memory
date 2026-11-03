@@ -13,7 +13,8 @@ from __future__ import annotations
 import json
 from collections import defaultdict
 
-from memlib import ROOT, body_links, concepts_by_key, internal_sources, key_for_path, load_docs, load_ontology, trust_tier
+from memlib import ROOT, concepts_by_key, load_docs, load_ontology, trust_tier
+from memlib import edges as graph_edges
 
 INVERSE = {"link": "linkedFrom", "source": "citedBy"}
 SHAPES = {
@@ -53,18 +54,7 @@ def build():
             "stale_after": stale.isoformat() if hasattr(stale, "isoformat") else stale,
         }
 
-    edges = set()
-    for key, d in concepts.items():
-        for target in internal_sources(d):
-            tk = d.bundle + target
-            if tk in nodes:
-                edges.add((key, "source", tk))
-        cited = {t for s, r, t in edges if s == key}
-        for _, path in body_links(d):
-            tk = key_for_path(path, d.bundle)
-            if tk and tk in nodes and tk != key and tk not in cited:
-                edges.add((key, "link", tk))
-    edges = sorted(edges)
+    edges = [(s, r, t) for s, r, t, _ in graph_edges(concepts)]
 
     backlinks = defaultdict(list)
     for src, rel, dst in edges:

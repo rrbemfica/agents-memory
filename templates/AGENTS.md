@@ -2,7 +2,7 @@
 
 <Uma frase: o que este repo faz.>
 Domínio: <dominio> → <URL completa de agents-memory/knowledge/domains/<dominio>/index.md na forja>
-Memória: antes de mexer em regra de negócio, consulte o domínio com a skill `agent-memory-skill`; ao terminar, use-a para fechar a sessão.
+Memória: se a tarefa toca regra de negócio, decisão ou integração do domínio, consulte com a skill `agent-memory-skill` antes de mudar; ao terminar, use-a para fechar a sessão.
 
 <!-- Todas as seções são opcionais (spec/01). Apague as que não têm nada que o agente não descobriria sozinho. -->
 

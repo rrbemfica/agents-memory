@@ -5,7 +5,7 @@
 | Onde | Humanos | Agentes |
 |---|---|---|
 | `AGENTS.md` de repo | Aprovam no PR e cortam o que é dedutível | Escrevem e propõem no PR |
-| `Decision` e conceitos de risco (ver [04](04-ciclo-de-vida.md#quando-pedir-revisão-humana)) | Escrevem ou revisam (`verified: human:`) | Propõem em `draft` |
+| `Decision` e conceitos de risco (ver [04](04-lifecycle.md#quando-pedir-revisão-humana)) | Escrevem ou revisam (`verified: human:`) | Propõem em `draft` |
 | Demais conceitos | Podem escrever e revisar | Propõem; entram não verificados, com `stale_after` |
 | `verified` | Registram a própria revisão | Registram confirmação no uso (`<agente>/<versão>`); evals registram `process:memory-evals` |
 | `schema/`, `spec/`, `templates/` | Donos de `knowledge/org/` | Sugerem no PR |
@@ -13,7 +13,7 @@
 
 ## Donos
 
-- Todo domínio tem um time dono, definido **só** no [`CODEOWNERS`](../CODEOWNERS) (`/knowledge/domains/<dominio>/ @org/time`). A forja pede a revisão desse time nos PRs da pasta; se ela **bloqueia** depende da forja e do plano ([09](09-forjas.md)).
+- Todo domínio tem um time dono, definido **só** no [`CODEOWNERS`](../CODEOWNERS) (`/knowledge/domains/<dominio>/ @org/time`). A forja pede a revisão desse time nos PRs da pasta; se ela **bloqueia** depende da forja e do plano ([09](09-forges.md)).
 - `knowledge/org/`, `schema/`, `spec/` e `templates/` pertencem ao grupo de plataforma/arquitetura.
 - Reorganização de times: troca uma linha do `CODEOWNERS`; não move nem edita conceitos.
 

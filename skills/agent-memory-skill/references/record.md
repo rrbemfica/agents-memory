@@ -4,7 +4,7 @@ Cria ou atualiza um conceito OKF v0.2 e prepara o PR/MR. Antes: ache o repo e o 
 
 ## 1. Procurar antes de criar
 
-- Leia o `index.md` do domínio e procure o assunto: `grep -ril "<termo>" knowledge/`.
+- Procure o assunto: `python tools/memory.py search "<termos>" --domain <dominio>` (inclua sinônimos) e `tree` na pasta do tipo. Ao achar um parecido, `read` e `neighbors` mostram o que ele já liga.
 - **Já existe?** Faça um delta pequeno com edição pontual. Nunca reescreva o conceito inteiro.
 - **`Decision` com `status: stable`:** nunca edite o conteúdo. Crie uma decisão nova com "Substitui [ADR-…](…)" em `# Relacionados`. Na antiga, mude só `status: deprecated` e acrescente "Substituída por [ADR-…](…)". A troca pede revisão humana.
 - **Contradiz um conceito revisado por humano** (`verified` com `human:`)? Não sobrescreva. Registre a divergência no corpo do PR/MR e deixe a pessoa decidir.
@@ -12,7 +12,7 @@ Cria ou atualiza um conceito OKF v0.2 e prepara o PR/MR. Antes: ache o repo e o 
 
 ## 2. Escolher tipo e caminho
 
-- Tipo e pasta: `schema/ontology.yaml` (`types.<Tipo>.folder`). A pergunta que cada tipo responde está em `spec/03-tipos.md`.
+- Tipo e pasta: `schema/ontology.yaml` (`types.<Tipo>.folder`). A pergunta que cada tipo responde está em `spec/03-types.md`.
 - Caminho: `knowledge/domains/<dominio>/<pasta>/<slug>.md`, ou `knowledge/org/<pasta>/` se vale para todos os domínios.
 - Nome em `kebab-case`, sem acentos. ADR: próximo número livre em `decisions/` (`0058-<slug>.md`). Incidente: data no início (`2026-10-14-<slug>.md`).
 - Instrução específica de um repo não é conceito: vai no `AGENTS.md` do repo ([agents-md.md](agents-md.md)).

@@ -158,3 +158,35 @@ def as_datetime(value) -> dt.datetime | None:
             return None
         return parsed if parsed.tzinfo else None
     return None
+
+
+def edges(concepts: dict[str, Doc]) -> list[tuple[str, str, str, str]]:
+    """Arestas (origem, rel, destino, texto) entre conceitos, ordenadas.
+
+    rel "source": fonte interna em sources[].resource; texto = title da fonte.
+    rel "link": link no corpo (se o destino não for também fonte); texto = linha onde o link está,
+    que é onde fica o verbo da relação (spec/02).
+    """
+    out = {}
+    for key, d in concepts.items():
+        cited = set()
+        for s in (d.fm or {}).get("sources") or []:
+            if isinstance(s, dict) and is_internal(s.get("resource")):
+                tk = d.bundle + normalize_id(s["resource"])
+                if tk in concepts and tk != key:
+                    cited.add(tk)
+                    out.setdefault((key, "source", tk), str(s.get("title") or s["resource"]))
+        related = False
+        for line in d.body.splitlines():
+            if line.startswith("#"):
+                related = bool(re.match(r"^#{1,2}\s+Relacionados\s*$", line))
+            for href in MD_LINK.findall(line):
+                p = resolve_link(d, href)
+                tk = key_for_path(p, d.bundle) if p is not None else None
+                if tk and tk in concepts and tk != key and tk not in cited:
+                    text = line.strip().lstrip("-*").strip()
+                    if related:
+                        out[(key, "link", tk)] = text
+                    else:
+                        out.setdefault((key, "link", tk), text)
+    return [(s, r, t, txt) for (s, r, t), txt in sorted(out.items())]

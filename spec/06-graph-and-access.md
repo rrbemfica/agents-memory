@@ -2,7 +2,7 @@
 
 ## Grafo gerado
 
-O Markdown é a fonte de verdade; o grafo é um **índice gerado sob demanda e não versionado** (`tools/build_graph.py`) feito só com o que a OKF define: links do corpo (aresta `link`) e fontes internas em `sources[].resource` (aresta `source`). As arestas não têm tipo de negócio; o sentido está no texto da seção `# Relacionados` ([02](02-formato.md#relações-entre-conceitos)).
+O Markdown é a fonte de verdade; o grafo é um **índice gerado sob demanda e não versionado** (`tools/build_graph.py`) feito só com o que a OKF define: links do corpo (aresta `link`) e fontes internas em `sources[].resource` (aresta `source`). As arestas não têm tipo de negócio; o sentido está no texto da seção `# Relacionados` ([02](02-format.md#relações-entre-conceitos)).
 
 | Arquivo gerado | Conteúdo |
 |---|---|
@@ -29,6 +29,10 @@ Uma fonte, vários canais. Nunca edite conhecimento direto num canal — eles s�
 | Outras ferramentas (Cursor, Codex, ChatGPT) | MCP | Mesmo servidor |
 | Humanos | GitHub ou GitLab | Leitura e PR/MR |
 
+## Navegação por linha de comando (✅ implementada)
+
+[`tools/memory.py`](../tools/memory.py) já faz as operações de leitura abaixo sobre o clone, montando o grafo em memória a cada chamada: `search`, `tree`, `read`, `neighbors`, `history` (e `domains`, `queue`). É o que a [skill](10-skills.md) usa. O CI roda a ferramenta em todo PR/MR para ela não quebrar em silêncio.
+
 ## Servidor MCP (📐 especificado, não implementado)
 
 Ferramentas pequenas — agente recebe só o necessário.
@@ -40,6 +44,6 @@ Ferramentas pequenas — agente recebe só o necessário.
 | `memory_search(query, type?, domain?)` | texto | lista de IDs com título e descrição |
 | `memory_neighbors(id, depth=1)` | ID | conceitos linkados e que linkam, com a linha de texto do link (onde está o verbo) |
 | `memory_history(id)` | ID de Decision | cadeia de decisões ligadas por "Substitui" / "Substituída por" |
-| `memory_propose(concept)` | conceito | abre PR com candidato (passa pelo [ciclo](04-ciclo-de-vida.md)) |
+| `memory_propose(concept)` | conceito | abre PR com candidato (passa pelo [ciclo](04-lifecycle.md)) |
 
-Implementação sugerida: montar o grafo em memória com as funções de `tools/memlib.py` (NetworkX) + busca textual (grep/ripgrep). Banco de grafos só se aparecer necessidade real: > ~5 mil conceitos, consultas temporais frequentes (→ Graphiti) ou muitos saltos concorrentes (→ Kùzu/Neo4j). Mesmo assim, o Markdown continua sendo a fonte.
+Implementação sugerida: um servidor fino sobre `tools/memory.py` (o grafo já é montado em memória por `memlib.edges`) + busca textual. Banco de grafos só se aparecer necessidade real: > ~5 mil conceitos, consultas temporais frequentes (→ Graphiti) ou muitos saltos concorrentes (→ Kùzu/Neo4j). Mesmo assim, o Markdown continua sendo a fonte.

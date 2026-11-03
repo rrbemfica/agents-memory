@@ -30,7 +30,7 @@ knowledge/                      # raiz do bundle
         └── evals/              # .yaml, fora da regra de conformidade (não é .md)
 ```
 
-- **Por domínio, não por time.** Times mudam; o dono de cada pasta fica no [`CODEOWNERS`](../CODEOWNERS), que também pede a revisão dele nos PRs (ver [09](09-forjas.md) sobre quando a forja bloqueia).
+- **Por domínio, não por time.** Times mudam; o dono de cada pasta fica no [`CODEOWNERS`](../CODEOWNERS), que também pede a revisão dele nos PRs (ver [09](09-forges.md) sobre quando a forja bloqueia).
 - **Cada domínio tem sua linguagem.** Se "cliente" significa coisas diferentes em dois domínios, cada um tem seu `Term`. O `org/` só tem os termos realmente comuns.
 - **Criar um domínio:** crie `knowledge/domains/<dominio>/index.md` e `log.md` a partir de [`templates/concepts/`](../templates/concepts/), adicione o time no `CODEOWNERS` e liste o domínio em `knowledge/domains/index.md`. A [skill](10-skills.md) faz isso passo a passo. [`examples/payments/`](../examples/payments/) mostra um domínio completo; se copiar conceitos de lá, os IDs de fontes internas mudam (`/decisions/...` vira `/domains/<dominio>/decisions/...`).
 
@@ -70,10 +70,10 @@ sources:
 
 | Campo | OKF v0.2 | Recomendamos? | Notas |
 |---|---|---|---|
-| `type` | obrigatório | ✅ | Ver [03-tipos.md](03-tipos.md) |
+| `type` | obrigatório | ✅ | Ver [03-types.md](03-types.md) |
 | `title`, `description` | recomendados | ✅ | `description` aparece nos índices |
 | `resource` | recomendado | só em `Service` | URL do repo ou sistema |
-| `tags` | recomendado | — | Em algumas tags recomendamos revisão humana (ver [04](04-ciclo-de-vida.md#quando-pedir-revisão-humana)) |
+| `tags` | recomendado | — | Em algumas tags recomendamos revisão humana (ver [04](04-lifecycle.md#quando-pedir-revisão-humana)) |
 | `status` | opcional | — | `draft` · `stable` · `deprecated` |
 | `generated` | opcional | ✅ | `{by, at}`. `by` é um **ator**: `human:<id>`, `process:<id>` ou `<agente>/<versão>` |
 | `verified` | opcional | — | Lista de `{by, at}`. Define o **nível de confiança** (abaixo). Um único mapa vale como lista de um item. |
@@ -124,7 +124,7 @@ Só links Markdown no corpo, como a OKF define. **Não usamos relações tipadas
 | Usa o termo | o conceito depende do significado de um termo |
 | Causado por | o incidente veio de um serviço ou de uma decisão |
 
-- Os verbos são convenção de texto, não campo. Qualquer leitor OKF entende, e o [grafo gerado](06-grafo-e-acesso.md) liga os conceitos.
+- Os verbos são convenção de texto, não campo. Qualquer leitor OKF entende, e o [grafo gerado](06-graph-and-access.md) liga os conceitos.
 - "Pertence ao domínio" não precisa ser dito: a hierarquia de pastas já diz isso (OKF §3).
 - **Quando voltar a ter relações tipadas:** quando uma pergunta como "o que é afetado se X mudar?" for recorrente e os links não derem conta. A mudança entra por ADR.
 
@@ -190,7 +190,7 @@ Exceção: na rodada semanal agendada (`--strict`), `stale_after` vencido no bun
 
 | Não entra | Onde fica |
 |---|---|
-| Transcrições de reunião, logs brutos | Fora do repo, com retenção curta ([07](07-governanca.md)) |
+| Transcrições de reunião, logs brutos | Fora do repo, com retenção curta ([07](07-governance.md)) |
 | Instruções de um repo específico | `AGENTS.md` do repo |
 | Procedimentos executáveis por agente (`SKILL.md`) | Plugin ou skills do time; o `Runbook` aponta para a skill |
 | Preferências pessoais | `~/.claude/CLAUDE.md` ou `CLAUDE.local.md` |

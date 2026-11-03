@@ -14,7 +14,7 @@ A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1)
 | `Incident` | `incidents/` | episódica | postmortem | não muda; gera lições |
 | `Meeting` | `meetings/` | episódica | resumo curto de reunião | **fica velho rápido**; o valor está no que gerou |
 
-`index.md` e `log.md` não são tipos: são arquivos reservados da OKF ([02](02-formato.md#indexmd-okf-8)).
+`index.md` e `log.md` não são tipos: são arquivos reservados da OKF ([02](02-format.md#indexmd-okf-8)).
 
 ## Decision (ADR)
 

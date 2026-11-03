@@ -5,7 +5,7 @@
 **Semana 1 — Fundação**
 - [ ] Escolher o domínio piloto e o time dono.
 - [ ] Instalar o plugin com a [skill](10-skills.md) `agent-memory-skill` nas máquinas do time.
-- [ ] Criar o domínio com a skill (procedimento novo-dominio).
+- [ ] Criar o domínio com a skill (procedimento new-domain).
 - [ ] `AGENTS.md` escrito à mão nos 2–3 repos mais ativos do domínio (template em [`templates/AGENTS.md`](../templates/AGENTS.md)), com `CLAUDE.md` → `@AGENTS.md`.
 - [ ] 20 perguntas de eval a partir de dúvidas reais (Slack, onboarding, reviews).
 
@@ -15,8 +15,8 @@
 - [ ] CI verde (`tools/ci.sh`).
 
 **Semanas 3–4 — Usar e medir**
-- [ ] Hábito de fim de sessão: agente sugere no máximo 2 candidatos (skill, procedimento fechar-sessao).
-- [ ] Revisão semanal de 15 min do domínio (candidatos, conflitos, expirados) com a skill (procedimento revisar).
+- [ ] Hábito de fim de sessão: agente sugere no máximo 2 candidatos (skill, procedimento close-session).
+- [ ] Revisão semanal de 15 min do domínio (candidatos, conflitos, expirados) com a skill (procedimento review).
 - [ ] Rodar as perguntas de eval com e sem memória (manualmente, até o runner existir).
 
 ## Critérios (definidos antes de começar)

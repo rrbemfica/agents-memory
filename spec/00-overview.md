@@ -58,14 +58,14 @@ agents-memory/
 | # | Documento | Conteúdo |
 |---|---|---|
 | 01 | [AGENTS.md](01-agents-md.md) | Padrão para repos de projeto |
-| 02 | [Formato](02-formato.md) | OKF v0.2: frontmatter, fontes, links, bundles, `index.md`, `log.md` |
-| 03 | [Tipos](03-tipos.md) | Tipos de conceito recomendados, campos e seções |
-| 04 | [Ciclo de vida](04-ciclo-de-vida.md) | Captura → verificação → manutenção → `stale_after`; níveis de confiança da OKF; quando pedir revisão humana |
+| 02 | [Formato](02-format.md) | OKF v0.2: frontmatter, fontes, links, bundles, `index.md`, `log.md` |
+| 03 | [Tipos](03-types.md) | Tipos de conceito recomendados, campos e seções |
+| 04 | [Ciclo de vida](04-lifecycle.md) | Captura → verificação → manutenção → `stale_after`; níveis de confiança da OKF; quando pedir revisão humana |
 | 05 | [Evals](05-evals.md) | Como medir acurácia (3 níveis) |
-| 06 | [Grafo e acesso](06-grafo-e-acesso.md) | Grafo gerado, MCP, canais de entrega |
-| 07 | [Governança](07-governanca.md) | Segurança, PII, o que pede humano |
-| 08 | [Adoção](08-adocao.md) | Piloto, métricas, critérios de parada |
-| 09 | [Forjas](09-forjas.md) | GitHub e GitLab: o que é igual, o que muda, aprovação do dono |
+| 06 | [Grafo e acesso](06-graph-and-access.md) | Grafo gerado, MCP, canais de entrega |
+| 07 | [Governança](07-governance.md) | Segurança, PII, o que pede humano |
+| 08 | [Adoção](08-adoption.md) | Piloto, métricas, critérios de parada |
+| 09 | [Forjas](09-forges.md) | GitHub e GitLab: o que é igual, o que muda, aprovação do dono |
 | 10 | [Skill](10-skills.md) | A skill que operacionaliza o padrão e o fluxo do dia a dia |
 
 ## Referências que embasam este desenho

@@ -8,7 +8,7 @@ O padrão [agents.md](https://agents.md) só define o arquivo: Markdown livre, n
 - **Comandos reais:** `package.json` (scripts), `Makefile`, `pyproject.toml`, `justfile`, configs de CI. Copie os comandos **com as flags** que o CI usa.
 - **Confirme** os comandos baratos rodando-os (lint, um teste só). Se precisar instalar dependências ou usar a rede, peça antes. O que não deu para confirmar entra no arquivo e vai listado no PR/MR como "não verificado". Não invente comando: sem CI nem script que o mostre, pergunte ou deixe a linha de fora.
 - **Armadilhas:** pergunte ao usuário o que já deu errado com agentes ou pessoas novas. Veja comentários `HACK`/`NOTE`/`IMPORTANT`, issues e reverts recentes (`git log -i --grep=revert`). Sem como perguntar, liste as perguntas no PR/MR.
-- **Domínio:** em qual domínio da memória este repo fica (`knowledge/domains/index.md`)? Se ele ainda não existe nem está num PR/MR aberto, ofereça criá-lo antes ([novo-dominio.md](novo-dominio.md)). Se está num PR/MR aberto, escreva a linha com a URL que ele terá no `main` e diga no PR/MR que depende dele.
+- **Domínio:** em qual domínio da memória este repo fica (`knowledge/domains/index.md`)? Se ele ainda não existe nem está num PR/MR aberto, ofereça criá-lo antes ([new-domain.md](new-domain.md)). Se está num PR/MR aberto, escreva a linha com a URL que ele terá no `main` e diga no PR/MR que depende dele.
 
 ## 2. Escrever
 
@@ -31,14 +31,14 @@ Parta do template. Todas as seções são opcionais; **apague as que ficariam va
 A linha da memória, logo abaixo de `Domínio:`, é o que faz os agentes usarem esta skill:
 
 ```markdown
-Memória: antes de mexer em regra de negócio, consulte o domínio com a skill `agent-memory-skill`; ao terminar, use-a para fechar a sessão.
+Memória: se a tarefa toca regra de negócio, decisão ou integração do domínio, consulte com a skill `agent-memory-skill` antes de mudar; ao terminar, use-a para fechar a sessão.
 ```
 
 Para cada linha, aplique o teste:
 1. Um agente descobriria isso lendo o código em poucos minutos? **Corte.**
 2. Já causou erro ou retrabalho? **Fica.**
 3. Vale só para uma pasta? Vai no `AGENTS.md` da pasta.
-4. É conhecimento do negócio, válido para vários repos? Vai para a memória ([registrar.md](registrar.md)); aqui fica uma linha com o link.
+4. É conhecimento do negócio, válido para vários repos? Vai para a memória ([record.md](record.md)); aqui fica uma linha com o link.
 5. Já está num comentário do código, mas mudar aquilo é perigoso? Não repita o fato; um limite ("Pergunte antes de mudar `X`") pode ficar.
 
 Evite: descrição da stack ou das pastas, conselhos genéricos, segredos, cópia do README.

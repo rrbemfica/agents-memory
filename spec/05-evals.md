@@ -15,7 +15,7 @@ Não avaliamos se uma nota *parece* boa (rubrica). Avaliamos se ela **produz a r
 ## Formato (domínio e unitário)
 
 ```yaml
-# knowledge/domains/payments/evals/basico.yaml
+# knowledge/domains/payments/evals/basic.yaml
 - id: pay-001
   question: "Qual o valor mínimo para Pix parcelado?"
   answer: "R$ 100"
@@ -68,7 +68,7 @@ Interpretação por conceito (evals unitários):
 | Acurácia de conceitos revisados por humano (amostra mensal) | ≥ 98% | Se a revisão é rigorosa |
 | Acurácia de conceitos confirmados por máquina | ≥ 90% | Se os evals bastam como verificação |
 | Acurácia de conceitos não verificados | ≥ 85% | Se as checagens de entrada bastam |
-| Meia-vida | medir | Calibra os prazos de `stale_after` em [04](04-ciclo-de-vida.md#prazos-padrão-de-stale_after) |
+| Meia-vida | medir | Calibra os prazos de `stale_after` em [04](04-lifecycle.md#prazos-padrão-de-stale_after) |
 | Recall de erros plantados | ≥ 90% | Se o sistema detecta erro |
 
 ## Quem escreve evals de domínio

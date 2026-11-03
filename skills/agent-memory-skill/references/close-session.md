@@ -20,7 +20,7 @@ Descarte o que:
 - se deduz lendo o código ou a documentação existente;
 - só vale para esta tarefa;
 - é preferência pessoal (vai em `~/.claude/CLAUDE.md` ou `CLAUDE.local.md`, não na memória do time);
-- já está na memória. Confira com `grep -ril "<termo>" <repo de memória>/knowledge/`. Se o que está lá estiver errado ou incompleto, o candidato vira uma **atualização**.
+- já está na memória. Confira com `python tools/memory.py search "<termos>"` no repo de memória. Se o que está lá estiver errado ou incompleto, o candidato vira uma **atualização**.
 
 Fique com no máximo **2** conceitos novos, descontando os já registrados nesta sessão. Prefira o que outra pessoa ou outro agente erraria sem saber.
 
@@ -29,8 +29,8 @@ Fique com no máximo **2** conceitos novos, descontando os já registrados nesta
 | O candidato é… | Vai para | Procedimento |
 |---|---|---|
 | Instrução para trabalhar **neste repo** (comando, armadilha local, limite) | `AGENTS.md` do repo | [agents-md.md](agents-md.md) |
-| Conhecimento do **domínio** (vale para vários repos ou para pessoas) | Conceito no bundle do domínio | [registrar.md](registrar.md) |
-| Vale para **todos** os domínios | Conceito em `knowledge/org/` | [registrar.md](registrar.md) |
+| Conhecimento do **domínio** (vale para vários repos ou para pessoas) | Conceito no bundle do domínio | [record.md](record.md) |
+| Vale para **todos** os domínios | Conceito em `knowledge/org/` | [record.md](record.md) |
 
 Cada fato fica em um lugar só. Se ele vai para a memória, o `AGENTS.md` pode só apontar para o conceito.
 
@@ -49,6 +49,6 @@ Mostre uma tabela curta e pergunte quais registrar:
 
 ## 5. Registrar o que o usuário escolher
 
-- Conceitos: [registrar.md](registrar.md), um PR/MR com os conceitos escolhidos.
+- Conceitos: [record.md](record.md), um PR/MR com os conceitos escolhidos.
 - Linhas de `AGENTS.md`: [agents-md.md](agents-md.md).
 - No fim, liste o que foi proposto e os links dos PRs/MRs.

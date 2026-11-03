@@ -16,11 +16,11 @@ Leia **só** o arquivo da situação:
 
 | Situação | Leia |
 |---|---|
-| Vai mexer em algo do domínio, ou perguntaram o que a memória diz | [references/consultar.md](references/consultar.md) |
-| Registrar, corrigir ou substituir um conceito ou ADR | [references/registrar.md](references/registrar.md) |
-| Fim de sessão, feature concluída, "o que aprendemos?" | [references/fechar-sessao.md](references/fechar-sessao.md) |
-| Revisar PR/MR de memória, verificar ou promover, fila semanal | [references/revisar.md](references/revisar.md) |
-| Criar um domínio | [references/novo-dominio.md](references/novo-dominio.md) |
+| Vai mexer em algo do domínio, ou perguntaram o que a memória diz | [references/query.md](references/query.md) |
+| Registrar, corrigir ou substituir um conceito ou ADR | [references/record.md](references/record.md) |
+| Fim de sessão, feature concluída, "o que aprendemos?" | [references/close-session.md](references/close-session.md) |
+| Revisar PR/MR de memória, verificar ou promover, fila semanal | [references/review.md](references/review.md) |
+| Criar um domínio | [references/new-domain.md](references/new-domain.md) |
 | Criar ou atualizar o `AGENTS.md` ou `CLAUDE.md` de um repo | [references/agents-md.md](references/agents-md.md) |
 
 ## Regras que valem para todos
@@ -31,7 +31,7 @@ Leia **só** o arquivo da situação:
 4. **Leia as regras do repo de memória, não de cabeça.** Elas mudam. Estão em:
    - `schema/ontology.yaml`: tipos, pasta, seções, tags que pedem humano
    - `templates/`: um template por tipo e o do `AGENTS.md`
-   - `spec/`: `02-formato.md` (formato), `03-tipos.md` (tipos), `04-ciclo-de-vida.md` (prazos, revisão humana), `01-agents-md.md` (AGENTS.md)
+   - `spec/`: `02-format.md` (formato), `03-types.md` (tipos), `04-lifecycle.md` (prazos, revisão humana), `01-agents-md.md` (AGENTS.md)
 5. **Não conseguiu perguntar ou conferir algo?** Não invente: siga com o que tem e liste no PR/MR (ou na resposta, se não houver PR/MR) o que ficou sem confirmação.
 6. **No máximo 2 conceitos novos por sessão**, somando tudo o que foi registrado nela. Exceção: o usuário pede um lote (ex.: semear um domínio).
 
@@ -48,7 +48,7 @@ Rode os comandos do repo de memória (`tools/validate.py`, `git`) a partir da ra
 **Atualizar a cópia** antes de ler ou escrever, se ela tem upstream e está limpa:
 
 ```bash
-git status --short                     # mudança que não é sua? pare e pergunte
+git status --short                     # mudança que não é sua? para ler, só avise; para escrever, pare e pergunte
 git rev-parse --abbrev-ref @{u} && git pull --ff-only
 ```
 
@@ -56,9 +56,9 @@ Se o primeiro comando falhar (`no upstream`), não é erro: a cópia não tem up
 
 **Domínio:**
 - Vem da linha `Domínio: <dominio> → <link>` do `AGENTS.md` do repo de projeto.
-- Sem essa linha, procure em `knowledge/domains/index.md` pelo assunto, ou pergunte.
+- Sem essa linha, rode `python tools/memory.py domains` e escolha pelo assunto, ou pergunte.
 - Vale para todos os domínios: `knowledge/org/`.
-- O domínio não está em `knowledge/domains/` do `main`? Antes de oferecer criá-lo, veja se ele está num branch ainda não aceito: `git branch -a --list '*novo-dominio-<dominio>*'`, ou um PR/MR aberto. Se estiver, use esse branch como base ("Preparar um branch"). Se não, ofereça criá-lo ([references/novo-dominio.md](references/novo-dominio.md)).
+- O domínio não está em `knowledge/domains/` do `main`? Antes de oferecer criá-lo, veja se ele está num branch ainda não aceito: `git branch -a --list '*novo-dominio-<dominio>*'`, ou um PR/MR aberto. Se estiver, use esse branch como base ("Preparar um branch"). Se não, ofereça criá-lo ([references/new-domain.md](references/new-domain.md)).
 
 ## Datas
 

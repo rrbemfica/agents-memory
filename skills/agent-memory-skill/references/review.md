@@ -15,19 +15,19 @@ Antes, ache o repo de memória e atualize a cópia (SKILL.md). Os comandos abaix
 **A fila** (revisão semanal):
 
 ```bash
-python <pasta desta skill>/scripts/fila.py . [--dominio <dominio>] [--dias 14]
+python tools/memory.py queue [--domain <dominio>] [--days 14]
 ```
 
 A fila olha o `main`. Para ver também o que espera revisão, liste os pedidos abertos: `gh pr list --search "memoria in:title"` ou `glab mr list --search memoria`.
 
-`<pasta desta skill>` é a pasta do `SKILL.md` (no plugin instalado ou em `skills/agent-memory-skill/` do repo de memória). O script mostra drafts, não verificados, o que pede humano e `stale_after` vencido ou vencendo. Por padrão olha só o bundle `knowledge/`; `--todos` inclui os exemplos.
+A fila mostra drafts, não verificados, o que pede humano e `stale_after` vencido ou vencendo. Por padrão olha só o bundle `knowledge/`; `--all` inclui os exemplos.
 
 ## 2. Conferir cada conceito
 
 1. **Validador:** `python tools/validate.py`. Erro = viola a OKF, precisa corrigir. Aviso = recomendação; anote os que tocam este conceito.
 2. **Fontes:** abra cada `sources[].resource` (URL, arquivo do repo, outro conceito). Para cada nota de rodapé com trecho entre aspas, confirme que o trecho **existe literalmente** na fonte. Para cada afirmação, confirme que é o que a fonte diz. Se a fonte é outro conceito, confira nele; se o trecho não está lá, procure nas fontes dele (um nível) e sugira citar a fonte certa. Fonte fora do seu alcance: marque como não conferida. A pessoa decide se aprova mesmo assim.
-3. **Duplicata ou conflito:** procure conceitos parecidos (`grep -ril`). Conflito com conceito revisado por humano é decisão da pessoa.
-4. **Revisão humana recomendada** (`spec/04-ciclo-de-vida.md`, "Quando pedir revisão humana"): `Decision` para virar `stable`, tags de `human_review_tags` da ontologia, fonte externa, descontinuar algo revisado por humano.
+3. **Duplicata ou conflito:** `python tools/memory.py search "<termos do título>"` e `neighbors <id>`. Conflito com conceito revisado por humano é decisão da pessoa.
+4. **Revisão humana recomendada** (`spec/04-lifecycle.md`, "Quando pedir revisão humana"): `Decision` para virar `stable`, tags de `human_review_tags` da ontologia, fonte externa, descontinuar algo revisado por humano.
 5. **Forma:** seções do tipo (`types.<Tipo>.sections`; seções a mais são permitidas), links com verbo em `# Relacionados` quando houver, entrada no `index.md` e no `log.md`.
 
 ## 3. Apresentar
