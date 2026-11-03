@@ -4,7 +4,7 @@
 
 | Onde | Humanos | Agentes |
 |---|---|---|
-| `AGENTS.md` de repo | Escrevem e aprovam | Sugerem no PR |
+| `AGENTS.md` de repo | Aprovam no PR e cortam o que é dedutível | Escrevem e propõem no PR |
 | `Decision` e conceitos de risco (ver [04](04-ciclo-de-vida.md#quando-exigir-humano)) | Escrevem ou revisam (`verified: human:`) | Propõem em `draft` |
 | Demais conceitos | Podem escrever e revisar | Propõem; entram não verificados, com `stale_after` |
 | `verified` | Registram a própria revisão | Registram confirmação no uso (`<agente>/<versão>`); evals registram `process:memory-evals` |

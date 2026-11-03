@@ -71,5 +71,5 @@ agents-memory/
 - OKF v0.2 (Google Cloud, jul/2026): https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
 - Meta — contexto curto, verificado e auto-reparado: https://engineering.fb.com/2026/04/06/developer-tools/how-meta-used-ai-to-map-tribal-knowledge-in-large-scale-data-pipelines
 - GitHub Copilot Memory — citações verificadas no uso, expiração: https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot
-- Estudo ETH sobre AGENTS.md (humano ajuda, gerado por LLM atrapalha): https://arxiv.org/html/2602.11988v1
+- Estudo ETH sobre AGENTS.md (ajuda o que não é dedutível do código; arquivo gerado sem curadoria atrapalha): https://arxiv.org/html/2602.11988v1
 - Anthropic — CLAUDE.md por time, atualizado no review: https://www-cdn.anthropic.com/58284b19e702b49db9302d5b6f135ad8871e7658.pdf

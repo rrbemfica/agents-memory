@@ -19,7 +19,7 @@ sources:
 Agentes de código precisam de dois tipos de contexto: instruções sobre como trabalhar num repo e conhecimento do negócio e do time que atravessa vários repos. Um vault central único fica longe do código e não é lido automaticamente. Instruções só por repo não cobrem conhecimento de domínio.[^agents-md]
 
 # Decisão
-- Cada repo de projeto tem um `AGENTS.md` curto, escrito por pessoas, apontando para o seu domínio.
+- Cada repo de projeto tem um `AGENTS.md` curto, proposto por agente e aprovado por uma pessoa no PR, apontando para o seu domínio.
 - O conhecimento compartilhado vive no bundle `knowledge/`, um diretório por domínio, no formato OKF v0.2.[^okf-spec] Usamos os campos do padrão para origem, confiança e frescor (`sources`, `generated`, `verified`, `status`, `stale_after`).
 - Só OKF, sem campos próprios. Dono por pasta no `CODEOWNERS`; ligações como links no corpo, com o verbo no texto; trecho literal da fonte na nota de rodapé.
 - Revisão humana é exigida para `Decision` estável, conteúdo de risco (segurança, compliance, dinheiro) e fonte externa. O resto entra sem verificação, com `stale_after`, e sobe de nível por evals e uso.
