@@ -1,6 +1,6 @@
 # Organização
 
-* [Dono](../../spec/07-governanca.md#donos) - team:plataforma
+* [Dono](../../.github/CODEOWNERS) - plataforma
 
 # Decisões
 

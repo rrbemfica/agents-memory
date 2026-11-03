@@ -1,7 +1,8 @@
-# Ontologia do agents-memory — fonte de verdade para tools/validate.py.
-# Alinhada à OKF v0.2 (https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md).
-# Mudanças aqui exigem PR revisado pelos donos de knowledge/org e atualização de spec/02 e spec/03.
-version: 0.2
+# Convenções do agents-memory — fonte de verdade para tools/validate.py.
+# Só OKF v0.2 (https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md), sem campos próprios.
+# O que está aqui são regras de USO do padrão (tipos, seções, quando exigir humano), não extensões do formato.
+# Mudanças aqui exigem PR revisado pelos donos de schema/ (ver .github/CODEOWNERS) e atualização de spec/02 e spec/03.
+version: 0.3
 okf_version: "0.2"
 
 # Bundles OKF deste repo (cada um tem index.md raiz com okf_version)
@@ -13,20 +14,17 @@ enums:
   status: [draft, stable, deprecated]          # OKF §5.4 (ausente = stable)
   grader: [exact, contains, llm]
 
-# Prefixos de ator (OKF §7). "team:" é usado em owner e sources[].author.
-actors:
-  human: "human:"
-  process: "process:"
-  team: "team:"
+# Campos de frontmatter da OKF v0.2 que usamos. Qualquer outro gera aviso (mantém o bundle sem extensões).
+okf_fields: [type, title, description, resource, tags, status, generated, verified, stale_after, sources]
 
-# Campos que exigimos além do `type` da OKF (o padrão só exige `type`)
-required_fields: [type, title, description, owner, generated, sources]
+# Campos da OKF que tornamos obrigatórios (o padrão só exige `type`)
+required_fields: [type, title, description, generated, sources]
 
 types:
   Decision:
     folder: decisions
     sections: [Contexto, Decisão, Alternativas rejeitadas, Consequências]
-    requires_quote: true          # ao menos uma fonte com quote literal
+    requires_quote: true          # ao menos uma nota de rodapé com trecho literal entre aspas
     requires_human: true          # human: em generated.by ou verified (quando não for draft)
   Business Rule:
     folder: rules
@@ -50,30 +48,6 @@ types:
 
 # Tags que exigem revisão humana (verified por human:), exceto em status draft
 human_required_tags: [security, compliance, money, external-source]
-
-# Relações tipadas (EXTENSÃO nossa; na OKF todo link é não tipado).
-# Alvos são IDs de conceito relativos ao bundle, com "/" inicial (ex.: /domains/payments/terms/estorno).
-relations:
-  dependsOn:    {from: [Service], to: [Service]}
-  implements:   {from: [Service], to: [Business Rule]}
-  decidesAbout: {from: [Decision], to: [Service, Business Rule, Runbook, Term]}
-  supersedes:   {from: [Decision], to: [Decision]}
-  usesTerm:     {from: "*", to: [Term]}
-  causedBy:     {from: [Incident], to: [Service, Decision]}
-  produced:     {from: [Incident, Meeting], to: "*"}
-  relatesTo:    {from: "*", to: "*"}
-
-# Nome da relação inversa, usada apenas no grafo gerado
-inverse:
-  dependsOn: dependencyOf
-  implements: implementedBy
-  decidesAbout: decidedBy
-  supersedes: supersededBy
-  usesTerm: usedBy
-  causedBy: caused
-  produced: producedBy
-  relatesTo: relatesTo
-  links: linkedFrom
 
 limits:
   body_words_warn: 400

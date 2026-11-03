@@ -10,7 +10,6 @@ sources:
   - id: glossario
     resource: https://example.org/glossario-financeiro#chargeback
     title: Glossário financeiro
-owner: team:pagamentos
 ---
 # Definição
 O portador do cartão contesta a compra no banco emissor, e o valor é revertido à força.[^glossario]

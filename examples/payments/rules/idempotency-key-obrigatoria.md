@@ -13,7 +13,6 @@ sources:
   - id: adr-0042
     resource: /decisions/0042-idempotencia-adquirente
     title: ADR-0042
-owner: team:pagamentos
 ---
 # Regra
 Toda requisição a um adquirente inclui `idempotencyKey` derivada do ID da cobrança.[^codigo]

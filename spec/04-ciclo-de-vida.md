@@ -64,8 +64,8 @@ Resultado esperado: a revisão humana fica concentrada em decisões e no que é 
 
 | Checagem | Garante | Status |
 |---|---|---|
-| `validate.py` | Conformidade OKF v0.2, campos, tipos, relações, links, seções, regras de humano, segredos | ✅ implementado |
-| Grounding | Cada `quote` existe literalmente na fonte | 📐 planejado |
+| `validate.py` | Conformidade OKF v0.2, campos, tipos, links, notas de rodapé, seções, regras de humano, segredos | ✅ implementado |
+| Grounding | Cada trecho entre aspas das notas de rodapé existe literalmente na fonte | 📐 planejado |
 | Evals do conceito | Responde certo e agrega valor (com e sem memória) → acrescenta `verified: process:memory-evals` | 📐 ver [05](05-evals.md) |
 | Evals do domínio | Nada piorou | 📐 ver [05](05-evals.md) |
 
@@ -81,7 +81,7 @@ Ordem de leitura do agente, do mais barato ao mais caro:
 Regras de uso:
 - **não verificado** → conferir a fonte antes de agir;
 - **passou do `stale_after`** → tratar como desatualizado e avisar;
-- **`deprecated`** → não usar; seguir `supersededBy` no grafo.
+- **`deprecated`** → não usar; seguir o link "Substituída por".
 
 Se o agente confirmar o conceito contra a fonte, ele pode propor um item em `verified` com o próprio ator. Se for contradito, propõe a correção.
 
@@ -91,7 +91,7 @@ Job agendado (📐 especificado; `stale_after` vencido já é checado pelo valid
 
 - **A fonte mudou?** Rodar de novo os evals do conceito. Passou: renova `verified` e `stale_after`. Falhou: abre PR de correção.
 - **Passou do `stale_after`?** Renovar se confirmado; senão, remover.
-- **Órfão?** Conceito que nenhum `index.md` lista e nenhuma relação alcança → avisar o dono.
+- **Órfão?** Conceito que nenhum `index.md` lista e nenhum outro conceito linka → avisar o dono.
 - **Dono não existe mais?** Avisar os donos de `org/`.
 - Regenerar grafo e backlinks (`build_graph.py`).
 

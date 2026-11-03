@@ -12,10 +12,6 @@ generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:
 sources:
   - id: codigo
     resource: <repo>:<caminho>
-owner: team:<time>
-relations:
-  dependsOn: []
-  implements: []
 ---
 # Responsabilidade
 <O que este serviço faz e o que NÃO faz.>[^codigo]
@@ -26,5 +22,9 @@ relations:
 
 # Armadilhas
 - <o que já deu problema>
+
+# Relacionados
+- Depende de [<servico>](<servico>.md)
+- Implementa [<regra>](../rules/<slug>.md)
 
 [^codigo]: <repo>

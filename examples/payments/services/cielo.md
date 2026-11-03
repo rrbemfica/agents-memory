@@ -12,7 +12,6 @@ sources:
   - id: incidente
     resource: /incidents/2026-10-14-timeout-cielo
     title: Postmortem do timeout na Cielo
-owner: team:pagamentos
 ---
 # Responsabilidade
 Autoriza e captura transações de cartão. Sistema de terceiros.

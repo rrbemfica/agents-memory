@@ -8,7 +8,6 @@
       "title": "ADR-0031: Parcelamento financiado pela própria empresa",
       "status": "deprecated",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": null
     },
     "examples/payments/decisions/0042-idempotencia-adquirente": {
@@ -19,7 +18,6 @@
       "title": "ADR-0042: Idempotency-key obrigatória em chamadas a adquirentes",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": null
     },
     "examples/payments/decisions/0057-pix-parcelado": {
@@ -30,7 +28,6 @@
       "title": "ADR-0057: Pix parcelado com mínimo de R$ 100",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": null
     },
     "examples/payments/incidents/2026-10-14-timeout-cielo": {
@@ -41,7 +38,6 @@
       "title": "2026-10-14: Timeout na Cielo derrubou cobranças de cartão",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": null
     },
     "examples/payments/meetings/2026-w44-produto": {
@@ -52,7 +48,6 @@
       "title": "Produto Pagamentos, semana 44/2026",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": "2027-01-28T00:00:00+00:00"
     },
     "examples/payments/rules/idempotency-key-obrigatoria": {
@@ -63,7 +58,6 @@
       "title": "Idempotency-key obrigatória em chamadas a adquirentes",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": "2026-11-20T00:00:00+00:00"
     },
     "examples/payments/rules/pix-parcelado-minimo": {
@@ -74,7 +68,6 @@
       "title": "Pix parcelado exige valor mínimo de R$ 100",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": "2027-04-30T00:00:00+00:00"
     },
     "examples/payments/runbooks/rollback-pix": {
@@ -85,7 +78,6 @@
       "title": "Rollback de cobranças Pix",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": "2027-04-16T00:00:00+00:00"
     },
     "examples/payments/services/cielo": {
@@ -96,7 +88,6 @@
       "title": "Cielo (adquirente)",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": "2027-01-15T00:00:00+00:00"
     },
     "examples/payments/services/ledger": {
@@ -107,7 +98,6 @@
       "title": "ledger",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": "2026-12-01T00:00:00+00:00"
     },
     "examples/payments/services/payments-api": {
@@ -118,7 +108,6 @@
       "title": "payments-api",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": "2027-01-30T00:00:00+00:00"
     },
     "examples/payments/terms/chargeback": {
@@ -129,7 +118,6 @@
       "title": "Chargeback",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": null
     },
     "examples/payments/terms/estorno": {
@@ -140,7 +128,6 @@
       "title": "Estorno",
       "status": "stable",
       "trust": "human-reviewed",
-      "owner": "team:pagamentos",
       "stale_after": null
     },
     "examples/payments/terms/pix-parcelado": {
@@ -151,7 +138,6 @@
       "title": "Pix parcelado",
       "status": "stable",
       "trust": "unverified",
-      "owner": "team:pagamentos",
       "stale_after": "2027-01-01T00:00:00+00:00"
     },
     "knowledge/org/decisions/0001-agents-md-e-okf": {
@@ -162,110 +148,134 @@
       "title": "ADR-0001: AGENTS.md nos repos de projeto e bundles OKF v0.2 por domínio",
       "status": "draft",
       "trust": "unverified",
-      "owner": "team:plataforma",
       "stale_after": "2026-12-02T00:00:00+00:00"
     }
   },
   "edges": [
     {
+      "from": "examples/payments/decisions/0031-parcelamento-proprio",
+      "rel": "link",
+      "to": "examples/payments/decisions/0057-pix-parcelado"
+    },
+    {
       "from": "examples/payments/decisions/0042-idempotencia-adquirente",
-      "rel": "decidesAbout",
+      "rel": "link",
       "to": "examples/payments/rules/idempotency-key-obrigatoria"
     },
     {
       "from": "examples/payments/decisions/0042-idempotencia-adquirente",
-      "rel": "decidesAbout",
+      "rel": "link",
       "to": "examples/payments/services/payments-api"
     },
     {
       "from": "examples/payments/decisions/0057-pix-parcelado",
-      "rel": "decidesAbout",
-      "to": "examples/payments/rules/pix-parcelado-minimo"
-    },
-    {
-      "from": "examples/payments/decisions/0057-pix-parcelado",
-      "rel": "supersedes",
+      "rel": "link",
       "to": "examples/payments/decisions/0031-parcelamento-proprio"
     },
     {
       "from": "examples/payments/decisions/0057-pix-parcelado",
-      "rel": "usesTerm",
+      "rel": "link",
+      "to": "examples/payments/rules/pix-parcelado-minimo"
+    },
+    {
+      "from": "examples/payments/decisions/0057-pix-parcelado",
+      "rel": "link",
       "to": "examples/payments/terms/pix-parcelado"
     },
     {
-      "from": "examples/payments/incidents/2026-10-14-timeout-cielo",
-      "rel": "causedBy",
-      "to": "examples/payments/services/cielo"
+      "from": "examples/payments/decisions/0057-pix-parcelado",
+      "rel": "source",
+      "to": "examples/payments/meetings/2026-w44-produto"
     },
     {
       "from": "examples/payments/incidents/2026-10-14-timeout-cielo",
-      "rel": "produced",
+      "rel": "link",
       "to": "examples/payments/runbooks/rollback-pix"
     },
     {
+      "from": "examples/payments/incidents/2026-10-14-timeout-cielo",
+      "rel": "link",
+      "to": "examples/payments/services/cielo"
+    },
+    {
       "from": "examples/payments/meetings/2026-w44-produto",
-      "rel": "produced",
+      "rel": "link",
       "to": "examples/payments/decisions/0057-pix-parcelado"
     },
     {
       "from": "examples/payments/meetings/2026-w44-produto",
-      "rel": "produced",
+      "rel": "link",
       "to": "examples/payments/terms/pix-parcelado"
     },
     {
       "from": "examples/payments/rules/idempotency-key-obrigatoria",
-      "rel": "links",
+      "rel": "source",
       "to": "examples/payments/decisions/0042-idempotencia-adquirente"
     },
     {
       "from": "examples/payments/rules/pix-parcelado-minimo",
-      "rel": "links",
-      "to": "examples/payments/decisions/0057-pix-parcelado"
-    },
-    {
-      "from": "examples/payments/rules/pix-parcelado-minimo",
-      "rel": "usesTerm",
+      "rel": "link",
       "to": "examples/payments/terms/pix-parcelado"
     },
     {
+      "from": "examples/payments/rules/pix-parcelado-minimo",
+      "rel": "source",
+      "to": "examples/payments/decisions/0057-pix-parcelado"
+    },
+    {
       "from": "examples/payments/runbooks/rollback-pix",
-      "rel": "usesTerm",
+      "rel": "link",
       "to": "examples/payments/terms/estorno"
     },
     {
-      "from": "examples/payments/services/payments-api",
-      "rel": "dependsOn",
-      "to": "examples/payments/services/cielo"
+      "from": "examples/payments/runbooks/rollback-pix",
+      "rel": "source",
+      "to": "examples/payments/incidents/2026-10-14-timeout-cielo"
+    },
+    {
+      "from": "examples/payments/services/cielo",
+      "rel": "source",
+      "to": "examples/payments/incidents/2026-10-14-timeout-cielo"
     },
     {
       "from": "examples/payments/services/payments-api",
-      "rel": "dependsOn",
-      "to": "examples/payments/services/ledger"
+      "rel": "link",
+      "to": "examples/payments/decisions/0042-idempotencia-adquirente"
     },
     {
       "from": "examples/payments/services/payments-api",
-      "rel": "implements",
+      "rel": "link",
       "to": "examples/payments/rules/idempotency-key-obrigatoria"
     },
     {
       "from": "examples/payments/services/payments-api",
-      "rel": "implements",
+      "rel": "link",
       "to": "examples/payments/rules/pix-parcelado-minimo"
     },
     {
       "from": "examples/payments/services/payments-api",
-      "rel": "links",
-      "to": "examples/payments/decisions/0042-idempotencia-adquirente"
+      "rel": "link",
+      "to": "examples/payments/services/cielo"
+    },
+    {
+      "from": "examples/payments/services/payments-api",
+      "rel": "link",
+      "to": "examples/payments/services/ledger"
     },
     {
       "from": "examples/payments/terms/chargeback",
-      "rel": "links",
+      "rel": "link",
       "to": "examples/payments/terms/estorno"
     },
     {
       "from": "examples/payments/terms/estorno",
-      "rel": "links",
+      "rel": "link",
       "to": "examples/payments/terms/chargeback"
+    },
+    {
+      "from": "examples/payments/terms/pix-parcelado",
+      "rel": "source",
+      "to": "examples/payments/meetings/2026-w44-produto"
     }
   ]
 }

@@ -12,11 +12,6 @@ sources:
   - id: <chave>
     resource: <URL ou ID de conceito, ex.: /domains/<d>/meetings/...>
     title: <rótulo da fonte>
-    quote: "<trecho literal da fonte>"   # obrigatório em Decision
-owner: team:<time>
-relations:
-  decidesAbout: []
-  supersedes: []
 ---
 # Contexto
 <O problema e as forças em jogo.>[^<chave>]
@@ -33,4 +28,9 @@ relations:
 # Revisitar quando
 <Condição que justificaria rever esta decisão.>
 
-[^<chave>]: <rótulo da fonte>
+# Relacionados
+- Substitui [ADR-NNNN](NNNN-<slug>.md)
+- Decide sobre [<conceito>](../<pasta>/<slug>.md)
+
+[^<chave>]: <rótulo da fonte>: "<trecho literal da fonte>"
+<!-- Em Decision, ao menos uma nota de rodapé precisa do trecho literal entre aspas. -->

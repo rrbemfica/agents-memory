@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import datetime as dt
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent.parent
 FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n?(.*)\Z", re.DOTALL)
 MD_LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)\s]+)\)")
 FOOTNOTE_REF = re.compile(r"\[\^([^\]]+)\](?!:)")
+FOOTNOTE_DEF = re.compile(r"^\[\^([^\]]+)\]:\s*(.*)$", re.MULTILINE)
 RESERVED = ("index.md", "log.md")
 
 
@@ -86,14 +87,12 @@ def is_internal(ref: str) -> bool:
     return isinstance(ref, str) and ref.startswith("/")
 
 
-def relations_of(d: Doc) -> list[tuple[str, str]]:
-    rels = (d.fm or {}).get("relations") or {}
+def internal_sources(d: Doc) -> list[str]:
+    """IDs de conceitos citados em sources[].resource (fontes dentro do mesmo bundle)."""
     out = []
-    if isinstance(rels, dict):
-        for name, targets in rels.items():
-            for t in targets or []:
-                if isinstance(t, str):
-                    out.append((name, normalize_id(t)))
+    for s in (d.fm or {}).get("sources") or []:
+        if isinstance(s, dict) and is_internal(s.get("resource")):
+            out.append(normalize_id(s["resource"]))
     return out
 
 

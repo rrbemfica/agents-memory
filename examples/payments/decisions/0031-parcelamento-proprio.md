@@ -10,8 +10,6 @@ sources:
   - id: ata-marco
     resource: https://example.org/atas/2026-03-10-produto
     title: Ata da reunião de produto de março
-    quote: "vamos testar parcelamento próprio por um trimestre"
-owner: team:pagamentos
 ---
 # Contexto
 Clientes pediam parcelamento e o adquirente cobrava caro pela antecipação.
@@ -25,4 +23,7 @@ Financiar o parcelamento com caixa próprio, como experimento de um trimestre.[^
 # Consequências
 Risco de crédito assumido pela empresa.
 
-[^ata-marco]: Ata da reunião de produto de março
+# Relacionados
+- Substituída por [ADR-0057: Pix parcelado com mínimo de R$ 100](0057-pix-parcelado.md)
+
+[^ata-marco]: Ata da reunião de produto de março: "vamos testar parcelamento próprio por um trimestre"

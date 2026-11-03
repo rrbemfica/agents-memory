@@ -10,13 +10,10 @@ sources:
   - id: agents-md
     resource: https://agents.md
     title: AGENTS.md
-    quote: "The closest AGENTS.md to the edited file wins"
   - id: okf-spec
     resource: https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
     title: Open Knowledge Format v0.2
     author: team:google-cloud-data-cloud
-    quote: "OKF v0.2 makes provenance, trust, lifecycle, and attestation first-class"
-owner: team:plataforma
 ---
 # Contexto
 Agentes de código precisam de dois tipos de contexto: instruções sobre como trabalhar num repo e conhecimento do negócio e do time que atravessa vários repos. Um vault central único fica longe do código e não é lido automaticamente. Instruções só por repo não cobrem conhecimento de domínio.[^agents-md]
@@ -24,7 +21,7 @@ Agentes de código precisam de dois tipos de contexto: instruções sobre como t
 # Decisão
 - Cada repo de projeto tem um `AGENTS.md` curto, escrito por pessoas, apontando para o seu domínio.
 - O conhecimento compartilhado vive no bundle `knowledge/`, um diretório por domínio, no formato OKF v0.2.[^okf-spec] Usamos os campos do padrão para origem, confiança e frescor (`sources`, `generated`, `verified`, `status`, `stale_after`).
-- Extensões só onde o padrão não cobre: `owner`, `relations` tipadas e `sources[].quote`.
+- Só OKF, sem campos próprios. Dono por pasta no `CODEOWNERS`; ligações como links no corpo, com o verbo no texto; trecho literal da fonte na nota de rodapé.
 - Revisão humana é exigida para `Decision` estável, conteúdo de risco (segurança, compliance, dinheiro) e fonte externa. O resto entra sem verificação, com `stale_after`, e sobe de nível por evals e uso.
 - A qualidade é medida por evals com resposta-ouro vinda da fonte.
 
@@ -34,6 +31,7 @@ Agentes de código precisam de dois tipos de contexto: instruções sobre como t
 - Wiki tradicional (Confluence, Notion): agentes não leem automaticamente; não tem fonte nem verificação.
 - Revisão humana de tudo: vira fila e depois carimbo.
 - Campos próprios de confiança e validade (`trust`, `expires`): a OKF v0.2 já os padroniza.
+- Relações tipadas no frontmatter (`dependsOn`, `supersedes`…): resolvem consultas de impacto que ainda não temos, e leitores OKF as ignoram. Voltam por ADR se a necessidade aparecer.
 - Banco de grafos desde o início: custo antes de provar valor; Markdown e um grafo gerado bastam.
 
 # Consequências
@@ -44,3 +42,6 @@ Agentes de código precisam de dois tipos de contexto: instruções sobre como t
 # Revisitar quando
 - A OKF publicar versão incompatível, ou as ferramentas passarem a ter memória de time nativa.
 - O piloto não mostrar ganho mensurável nos evals (spec/08).
+
+[^agents-md]: AGENTS.md: "The closest AGENTS.md to the edited file wins"
+[^okf-spec]: Open Knowledge Format v0.2: "OKF v0.2 makes provenance, trust, lifecycle, and attestation first-class"

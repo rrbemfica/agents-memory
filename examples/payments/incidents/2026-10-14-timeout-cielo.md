@@ -10,10 +10,6 @@ sources:
   - id: postmortem
     resource: https://example.org/postmortems/2026-10-14
     title: Postmortem original
-owner: team:pagamentos
-relations:
-  causedBy: [/services/cielo]
-  produced: [/runbooks/rollback-pix]
 ---
 # Resumo
 Latência alta na Cielo, somada a um timeout de 30 s, esgotou o pool de conexões da payments-api.[^postmortem]
@@ -27,5 +23,9 @@ Timeout longo demais para o volume de pico; conexões presas.
 # Lições
 - Timeout reduzido para 15 s (ver [Cielo](../services/cielo.md)).
 - Procedimento de reversão documentado em [rollback de cobranças Pix](../runbooks/rollback-pix.md).
+
+# Relacionados
+- Causado por [Cielo (adquirente)](../services/cielo.md)
+- Gerou [Rollback de cobranças Pix](../runbooks/rollback-pix.md)
 
 [^postmortem]: Postmortem original

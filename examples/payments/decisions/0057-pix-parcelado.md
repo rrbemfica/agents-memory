@@ -11,12 +11,6 @@ sources:
     resource: /meetings/2026-w44-produto
     title: Reunião de produto W44
     author: team:produto
-    quote: "abaixo de 100 reais o custo da operação não fecha"
-owner: team:pagamentos
-relations:
-  supersedes: [/decisions/0031-parcelamento-proprio]
-  decidesAbout: [/rules/pix-parcelado-minimo]
-  usesTerm: [/terms/pix-parcelado]
 ---
 # Contexto
 O parcelamento próprio ([ADR-0031](0031-parcelamento-proprio.md)) gerou risco de crédito. O Pix parcelado transfere o financiamento a uma instituição parceira.
@@ -34,4 +28,9 @@ Cobranças abaixo de R$ 100 não podem ser parceladas.
 # Revisitar quando
 O custo por parcela da instituição parceira cair abaixo de R$ 0,50.
 
-[^reuniao-w44]: Reunião de produto W44
+# Relacionados
+- Substitui [ADR-0031: Parcelamento financiado pela própria empresa](0031-parcelamento-proprio.md)
+- Decide sobre [Pix parcelado exige valor mínimo de R$ 100](../rules/pix-parcelado-minimo.md)
+- Usa o termo [Pix parcelado](../terms/pix-parcelado.md)
+
+[^reuniao-w44]: Reunião de produto W44: "abaixo de 100 reais o custo da operação não fecha"

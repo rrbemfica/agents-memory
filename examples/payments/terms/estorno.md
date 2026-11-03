@@ -9,7 +9,6 @@ verified: { by: human:tl-pagamentos, at: 2026-09-01T12:00:00Z }
 sources:
   - id: refund
     resource: payments-api:src/routes/refund.ts#createRefund
-owner: team:pagamentos
 ---
 # Definição
 Nós decidimos devolver o valor ao cliente, total ou parcialmente.[^refund]

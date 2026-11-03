@@ -1,6 +1,7 @@
 # Log · Pagamentos (exemplo)
 
 ## 2026-11-02
+* **Atualização**: todos os conceitos sem campos fora da OKF; relações viraram a seção Relacionados.
 * **Criação**: [Pix parcelado](terms/pix-parcelado.md), proposto por agente (não verificado).
 
 ## 2026-10-30

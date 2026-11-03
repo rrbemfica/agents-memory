@@ -11,9 +11,6 @@ sources:
   - id: incidente
     resource: /incidents/2026-10-14-timeout-cielo
     title: Postmortem do timeout na Cielo
-owner: team:pagamentos
-relations:
-  usesTerm: [/terms/estorno]
 ---
 # Quando usar
 Um lote de cobranças Pix foi confirmado ao cliente mas não registrado no ledger (ou o contrário).[^incidente]
@@ -26,5 +23,8 @@ Um lote de cobranças Pix foi confirmado ao cliente mas não registrado no ledge
 
 # Como verificar
 A soma dos lançamentos do intervalo no ledger fecha em zero e não há cobrança sem lançamento.
+
+# Relacionados
+- Usa o termo [Estorno](../terms/estorno.md)
 
 [^incidente]: Postmortem do timeout na Cielo

@@ -15,15 +15,15 @@ sources:
   - id: adr-0057
     resource: /decisions/0057-pix-parcelado
     title: ADR-0057
-owner: team:pagamentos
-relations:
-  usesTerm: [/terms/pix-parcelado]
 ---
 # Regra
 Uma cobrança só pode ser parcelada via Pix parcelado se o valor total for maior ou igual a R$ 100,00.[^codigo]
 
 # Motivo
 Abaixo disso o custo por parcela inviabiliza a operação ([ADR-0057](../decisions/0057-pix-parcelado.md)).[^adr-0057]
+
+# Relacionados
+- Usa o termo [Pix parcelado](../terms/pix-parcelado.md)
 
 [^codigo]: payments-api, validateMinimumAmount
 [^adr-0057]: ADR-0057

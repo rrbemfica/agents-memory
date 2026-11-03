@@ -12,10 +12,6 @@ sources:
   - id: postmortem
     resource: <link do postmortem original>
     title: Postmortem original
-owner: team:<time>
-relations:
-  causedBy: []
-  produced: []               # conceitos gerados pelas lições
 ---
 # Resumo
 <O que aconteceu.>[^postmortem]
@@ -28,5 +24,8 @@ relations:
 
 # Lições
 - <lição> → <link para o conceito gerado>
+
+# Relacionados
+- Causado por [<servico ou decisão>](../services/<servico>.md)
 
 [^postmortem]: Postmortem original

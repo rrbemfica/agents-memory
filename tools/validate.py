@@ -14,8 +14,8 @@ import sys
 import yaml
 
 from memlib import (
-    FOOTNOTE_REF, ROOT, as_datetime, body_links, concepts_by_key, is_internal, key_for_path,
-    load_docs, load_ontology, normalize_id, relations_of, verified_list,
+    FOOTNOTE_DEF, FOOTNOTE_REF, ROOT, as_datetime, body_links, concepts_by_key, is_internal,
+    key_for_path, load_docs, load_ontology, normalize_id, verified_list,
 )
 
 SECRET_PATTERNS = {
@@ -27,6 +27,7 @@ SECRET_PATTERNS = {
 }
 ACTOR = re.compile(r"^(human:[\w.@-]+|process:[\w.@-]+|[\w.-]+/[\w.:-]+)$")
 LOG_DATE = re.compile(r"^##\s+(\d{4}-\d{2}-\d{2})\s*$")
+QUOTED = re.compile(r'["“][^"”]{3,}["”]')
 
 
 class Report:
@@ -43,10 +44,6 @@ class Report:
 
 def where(d) -> str:
     return d.path.relative_to(ROOT).as_posix()
-
-
-def allowed(spec_value, type_name) -> bool:
-    return spec_value == "*" or type_name in spec_value
 
 
 def has_human(fm: dict) -> bool:
@@ -82,14 +79,11 @@ def check_reserved(onto, docs, r: Report):
                         dates.append(m.group(1))
             if dates != sorted(dates, reverse=True):
                 r.warn(where(d), "datas do log devem estar da mais recente para a mais antiga")
-        if d.kind != "concept" and (d.path.parent / "README.md").exists():
-            pass  # README dentro de bundle é tratado como conceito (abaixo)
 
 
 def check_concepts(onto, docs, concepts, r: Report, strict: bool):
-    types, rel_spec = onto["types"], onto["relations"]
+    types = onto["types"]
     now = dt.datetime.now(dt.timezone.utc)
-    superseded = {d.bundle + t for d in concepts.values() for n, t in relations_of(d) if n == "supersedes"}
 
     for d in docs:
         if d.kind != "concept":
@@ -111,6 +105,8 @@ def check_concepts(onto, docs, concepts, r: Report, strict: bool):
         tdef = types[t] or {}
         status = fm.get("status", "stable")
 
+        for f in sorted(set(fm) - set(onto["okf_fields"])):
+            r.warn(w, f"campo fora da OKF: {f} (use só campos do padrão; ver spec/02)")
         for f in onto["required_fields"] + tdef.get("required", []):
             if fm.get(f) in (None, "", [], {}):
                 r.error(w, f"campo obrigatório ausente: {f}")
@@ -118,9 +114,6 @@ def check_concepts(onto, docs, concepts, r: Report, strict: bool):
             r.warn(w, f"type {t} costuma ficar na pasta {tdef['folder']}/")
         if status not in onto["enums"]["status"]:
             r.error(w, f"status inválido: {status!r} (draft | stable | deprecated)")
-        owner = fm.get("owner")
-        if owner and not str(owner).startswith("team:"):
-            r.error(w, "owner deve ser team:<id>")
 
         # generated / verified (OKF §5.2, §7)
         gen = fm.get("generated")
@@ -175,24 +168,14 @@ def check_concepts(onto, docs, concepts, r: Report, strict: bool):
             res = str(s["resource"])
             if is_internal(res) and d.bundle + normalize_id(res) not in concepts:
                 r.error(w, f"sources[{i}].resource aponta para conceito inexistente: {res}")
-        if tdef.get("requires_quote") and not any(isinstance(s, dict) and s.get("quote") for s in sources):
-            r.error(w, f"{t} exige ao menos uma fonte com quote literal")
+        defs = dict(FOOTNOTE_DEF.findall(d.body))
         for ref in set(FOOTNOTE_REF.findall(d.body)):
             if ref not in ids:
                 r.error(w, f"nota de rodapé [^{ref}] sem sources[].id correspondente (OKF §5.1)")
-
-        # relações tipadas (extensão)
-        for name, target in relations_of(d):
-            if name not in rel_spec:
-                r.error(w, f"relação desconhecida: {name}")
-                continue
-            if not allowed(rel_spec[name]["from"], t):
-                r.error(w, f"relação {name} não pode sair de {t}")
-            tk = d.bundle + target
-            if tk not in concepts:
-                r.error(w, f"relação {name} aponta para conceito inexistente: {target}")
-            elif not allowed(rel_spec[name]["to"], concepts[tk].type):
-                r.error(w, f"relação {name} não pode apontar para {concepts[tk].type} ({target})")
+            if ref not in defs:
+                r.error(w, f"nota de rodapé [^{ref}] usada sem definição ([^{ref}]: ...)")
+        if tdef.get("requires_quote") and not any(QUOTED.search(v) for v in defs.values()):
+            r.error(w, f'{t} exige ao menos uma nota de rodapé com trecho literal entre aspas ([^id]: Título: "trecho")')
 
         # seções e tamanho
         for section in tdef.get("sections", []):
@@ -202,8 +185,10 @@ def check_concepts(onto, docs, concepts, r: Report, strict: bool):
         if words > onto["limits"]["body_words_warn"]:
             r.warn(w, f"corpo com {words} palavras; considere quebrar em conceitos menores")
 
-        if t == "Decision" and status == "deprecated" and d.key not in superseded:
-            r.warn(w, "Decision deprecated sem nenhuma outra declarando supersedes para ela")
+        if t == "Decision" and status == "deprecated":
+            links = {key_for_path(p, d.bundle) for _, p in body_links(d)}
+            if not any(k in concepts and concepts[k].type == "Decision" for k in links):
+                r.warn(w, "Decision deprecated sem link para a decisão que a substitui")
 
     # links do corpo (todos os .md dos bundles)
     for d in docs:

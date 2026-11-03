@@ -18,16 +18,16 @@ A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1)
 
 - Seções obrigatórias: `# Contexto` · `# Decisão` · `# Alternativas rejeitadas` · `# Consequências`.
 - Recomendada: `# Revisitar quando`, a condição que justificaria rever. Evita que "já foi rejeitado" vire dogma.
-- Sempre com ao menos uma fonte com `quote`.
+- Sempre com ao menos uma nota de rodapé com o trecho literal da fonte entre aspas.
 - **Para ser `stable`, exige humano:** um ator `human:` em `generated.by` ou em `verified`. Agentes podem propor decisões em `draft`.
 - `status`: `draft` (proposta) → `stable` (aceita) → `deprecated` (substituída ou abandonada).
-- **Nunca edite o conteúdo de uma decisão `stable`.** Para mudar, crie uma nova com `supersedes:` e marque a antiga como `deprecated`.
+- **Nunca edite o conteúdo de uma decisão `stable`.** Para mudar, crie uma nova com "Substitui [ADR-…]" em `# Relacionados`, marque a antiga como `deprecated` e acrescente nela "Substituída por […]".
 - Vira ADR quando a decisão é difícil de reverter ou já gerou discussão repetida. Detalhe de implementação não vira ADR.
 
 ## Business Rule
 
 - Seções: `# Regra` (uma frase verificável) · `# Motivo`.
-- Recomendado: o `Service` que aplica a regra declara `implements`, e uma fonte aponta o símbolo no código.
+- Recomendado: o `Service` que aplica a regra diz "Implementa […]" em `# Relacionados`, e uma fonte aponta o símbolo no código.
 
 ## Term
 
@@ -39,7 +39,7 @@ A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1)
 - Campo obrigatório: `resource` (URL do repo ou do sistema externo).
 - Seções: `# Responsabilidade` · `# Interfaces` (entradas e saídas) · `# Armadilhas`.
 - Serviços externos (adquirente, banco central, SaaS) também são `Service`, com `tags: [external]`.
-- O esqueleto (`resource`, `owner`, `dependsOn`) deve ser **gerado do código** quando possível; o texto é curado.
+- O esqueleto (`resource` e os "Depende de") deve ser **gerado do código** quando possível; o texto é curado.
 
 ## Runbook
 
@@ -49,13 +49,13 @@ A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1)
 ## Incident
 
 - Seções: `# Resumo` · `# Impacto` · `# Causa` · `# Lições`.
-- Cada lição relevante vira um conceito próprio (`Business Rule`, `Runbook`, `Decision`), ligado por `produced`.
+- Cada lição relevante vira um conceito próprio (`Business Rule`, `Runbook`, `Decision`), linkado na seção `# Lições`.
 
 ## Meeting
 
 - `stale_after` obrigatório (padrão: 90 dias depois da reunião).
 - Corpo curto: bullets com o que foi decidido ou definido, cada um apontando para o conceito gerado.
-- Campo recomendado: `participants`, com times, não pessoas (extensão).
+- Primeiro bullet: `Participantes:`, com times, não pessoas.
 - **Nunca** a transcrição.
 
 ## Tipos da OKF que podemos adotar depois

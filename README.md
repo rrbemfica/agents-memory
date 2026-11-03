@@ -17,7 +17,7 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 ```
 
 - **Repos de projeto** usam [`AGENTS.md`](spec/01-agents-md.md): instruções curtas e locais, carregadas automaticamente pelos agentes.
-- **Conhecimento do time e do domínio** (decisões, regras de negócio, termos, serviços, runbooks, incidentes) vive aqui, no bundle `knowledge/`, no formato [**Open Knowledge Format (OKF) v0.2**](spec/02-formato.md). Origem, confiança e frescor usam os campos do padrão (`sources`, `generated`, `verified`, `status`, `stale_after`); nossas extensões são só `owner`, `relations` tipadas e `sources[].quote`.
+- **Conhecimento do time e do domínio** (decisões, regras de negócio, termos, serviços, runbooks, incidentes) vive aqui, no bundle `knowledge/`, no formato [**Open Knowledge Format (OKF) v0.2**](spec/02-formato.md). Só campos do padrão, sem extensões: origem, confiança e frescor usam `sources`, `generated`, `verified`, `status` e `stale_after`; o dono de cada pasta fica no [`CODEOWNERS`](.github/CODEOWNERS).
 - **Qualidade é medida**, não presumida: toda nota cita sua fonte e cada domínio tem [evals](spec/05-evals.md) que medem acurácia.
 
 ## Por onde começar
@@ -36,7 +36,7 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 
 ```bash
 pip install -r tools/requirements.txt
-python tools/validate.py        # valida frontmatter, tipos, relações, links, evals e segredos
+python tools/validate.py        # valida frontmatter, tipos, fontes, links, evals e segredos
 python tools/build_graph.py     # gera graph/ (graph.json, backlinks.json, Mermaid por área)
 ```
 
@@ -46,9 +46,9 @@ O CI (`.github/workflows/memory-ci.yml`) roda os dois em todo PR e falha se o gr
 
 | Peça | Status |
 |---|---|
-| Especificação (`spec/`) | ✅ v0.2 (alinhada à OKF v0.2) |
+| Especificação (`spec/`) | ✅ v0.3 (OKF v0.2 pura, sem extensões) |
 | Templates e domínio de exemplo | ✅ |
 | Validador e gerador de grafo + CI | ✅ |
-| Servidor MCP de leitura (`search`, `get`, `neighbors`, `impact`) | 📐 especificado em [06](spec/06-grafo-e-acesso.md), não implementado |
+| Servidor MCP de leitura (`search`, `get`, `neighbors`, `history`) | 📐 especificado em [06](spec/06-grafo-e-acesso.md), não implementado |
 | Runner de evals com/sem memória | 📐 especificado em [05](spec/05-evals.md), não implementado |
 | Gardener noturno (verificação de fontes, expiração) | 📐 especificado em [04](spec/04-ciclo-de-vida.md), parcial (`stale_after` é checado no validador) |

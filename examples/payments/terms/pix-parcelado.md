@@ -10,8 +10,6 @@ sources:
   - id: reuniao-w44
     resource: /meetings/2026-w44-produto
     title: Reunião de produto W44
-    quote: "o parceiro paga à vista e o cliente parcela com ele"
-owner: team:pagamentos
 ---
 # Definição
 Recebemos o valor à vista; a instituição parceira financia o pagador, que paga a ela em parcelas.[^reuniao-w44]
@@ -22,4 +20,4 @@ Recebemos o valor à vista; a instituição parceira financia o pagador, que pag
 # Não confundir com
 - Parcelamento no cartão: financiado pelo emissor do cartão, não por parceiro Pix.
 
-[^reuniao-w44]: Reunião de produto W44
+[^reuniao-w44]: Reunião de produto W44: "o parceiro paga à vista e o cliente parcela com ele"

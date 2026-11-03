@@ -12,7 +12,6 @@ sources:
   - id: origem
     resource: <ID do incidente, doc ou skill>
     title: <rótulo>
-owner: team:<time>
 ---
 # Quando usar
 <Sintoma ou situação.>[^origem]

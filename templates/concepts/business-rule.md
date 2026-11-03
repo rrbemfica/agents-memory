@@ -11,14 +11,14 @@ generated: { by: <human:id | process:id | agente/versão>, at: AAAA-MM-DDThh:mm:
 sources:
   - id: codigo
     resource: <repo>:<caminho>#<símbolo>
-owner: team:<time>
-relations:
-  usesTerm: []
 ---
 # Regra
 <Uma frase verificável.>[^codigo]
 
 # Motivo
 <Por que a regra existe.>
+
+# Relacionados
+- Usa o termo [<termo>](../terms/<slug>.md)
 
 [^codigo]: <repo>, <símbolo>

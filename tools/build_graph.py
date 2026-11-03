@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Gera graph/ a partir dos bundles: graph.json, backlinks.json e um Mermaid por área.
 
+Só usa o que a OKF v0.2 define: links do corpo (aresta `link`) e fontes internas em
+sources[].resource (aresta `source`). Arestas não têm tipo de negócio; o sentido está no texto.
+
 Uso: python tools/build_graph.py
 A saída é determinística (ordenada e sem datas relativas a "hoje") para o CI checar se está atualizada.
 """
@@ -9,9 +12,9 @@ from __future__ import annotations
 import json
 from collections import defaultdict
 
-from memlib import ROOT, body_links, concepts_by_key, key_for_path, load_docs, load_ontology, relations_of, trust_tier
+from memlib import ROOT, body_links, concepts_by_key, internal_sources, key_for_path, load_docs, load_ontology, trust_tier
 
-HIDDEN_IN_DIAGRAM = {"links"}
+INVERSE = {"link": "linkedFrom", "source": "citedBy"}
 SHAPES = {
     "Decision": ('{{"', '"}}'),
     "Service": ('[("', '")]'),
@@ -34,7 +37,6 @@ def build():
     onto = load_ontology()
     docs = load_docs(onto)
     concepts = concepts_by_key(docs)
-    inverse = onto["inverse"]
 
     nodes = {}
     for key, d in sorted(concepts.items()):
@@ -47,27 +49,25 @@ def build():
             "title": d.fm.get("title"),
             "status": d.fm.get("status", "stable"),
             "trust": trust_tier(d.fm),
-            "owner": d.fm.get("owner"),
             "stale_after": stale.isoformat() if hasattr(stale, "isoformat") else stale,
         }
 
     edges = set()
     for key, d in concepts.items():
-        declared = set()
-        for rel, target in relations_of(d):
+        for target in internal_sources(d):
             tk = d.bundle + target
             if tk in nodes:
-                edges.add((key, rel, tk))
-                declared.add(tk)
+                edges.add((key, "source", tk))
+        cited = {t for s, r, t in edges if s == key}
         for _, path in body_links(d):
             tk = key_for_path(path, d.bundle)
-            if tk and tk in nodes and tk != key and tk not in declared:
-                edges.add((key, "links", tk))
+            if tk and tk in nodes and tk != key and tk not in cited:
+                edges.add((key, "link", tk))
     edges = sorted(edges)
 
     backlinks = defaultdict(list)
     for src, rel, dst in edges:
-        backlinks[dst].append({"from": src, "rel": inverse.get(rel, rel)})
+        backlinks[dst].append({"from": src, "rel": INVERSE[rel]})
 
     out = ROOT / "graph"
     out.mkdir(exist_ok=True)
@@ -93,12 +93,13 @@ def build():
             elif n["trust"] == "unverified":
                 lines.append(f"  class {ids[k]} unverified")
         for src, rel, dst in edges:
-            if rel not in HIDDEN_IN_DIAGRAM and src in ids and dst in ids:
-                lines.append(f"  {ids[src]} -- {rel} --> {ids[dst]}")
+            if src in ids and dst in ids:
+                arrow = "-. fonte .->" if rel == "source" else "-->"
+                lines.append(f"  {ids[src]} {arrow} {ids[dst]}")
         lines.append("```")
         name = area.replace("/", "--") + ".md"
         header = (f"# Grafo · {area}\n\n> Gerado por `tools/build_graph.py`. Não edite à mão. "
-                  "Tracejado = não verificado · esmaecido = deprecated.\n\n")
+                  "Seta cheia = link no texto · pontilhada = fonte · tracejado = não verificado · esmaecido = deprecated.\n\n")
         (out / name).write_text(header + "\n".join(lines) + "\n", encoding="utf-8")
         written.add(name)
 

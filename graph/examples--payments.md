@@ -1,6 +1,6 @@
 # Grafo · examples/payments
 
-> Gerado por `tools/build_graph.py`. Não edite à mão. Tracejado = não verificado · esmaecido = deprecated.
+> Gerado por `tools/build_graph.py`. Não edite à mão. Seta cheia = link no texto · pontilhada = fonte · tracejado = não verificado · esmaecido = deprecated.
 
 ```mermaid
 graph LR
@@ -22,19 +22,29 @@ graph LR
   n12("Estorno")
   n13("Pix parcelado")
   class n13 unverified
-  n1 -- decidesAbout --> n5
-  n1 -- decidesAbout --> n10
-  n2 -- decidesAbout --> n6
-  n2 -- supersedes --> n0
-  n2 -- usesTerm --> n13
-  n3 -- causedBy --> n8
-  n3 -- produced --> n7
-  n4 -- produced --> n2
-  n4 -- produced --> n13
-  n6 -- usesTerm --> n13
-  n7 -- usesTerm --> n12
-  n10 -- dependsOn --> n8
-  n10 -- dependsOn --> n9
-  n10 -- implements --> n5
-  n10 -- implements --> n6
+  n0 --> n2
+  n1 --> n5
+  n1 --> n10
+  n2 --> n0
+  n2 --> n6
+  n2 --> n13
+  n2 -. fonte .-> n4
+  n3 --> n7
+  n3 --> n8
+  n4 --> n2
+  n4 --> n13
+  n5 -. fonte .-> n1
+  n6 --> n13
+  n6 -. fonte .-> n2
+  n7 --> n12
+  n7 -. fonte .-> n3
+  n8 -. fonte .-> n3
+  n10 --> n1
+  n10 --> n5
+  n10 --> n6
+  n10 --> n8
+  n10 --> n9
+  n11 --> n12
+  n12 --> n11
+  n13 -. fonte .-> n4
 ```

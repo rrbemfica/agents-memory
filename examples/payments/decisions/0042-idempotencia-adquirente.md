@@ -10,10 +10,6 @@ sources:
   - id: pr-412
     resource: https://github.com/example-org/payments-api/pull/412
     title: PR 412, remoção do retry no adapter
-    quote: "retry no adapter gerou cobrança duplicada em produção"
-owner: team:pagamentos
-relations:
-  decidesAbout: [/rules/idempotency-key-obrigatoria, /services/payments-api]
 ---
 # Contexto
 Retries no adapter do adquirente, sem chave de idempotência, geraram cobranças duplicadas.[^pr-412]
@@ -30,4 +26,8 @@ Adapters ficam sem lógica de retry; a fila precisa de backoff configurado.
 # Revisitar quando
 Algum adquirente não suportar idempotência nativa.
 
-[^pr-412]: PR 412, remoção do retry no adapter
+# Relacionados
+- Decide sobre [Idempotency-key obrigatória em chamadas a adquirentes](../rules/idempotency-key-obrigatoria.md)
+- Decide sobre [payments-api](../services/payments-api.md)
+
+[^pr-412]: PR 412, remoção do retry no adapter: "retry no adapter gerou cobrança duplicada em produção"

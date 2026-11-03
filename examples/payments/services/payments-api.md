@@ -13,10 +13,6 @@ stale_after: 2027-01-30T00:00:00Z
 sources:
   - id: charge-route
     resource: payments-api:src/routes/charge.ts#createCharge
-owner: team:pagamentos
-relations:
-  dependsOn: [/services/ledger, /services/cielo]
-  implements: [/rules/pix-parcelado-minimo, /rules/idempotency-key-obrigatoria]
 ---
 # Responsabilidade
 Ponto de entrada de toda cobrança. Valida, chama o adquirente e registra o resultado no [ledger](ledger.md). Não calcula tarifas (isso é do billing).[^charge-route]
@@ -27,5 +23,11 @@ Ponto de entrada de toda cobrança. Valida, chama o adquirente e registra o resu
 
 # Armadilhas
 - Retry é feito pela fila, não no adapter do adquirente ([ADR-0042](../decisions/0042-idempotencia-adquirente.md)).
+
+# Relacionados
+- Depende de [ledger](ledger.md)
+- Depende de [Cielo (adquirente)](cielo.md)
+- Implementa [Pix parcelado exige valor mínimo de R$ 100](../rules/pix-parcelado-minimo.md)
+- Implementa [Idempotency-key obrigatória em chamadas a adquirentes](../rules/idempotency-key-obrigatoria.md)
 
 [^charge-route]: payments-api, rota de cobrança

@@ -1,6 +1,6 @@
 # 00 · Visão geral
 
-> Especificação v0.2 · 2026-11-02 · alinhada à [OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+> Especificação v0.3 · 2026-11-02 · só OKF, sem campos próprios · alinhada à [OKF v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
 
 ## Problema
 
@@ -13,7 +13,7 @@ Duas camadas, cada uma com um padrão aberto:
 | Camada | Onde | Padrão | Papel | Carregamento |
 |---|---|---|---|---|
 | **Instrução local** | Cada repo de projeto | [AGENTS.md](https://agents.md) | *Como trabalhar aqui*: comandos, arquivos-chave, armadilhas, limites | Automático, por toda ferramenta |
-| **Conhecimento compartilhado** | Este repo, bundle `knowledge/` com um diretório por domínio | [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) + poucas extensões | *O que é verdade*: decisões, regras, termos, serviços, runbooks, incidentes | Sob demanda (link, MCP, plugin) |
+| **Conhecimento compartilhado** | Este repo, bundle `knowledge/` com um diretório por domínio | [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) sem campos próprios | *O que é verdade*: decisões, regras, termos, serviços, runbooks, incidentes | Sob demanda (link, MCP, plugin) |
 
 A ponte entre as duas é uma linha no `AGENTS.md` de cada repo apontando para o `index.md` do domínio a que ele pertence.
 
@@ -27,7 +27,7 @@ Ver a decisão completa em [knowledge/org/decisions/0001-agents-md-e-okf.md](../
 4. **Substitua, não sobrescreva.** Decisões mudam por substituição; o histórico fica.
 5. **Delta, não reescrita.** Agentes propõem mudanças pontuais, nunca reescrevem uma nota inteira.
 6. **Domínio, não organograma.** Bundles são por domínio; o time dono é um campo.
-7. **Memória sem dono apodrece.** Todo conceito tem `owner`.
+7. **Memória sem dono apodrece.** Toda pasta tem dono no `CODEOWNERS`.
 8. **Se não tem eval, não sabemos se ajuda.** Acurácia é medida.
 
 ## Estrutura deste repositório
@@ -36,7 +36,7 @@ Ver a decisão completa em [knowledge/org/decisions/0001-agents-md-e-okf.md](../
 agents-memory/
 ├── AGENTS.md / CLAUDE.md     # como agentes trabalham NESTE repo
 ├── spec/                     # esta especificação
-├── schema/ontology.yaml      # tipos e relações permitidos (fonte do validador)
+├── schema/ontology.yaml      # tipos, seções e regras de humano (fonte do validador)
 ├── templates/                # AGENTS.md de projeto + um template por tipo de conceito
 ├── knowledge/                # bundle OKF v0.2 (index.md raiz com okf_version)
 │   ├── org/                  #   padrões, termos e decisões transversais
@@ -51,7 +51,7 @@ agents-memory/
 | # | Documento | Conteúdo |
 |---|---|---|
 | 01 | [AGENTS.md](01-agents-md.md) | Padrão para repos de projeto |
-| 02 | [Formato](02-formato.md) | OKF + extensões: frontmatter, relações, bundles, `index.md`, `log.md` |
+| 02 | [Formato](02-formato.md) | OKF v0.2: frontmatter, fontes, links, bundles, `index.md`, `log.md` |
 | 03 | [Tipos](03-tipos.md) | Cada tipo de conceito, campos e seções obrigatórias |
 | 04 | [Ciclo de vida](04-ciclo-de-vida.md) | Captura → verificação → manutenção → `stale_after`; níveis de confiança da OKF; quando exigir humano |
 | 05 | [Evals](05-evals.md) | Como medir acurácia (3 níveis) |
@@ -63,7 +63,6 @@ agents-memory/
 
 - AGENTS.md — padrão aberto, arquivos aninhados por pasta: https://agents.md
 - OKF v0.2 (Google Cloud, jul/2026): https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md
-- Vocabulário de relações do Backstage: https://backstage.io/docs/features/software-catalog/well-known-relations
 - Meta — contexto curto, verificado e auto-reparado: https://engineering.fb.com/2026/04/06/developer-tools/how-meta-used-ai-to-map-tribal-knowledge-in-large-scale-data-pipelines
 - GitHub Copilot Memory — citações verificadas no uso, expiração: https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot
 - Estudo ETH sobre AGENTS.md (humano ajuda, gerado por LLM atrapalha): https://arxiv.org/html/2602.11988v1

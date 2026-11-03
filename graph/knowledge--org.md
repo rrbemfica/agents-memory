@@ -1,6 +1,6 @@
 # Grafo · knowledge/org
 
-> Gerado por `tools/build_graph.py`. Não edite à mão. Tracejado = não verificado · esmaecido = deprecated.
+> Gerado por `tools/build_graph.py`. Não edite à mão. Seta cheia = link no texto · pontilhada = fonte · tracejado = não verificado · esmaecido = deprecated.
 
 ```mermaid
 graph LR

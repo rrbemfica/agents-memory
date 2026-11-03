@@ -10,7 +10,8 @@ Dono: plataforma
 
 ## Onde está o quê
 - `spec/`: a especificação. Leia `spec/02-formato.md` e `spec/03-tipos.md` antes de criar conceitos
-- `schema/ontology.yaml`: tipos, relações e regras de humano
+- `schema/ontology.yaml`: tipos, seções e regras de humano
+- `.github/CODEOWNERS`: dono de cada pasta
 - `templates/concepts/`: um template por tipo. Sempre comece por eles
 - `knowledge/domains/<d>/index.md`: porta de entrada de cada domínio; `knowledge/org/` vale para todos
 
@@ -21,8 +22,9 @@ Dono: plataforma
 
 ## Ao escrever memória
 - Procure conceito existente antes de criar; prefira um delta pequeno.
-- Nunca reescreva um conceito inteiro. Nunca edite uma `Decision` `stable`: crie outra com `supersedes`.
-- Conceito escrito por você: `generated.by: <ferramenta>/<modelo>`, sem `verified`, `stale_after` (+30 dias), `sources` com `id` e `quote` literal.
+- Nunca reescreva um conceito inteiro. Nunca edite uma `Decision` `stable`: crie outra com "Substitui [...]" em `# Relacionados`.
+- Conceito escrito por você: `generated.by: <ferramenta>/<modelo>`, sem `verified`, `stale_after` (+30 dias), `sources` com `id`, e o trecho literal entre aspas na nota de rodapé.
+- Só campos da OKF no frontmatter. Ligações vão como links no corpo, com o verbo no texto.
 - Decisão nova ou conteúdo com tags `security`, `compliance`, `money`, `external-source`: entre como `status: draft`.
 - No máximo 2 conceitos novos por sessão. Registre cada mudança no `log.md` do bundle (`## AAAA-MM-DD` + `* **Ação**: ...`).
 - Não edite `graph/` à mão.

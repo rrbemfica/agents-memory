@@ -1,6 +1,6 @@
-# 02 · Formato (OKF v0.2 + extensões)
+# 02 · Formato (OKF v0.2)
 
-Todo conhecimento compartilhado é um **conceito**: um arquivo Markdown com frontmatter YAML, uma ideia por arquivo, no formato [Open Knowledge Format v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md). Onde a OKF já define um campo, usamos o dela. Só estendemos o que ela não cobre, e cada extensão está justificada na [tabela abaixo](#o-que-é-padrão-e-o-que-é-extensão).
+Todo conhecimento compartilhado é um **conceito**: um arquivo Markdown com frontmatter YAML, uma ideia por arquivo, no formato [Open Knowledge Format v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md). **Não usamos campos próprios**: só os do padrão. O que acrescentamos são regras de uso (quais campos e seções exigimos), resumidas [no fim desta página](#o-que-é-padrão-e-o-que-é-convenção-nossa).
 
 ## Bundles
 
@@ -30,22 +30,21 @@ knowledge/                      # raiz do bundle
         └── evals/              # .yaml, fora da regra de conformidade (não é .md)
 ```
 
-- **Por domínio, não por time.** Times mudam; o campo `owner` diz quem cuida hoje.
+- **Por domínio, não por time.** Times mudam; o dono de cada pasta fica no [`CODEOWNERS`](../.github/CODEOWNERS), que também exige a revisão dele nos PRs.
 - **Cada domínio tem sua linguagem.** Se "cliente" significa coisas diferentes em dois domínios, cada um tem seu `Term`. O `org/` só tem os termos realmente comuns.
-- **Criar um domínio:** copie a estrutura de [`examples/payments/`](../examples/payments/) para `knowledge/domains/<dominio>/`, ajuste os índices e os IDs das relações (`/decisions/...` vira `/domains/<dominio>/decisions/...`) e liste o domínio em `knowledge/domains/index.md`.
+- **Criar um domínio:** copie a estrutura de [`examples/payments/`](../examples/payments/) para `knowledge/domains/<dominio>/`, ajuste os índices e os IDs de fontes internas (`/decisions/...` vira `/domains/<dominio>/decisions/...`), adicione o time no `CODEOWNERS` e liste o domínio em `knowledge/domains/index.md`.
 
 ## Identidade e links
 
 - **ID do conceito** (OKF §2): o caminho do arquivo dentro do bundle, sem `.md`. Ex.: `/domains/payments/decisions/0057-pix-parcelado`.
 - Nomes de arquivo em `kebab-case`, sem acentos. ADRs e incidentes com prefixo ordenável (`0057-…`, `2026-10-14-…`).
 - **Links no corpo:** links Markdown normais. Use **links relativos** (`[ADR-0042](../decisions/0042-idempotencia-adquirente.md)`). A OKF recomenda `/` (relativo à raiz do bundle), mas o GitHub interpreta `/` como raiz do repo e o link quebra na navegação. O validador aceita as duas formas.
-- **IDs em `relations` e `sources[].resource` internos:** use a forma relativa ao bundle, com `/` (`/domains/payments/terms/estorno`).
+- **IDs em `sources[].resource` internos:** use a forma relativa ao bundle, com `/` (`/domains/payments/terms/estorno`).
 
 ## Frontmatter
 
 ```yaml
 ---
-# ── OKF v0.2 ─────────────────────────────────────────────────────────
 type: Decision                                   # OBRIGATÓRIO na OKF
 title: "ADR-0057: Pix parcelado com mínimo de R$ 100"
 description: Uma frase que responde "do que se trata?".
@@ -63,12 +62,6 @@ sources:
     title: Reunião de produto W44
     author: team:produto
     last_modified: 2026-10-30T14:00:00Z
-    quote: "abaixo de 100 reais o custo da operação não fecha"   # EXTENSÃO
-# ── Extensões agents-memory ─────────────────────────────────────────
-owner: team:pagamentos
-relations:
-  supersedes: [/domains/payments/decisions/0031-parcelamento-proprio]
-  decidesAbout: [/domains/payments/rules/pix-parcelado-minimo]
 ---
 ```
 
@@ -85,9 +78,6 @@ relations:
 | `verified` | opcional | — | Lista de `{by, at}`. Define o **nível de confiança** (abaixo). Um único mapa vale como lista de um item. |
 | `stale_after` | opcional | em `Meeting` e em conceito gerado por agente sem `verified` | Data e hora absolutas (ISO 8601 com fuso) |
 | `sources` | opcional | ✅ (≥ 1) | Cada item exige `resource` |
-| `sources[].quote` | **extensão** | em `Decision` | Trecho literal da fonte |
-| `owner` | **extensão** | ✅ | `team:<id>` |
-| `relations` | **extensão** | — | Relações tipadas (abaixo) |
 
 Todas as datas e horas usam ISO 8601 **com fuso** (`2026-10-30T15:00:00Z`), como exige a OKF.
 
@@ -109,28 +99,33 @@ Derivados de `verified`, não declarados:
   ```markdown
   O mínimo é R$ 100.[^reuniao-w44]
 
-  [^reuniao-w44]: Reunião de produto W44
+  [^reuniao-w44]: Reunião de produto W44: "abaixo de 100 reais o custo da operação não fecha"
   ```
-- `quote` (extensão) é obrigatório em `Decision`. É o que permite checar a afirmação sem reler a fonte inteira.
+- **Trecho literal:** quando der, a nota de rodapé traz o trecho exato da fonte entre aspas. Em `Decision` é obrigatório. É o que permite checar a afirmação sem reler a fonte inteira, e o que o jardineiro usa para conferir se a fonte ainda diz o mesmo.
 
-## Relações tipadas (extensão)
+## Relações entre conceitos
 
-Na OKF, um link entre conceitos não diz *que tipo* de relação é. Nós precisamos disso para perguntas como "o que é afetado se eu mudar isto?". Por isso as relações vão em `relations`, com vocabulário fechado definido em [`schema/ontology.yaml`](../schema/ontology.yaml):
+Só links Markdown no corpo, como a OKF define. **Não usamos relações tipadas no frontmatter.** O sentido da ligação vai no texto, numa seção `# Relacionados`:
 
-| Relação | De → Para | Origem do nome | Responde |
-|---|---|---|---|
-| `dependsOn` | `Service` → `Service` | Backstage | Se X cair, o que quebra? |
-| `implements` | `Service` → `Business Rule` | nossa | Onde a regra está no código? |
-| `decidesAbout` | `Decision` → `Service`, `Business Rule`, `Runbook`, `Term` | nossa | Por que é assim? |
-| `supersedes` | `Decision` → `Decision` | nossa | Isso ainda vale? |
-| `usesTerm` | qualquer → `Term` | nossa | O que o termo significa aqui? |
-| `causedBy` | `Incident` → `Service`, `Decision` | nossa | Isso já deu problema? |
-| `produced` | `Incident`, `Meeting` → qualquer | nossa | O que saiu disso? |
-| `relatesTo` | qualquer → qualquer | nossa | Use só se nenhuma outra servir |
+```markdown
+# Relacionados
+- Depende de [ledger](ledger.md)
+- Implementa [Pix parcelado exige valor mínimo de R$ 100](../rules/pix-parcelado-minimo.md)
+- Substitui [ADR-0031](0031-parcelamento-proprio.md)
+```
 
-- "Pertence ao domínio" **não** é relação: a hierarquia de pastas já diz isso (OKF §3).
-- Declare a relação em **um lado só**. Os inversos (`supersededBy`, `dependencyOf`, "citado por") existem só no [grafo gerado](06-grafo-e-acesso.md).
-- Leitores OKF que não conhecem `relations` simplesmente ignoram o campo. Os links do corpo continuam formando o grafo não tipado do padrão.
+| Verbo sugerido | Use quando |
+|---|---|
+| Depende de | um serviço chama ou precisa de outro |
+| Implementa | o serviço aplica uma regra de negócio |
+| Decide sobre | a decisão define uma regra, um serviço, um runbook ou um termo |
+| Substitui / Substituída por | uma decisão troca outra (escreva nos dois lados) |
+| Usa o termo | o conceito depende do significado de um termo |
+| Causado por | o incidente veio de um serviço ou de uma decisão |
+
+- Os verbos são convenção de texto, não campo. Qualquer leitor OKF entende, e o [grafo gerado](06-grafo-e-acesso.md) liga os conceitos.
+- "Pertence ao domínio" não precisa ser dito: a hierarquia de pastas já diz isso (OKF §3).
+- **Quando voltar a ter relações tipadas:** quando uma pergunta como "o que é afetado se X mudar?" for recorrente e os links não derem conta. A mudança entra por ADR.
 
 ## Corpo
 
@@ -147,7 +142,7 @@ Na OKF, um link entre conceitos não diz *que tipo* de relação é. Nós precis
 ```markdown
 # Pagamentos
 
-* [Dono](#) - team:pagamentos
+* [Dono](../../../.github/CODEOWNERS) - pagamentos
 
 # Decisões vigentes
 
@@ -168,21 +163,21 @@ Sem frontmatter. Entradas agrupadas por data, mais recente primeiro, com a açã
 
 Ações usadas: **Criação** · **Atualização** · **Verificação** · **Descontinuação** · **Remoção**.
 
-## O que é padrão e o que é extensão
+## O que é padrão e o que é convenção nossa
 
-| Item | Situação | Por que mantemos |
+| Item | Situação | Por quê |
 |---|---|---|
 | Frontmatter, `type`, `title`, `description`, `resource`, `tags` | OKF | — |
 | `generated`, `verified`, níveis de confiança, `status`, `stale_after`, `sources` | OKF v0.2 | — |
-| `index.md`, `log.md`, links, IDs | OKF | — |
-| `owner` | extensão | Memória sem dono apodrece; a OKF não define propriedade |
-| `relations` tipadas | extensão | Consultas de impacto e histórico; a OKF só tem links não tipados |
-| `sources[].quote` | extensão | Permite checar uma decisão sem reler a fonte |
+| `index.md`, `log.md`, links, IDs, notas de rodapé | OKF | — |
+| Dono por pasta | `CODEOWNERS` do GitHub | Memória sem dono apodrece; a OKF não define propriedade |
+| Seção `# Relacionados` com verbos | convenção de texto | Dá sentido aos links sem sair do padrão |
+| Trecho literal na nota de rodapé | convenção de texto | Permite conferir a fonte |
 | Seções obrigatórias por tipo | convenção local | Garante conceitos completos; a OKF não exige seções |
-| Campos que tornamos obrigatórios (`title`, `description`, `owner`, `generated`, `sources`) | regra local, mais estrita | Sem eles não dá para medir confiança nem governar |
+| Campos que tornamos obrigatórios (`title`, `description`, `generated`, `sources`) | regra local, mais estrita | Sem eles não dá para medir confiança |
 | `evals/*.yaml` | fora do escopo da OKF | Medir acurácia ([05](05-evals.md)); não afeta a conformidade |
 
-Tudo o que é extensão continua sendo OKF válido: o padrão manda leitores tolerarem campos desconhecidos (OKF §4.1, §11).
+Nenhum conceito tem campo fora da OKF. Qualquer leitor do padrão lê o bundle inteiro sem perder nada.
 
 ## O que NÃO entra no bundle
 

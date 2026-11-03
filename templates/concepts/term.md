@@ -12,7 +12,6 @@ sources:
   - id: <chave>
     resource: <URL ou ID>
     title: <rótulo>
-owner: team:<time>
 ---
 # Definição
 <O que significa neste domínio.>[^<chave>]

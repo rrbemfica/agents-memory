@@ -1,0 +1,9 @@
+# Dono de cada área da memória. Substitui o antigo campo `owner` dos conceitos.
+# Ao criar um domínio, adicione uma linha com o time dono, por exemplo:
+#   /knowledge/domains/pagamentos/  @<org>/time-pagamentos
+*                      @rrbemfica
+/knowledge/org/        @rrbemfica
+/examples/payments/    @rrbemfica
+/schema/       @rrbemfica
+/spec/         @rrbemfica
+/templates/    @rrbemfica

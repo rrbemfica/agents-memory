@@ -11,7 +11,6 @@ stale_after: 2026-12-01T00:00:00Z
 sources:
   - id: ledger-post
     resource: ledger:src/ledger_service.py#LedgerService.post
-owner: team:pagamentos
 ---
 # Responsabilidade
 Toda movimentação gera dois lançamentos (débito e crédito) que somam zero.[^ledger-post]
