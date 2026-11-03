@@ -11,14 +11,14 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 │   limites)                   │  para  │    domains/<nome>/ por domínio    │
 │  lido automaticamente        │        │     evals/                        │
 └──────────────────────────────┘        └───────────────────────────────────┘
-                                              │ gerado no CI
+                                              │ gerado sob demanda (não versionado)
                                               ▼
                                         graph/  (grafo, Mermaid, backlinks)
 ```
 
 - **Repos de projeto** usam [`AGENTS.md`](spec/01-agents-md.md): instruções curtas e locais, carregadas automaticamente pelos agentes.
 - **Conhecimento do time e do domínio** (decisões, regras de negócio, termos, serviços, runbooks, incidentes) vive aqui, no bundle `knowledge/`, no formato [**Open Knowledge Format (OKF) v0.2**](spec/02-formato.md). Só campos do padrão, sem extensões: origem, confiança e frescor usam `sources`, `generated`, `verified`, `status` e `stale_after`; o dono de cada pasta fica no [`CODEOWNERS`](CODEOWNERS).
-- **Qualidade é medida**, não presumida: toda nota cita sua fonte e cada domínio tem [evals](spec/05-evals.md) que medem acurácia.
+- **Qualidade é medida**, não presumida: toda nota cita sua fonte, e domínios podem ter [evals](spec/05-evals.md) que medem acurácia (camada nossa, recomendada; o runner ainda não existe).
 
 ## Por onde começar
 
@@ -38,10 +38,10 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 ```bash
 pip install -r tools/requirements.txt
 python tools/validate.py        # valida frontmatter, tipos, fontes, links, evals e segredos
-python tools/build_graph.py     # gera graph/ (graph.json, backlinks.json, Mermaid por área)
+python tools/build_graph.py     # opcional: gera graph/ localmente (não é commitado)
 ```
 
-O CI roda `tools/ci.sh` (validação + grafo) em todo PR/MR e falha se o grafo commitado estiver desatualizado. Funciona no GitHub (`.github/workflows/memory-ci.yml`) e no GitLab (`.gitlab-ci.yml`); ver [spec/09-forjas.md](spec/09-forjas.md).
+O CI roda `tools/ci.sh` em todo PR/MR: valida os bundles e publica o grafo como artefato da pipeline (30 dias), sem commit. Funciona no GitHub (`.github/workflows/memory-ci.yml`) e no GitLab (`.gitlab-ci.yml`); ver [spec/09-forjas.md](spec/09-forjas.md).
 
 ## Status
 

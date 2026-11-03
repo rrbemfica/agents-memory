@@ -42,7 +42,7 @@ agents-memory/
 │   ├── org/                  #   padrões, termos e decisões transversais
 │   └── domains/<dominio>/    #   um diretório por domínio
 ├── examples/payments/        # bundle de exemplo completo (referência)
-├── graph/                    # GERADO: grafo, backlinks, Mermaid
+├── graph/                    # GERADO sob demanda, não versionado (.gitignore)
 ├── tools/                    # validate.py, build_graph.py, ci.sh
 ├── CODEOWNERS                # dono de cada pasta (GitHub e GitLab)
 ├── .github/workflows/        # CI no GitHub (chama tools/ci.sh)

@@ -2,11 +2,13 @@
 
 Não avaliamos se uma nota *parece* boa (rubrica). Avaliamos se ela **produz a resposta certa**, contra uma resposta-ouro que vem **da fonte, não da nota**.
 
+> **Camada nossa, recomendada, não obrigatória.** Nem o AGENTS.md nem a OKF definem evals. A OKF só oferece onde registrar o resultado: um item em `verified` com ator `process:` (nível "confirmado por máquina"). Enquanto o runner não existir, evals são **recomendados**: o validador confere o formato quando existem, mas nenhum domínio é obrigado a tê-los. Tornar obrigatório entra por ADR, depois que o runner estiver rodando.
+
 ## Três níveis
 
 | Nível | Pergunta | Resposta-ouro vem de | Onde fica | Status |
 |---|---|---|---|---|
-| **Domínio** | O agente responde certo às perguntas reais do time? | Humanos, a partir de dúvidas reais (Slack, onboarding, reviews) | `knowledge/domains/<d>/evals/*.yaml` | ✅ formato definido e validado |
+| **Domínio** | O agente responde certo às perguntas reais do time? | Humanos, a partir de dúvidas reais (Slack, onboarding, reviews) | `knowledge/domains/<d>/evals/*.yaml` | ✅ formato definido e validado; nada roda ainda |
 | **Unitário** | Este conceito está certo e agrega valor? | Gerada da fonte citada, sem ver o conceito | `knowledge/domains/<d>/evals/unit/*.yaml` | 📐 planejado |
 | **Tarefa** (replay) | O agente resolve tarefas antigas melhor com a memória? | O diff que foi merged de verdade | fora deste repo | 📐 planejado |
 
@@ -71,4 +73,4 @@ Interpretação por conceito (evals unitários):
 
 ## Quem escreve evals de domínio
 
-O time dono do domínio, a partir de **dúvidas reais**. Meta: começar com 20 perguntas por domínio e acrescentar toda dúvida que um agente ou pessoa errou. É o principal trabalho humano recorrente do sistema — e também documenta o que o time precisa saber.
+O time dono do domínio, a partir de **dúvidas reais**. Recomendado: começar com umas 20 perguntas quando o domínio tiver conteúdo suficiente e acrescentar toda dúvida que um agente ou pessoa errou. É o principal trabalho humano recorrente do sistema — e também documenta o que o time precisa saber.

@@ -23,7 +23,7 @@ Agentes de código precisam de dois tipos de contexto: instruções sobre como t
 - O conhecimento compartilhado vive no bundle `knowledge/`, um diretório por domínio, no formato OKF v0.2.[^okf-spec] Usamos os campos do padrão para origem, confiança e frescor (`sources`, `generated`, `verified`, `status`, `stale_after`).
 - Só OKF, sem campos próprios. Dono por pasta no `CODEOWNERS`; ligações como links no corpo, com o verbo no texto; trecho literal da fonte na nota de rodapé.
 - Revisão humana é exigida para `Decision` estável, conteúdo de risco (segurança, compliance, dinheiro) e fonte externa. O resto entra sem verificação, com `stale_after`, e sobe de nível por evals e uso.
-- A qualidade é medida por evals com resposta-ouro vinda da fonte.
+- A qualidade deve ser medida por evals com resposta-ouro vinda da fonte. É uma camada nossa (nenhum dos dois padrões define), recomendada até existir o runner.
 
 # Alternativas rejeitadas
 - Vault central único em Obsidian (modelo "Autonomous Engineering OS"): longe do código, links sem tipo, sem verificação.
@@ -37,7 +37,7 @@ Agentes de código precisam de dois tipos de contexto: instruções sobre como t
 # Consequências
 - Dois lugares para manter, com regra clara do que vai em cada um (spec/01).
 - A OKF ainda é jovem (v0.2) e pode mudar; o risco é baixo porque o formato é Markdown simples.
-- Exige disciplina de fonte e um conjunto de evals por domínio.
+- Exige disciplina de fonte; evals por domínio são recomendados.
 
 # Revisitar quando
 - A OKF publicar versão incompatível, ou as ferramentas passarem a ter memória de time nativa.

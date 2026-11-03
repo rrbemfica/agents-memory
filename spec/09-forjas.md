@@ -7,7 +7,7 @@ O núcleo não depende de forja: conceitos são Markdown com OKF, e `tools/valid
 | Peça | Por quê |
 |---|---|
 | Conceitos, `index.md`, `log.md`, links relativos | Markdown comum; as duas forjas tratam `/` como raiz do repo, por isso usamos links relativos ([02](02-formato.md#identidade-e-links)) |
-| `graph/*.md` | As duas renderizam Mermaid |
+| Grafo como artefato | As duas publicam `graph/` como artefato da pipeline; o Mermaid renderiza nas duas |
 | `sources[].resource` | `repo:caminho#símbolo` é neutro; URLs de qualquer forja valem |
 | `AGENTS.md` dos repos de projeto | Aponta para o domínio por URL |
 | Plugin de skills do time | Um marketplace de plugins pode ser qualquer URL git |

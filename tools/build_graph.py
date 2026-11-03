@@ -5,7 +5,8 @@ Só usa o que a OKF v0.2 define: links do corpo (aresta `link`) e fontes interna
 sources[].resource (aresta `source`). Arestas não têm tipo de negócio; o sentido está no texto.
 
 Uso: python tools/build_graph.py
-A saída é determinística (ordenada e sem datas relativas a "hoje") para o CI checar se está atualizada.
+graph/ não é versionado: serve para olhar localmente e como artefato do CI.
+A saída é determinística (ordenada, sem datas relativas a "hoje").
 """
 from __future__ import annotations
 
@@ -98,7 +99,7 @@ def build():
                 lines.append(f"  {ids[src]} {arrow} {ids[dst]}")
         lines.append("```")
         name = area.replace("/", "--") + ".md"
-        header = (f"# Grafo · {area}\n\n> Gerado por `tools/build_graph.py`. Não edite à mão. "
+        header = (f"# Grafo · {area}\n\n> Gerado por `tools/build_graph.py` (não versionado). "
                   "Seta cheia = link no texto · pontilhada = fonte · tracejado = não verificado · esmaecido = deprecated.\n\n")
         (out / name).write_text(header + "\n".join(lines) + "\n", encoding="utf-8")
         written.add(name)

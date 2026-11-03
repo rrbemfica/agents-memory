@@ -93,7 +93,7 @@ Job agendado (📐 especificado; `stale_after` vencido já é checado pelo valid
 - **Passou do `stale_after`?** Renovar se confirmado; senão, remover.
 - **Órfão?** Conceito que nenhum `index.md` lista e nenhum outro conceito linka → avisar o dono.
 - **Dono não existe mais?** Avisar os donos de `org/`.
-- Regenerar grafo e backlinks (`build_graph.py`).
+- Montar o grafo em memória para achar órfãos e links quebrados.
 
 ## Prazos padrão de `stale_after`
 

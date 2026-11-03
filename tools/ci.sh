@@ -5,12 +5,5 @@ set -eu
 cd "$(dirname "$0")/.."
 
 python tools/validate.py "$@"
+# O grafo não é versionado: é gerado aqui só para o CI publicar como artefato.
 python tools/build_graph.py
-if ! git diff --exit-code -- graph/; then
-  echo "ERRO graph/ desatualizado. Rode 'python tools/build_graph.py' e commite o resultado." >&2
-  exit 1
-fi
-if [ -n "$(git status --porcelain -- graph/)" ]; then
-  echo "ERRO graph/ tem arquivos novos não commitados. Rode 'python tools/build_graph.py' e commite o resultado." >&2
-  exit 1
-fi

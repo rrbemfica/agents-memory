@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 .DS_Store
+
+# Gerado por tools/build_graph.py; não versionado
+graph/

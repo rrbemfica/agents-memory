@@ -6,7 +6,7 @@ Dono: plataforma
 ## Comandos
 - Instalar: `pip install -r tools/requirements.txt`
 - Validar: `python tools/validate.py` (rodar antes de todo commit)
-- Gerar grafo: `python tools/build_graph.py` (commitar o `graph/` gerado)
+- Grafo (opcional, não versionado): `python tools/build_graph.py`
 - Tudo o que o CI roda (GitHub ou GitLab): `tools/ci.sh`
 
 ## Onde está o quê
@@ -28,7 +28,6 @@ Dono: plataforma
 - Só campos da OKF no frontmatter. Ligações vão como links no corpo, com o verbo no texto.
 - Decisão nova ou conteúdo com tags `security`, `compliance`, `money`, `external-source`: entre como `status: draft`.
 - No máximo 2 conceitos novos por sessão. Registre cada mudança no `log.md` do bundle (`## AAAA-MM-DD` + `* **Ação**: ...`).
-- Não edite `graph/` à mão.
 
 ## Não faça sem um humano
 - Mudar `schema/`, `spec/` ou `templates/`

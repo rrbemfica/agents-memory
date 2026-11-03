@@ -11,7 +11,7 @@
 **Semana 2 — Semear**
 - [ ] ~20 conceitos respondendo às perguntas acima: os ADRs mais discutidos, termos que confundem, regras de negócio que já causaram bug, serviços do domínio.
 - [ ] `index.md` do domínio completo.
-- [ ] CI verde (`validate.py`, `build_graph.py`).
+- [ ] CI verde (`tools/ci.sh`).
 
 **Semanas 3–4 — Usar e medir**
 - [ ] Hábito de fim de sessão: agente sugere no máximo 2 candidatos.

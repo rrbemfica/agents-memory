@@ -9,7 +9,7 @@
 | Demais conceitos | Podem escrever e revisar | Propõem; entram não verificados, com `stale_after` |
 | `verified` | Registram a própria revisão | Registram confirmação no uso (`<agente>/<versão>`); evals registram `process:memory-evals` |
 | `schema/`, `spec/`, `templates/` | Donos de `knowledge/org/` | Sugerem no PR |
-| `graph/` | Ninguém | Gerado pelo CI |
+| `graph/` | Ninguém | Não versionado; gerado sob demanda ou como artefato do CI |
 
 ## Donos
 
