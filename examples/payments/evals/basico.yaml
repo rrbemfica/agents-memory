@@ -25,7 +25,7 @@
   question: "Por que não fazemos mais parcelamento financiado por nós?"
   answer: "Risco de crédito; foi substituído pelo Pix parcelado (ADR-0057 substitui ADR-0031)."
   grader: llm
-  source: /meetings/2026-w44-produto
+  source: https://example.org/atas/2026-10-30-produto   # a fonte, nunca a nota (spec/05)
   concepts: [/decisions/0057-pix-parcelado, /decisions/0031-parcelamento-proprio]
 
 - id: pay-005

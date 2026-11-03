@@ -31,7 +31,7 @@ okf_version: "0.2"
 
 # Runbooks e incidentes
 
-* [Rollback de cobranças Pix](runbooks/rollback-pix.md) - reverter lote processado com erro
+* [Reconciliar cobranças de cartão](runbooks/reconciliar-cartao-falha-adquirente.md) - quando o adquirente falha no meio da cobrança
 * [2026-10-14: timeout na Cielo](incidents/2026-10-14-timeout-cielo.md) - pool esgotado no pico
 
 # Reuniões

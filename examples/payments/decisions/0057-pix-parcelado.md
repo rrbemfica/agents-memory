@@ -8,8 +8,8 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-10-30T16:00:00Z }
 verified: { by: human:tl-pagamentos, at: 2026-10-31T10:00:00Z }
 sources:
   - id: reuniao-w44
-    resource: /meetings/2026-w44-produto
-    title: Reunião de produto W44
+    resource: https://example.org/atas/2026-10-30-produto
+    title: Ata da reunião de produto W44
     author: team:produto
 ---
 # Contexto
@@ -32,5 +32,6 @@ O custo por parcela da instituição parceira cair abaixo de R$ 0,50.
 - Substitui [ADR-0031: Parcelamento financiado pela própria empresa](0031-parcelamento-proprio.md)
 - Decide sobre [Pix parcelado exige valor mínimo de R$ 100](../rules/pix-parcelado-minimo.md)
 - Usa o termo [Pix parcelado](../terms/pix-parcelado.md)
+- Definida em [Produto Pagamentos, semana 44/2026](../meetings/2026-w44-produto.md)
 
-[^reuniao-w44]: Reunião de produto W44: "abaixo de 100 reais o custo da operação não fecha"
+[^reuniao-w44]: Ata da reunião de produto W44: "abaixo de 100 reais o custo da operação não fecha"

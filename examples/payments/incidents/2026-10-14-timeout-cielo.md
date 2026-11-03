@@ -22,10 +22,10 @@ Timeout longo demais para o volume de pico; conexões presas.
 
 # Lições
 - Timeout reduzido para 15 s (ver [Cielo](../services/cielo.md)).
-- Procedimento de reversão documentado em [rollback de cobranças Pix](../runbooks/rollback-pix.md).
+- Procedimento de reconciliação documentado em [reconciliar cobranças de cartão](../runbooks/reconciliar-cartao-falha-adquirente.md).
 
 # Relacionados
 - Causado por [Cielo (adquirente)](../services/cielo.md)
-- Gerou [Rollback de cobranças Pix](../runbooks/rollback-pix.md)
+- Gerou [Reconciliar cobranças de cartão após falha do adquirente](../runbooks/reconciliar-cartao-falha-adquirente.md)
 
 [^postmortem]: Postmortem original

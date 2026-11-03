@@ -2,7 +2,7 @@
 """Valida os bundles: conformidade OKF v0.2 + regras locais (spec/02, spec/03, spec/04, schema/ontology.yaml).
 
 Uso: python tools/validate.py [--strict]
-  --strict  trata conceitos com stale_after vencido como erro (padrão: aviso)
+  --strict  trata conceitos com stale_after vencido como erro nos bundles de strict_bundles (padrão: aviso)
 Sai com código 1 se houver erros.
 """
 from __future__ import annotations
@@ -139,7 +139,7 @@ def check_concepts(onto, docs, concepts, r: Report, strict: bool):
             if not st:
                 r.error(w, "stale_after deve ser ISO 8601 com fuso")
             elif now >= st:
-                (r.error if strict else r.warn)(w, f"desatualizado desde {st:%Y-%m-%d}: reverifique e renove, ou remova")
+                (r.error if strict and d.bundle in onto["strict_bundles"] else r.warn)(w, f"desatualizado desde {st:%Y-%m-%d}: reverifique e renove, ou remova")
         agent_written = isinstance(gen, dict) and not str(gen.get("by", "")).startswith(("human:", "process:"))
         if agent_written and not verified_list(fm) and stale is None:
             r.error(w, "conceito gerado por agente e sem verified precisa de stale_after")

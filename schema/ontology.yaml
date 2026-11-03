@@ -10,6 +10,9 @@ bundles:
   - knowledge
   - examples/payments
 
+# Bundles em que --strict torna stale_after vencido um erro. Exemplos são fictícios e envelhecem: só avisam.
+strict_bundles: [knowledge]
+
 enums:
   status: [draft, stable, deprecated]          # OKF §5.4 (ausente = stable)
   grader: [exact, contains, llm]

@@ -1,6 +1,8 @@
 # Log · Pagamentos (exemplo)
 
 ## 2026-11-02
+* **Atualização**: runbook de rollback Pix trocado por [reconciliar cobranças de cartão](runbooks/reconciliar-cartao-falha-adquirente.md), coerente com o incidente da Cielo.
+* **Atualização**: [ADR-0057](decisions/0057-pix-parcelado.md) passa a citar a ata original, não o resumo da reunião.
 * **Atualização**: todos os conceitos sem campos fora da OKF; relações viraram a seção Relacionados.
 * **Criação**: [Pix parcelado](terms/pix-parcelado.md), proposto por agente (não verificado).
 
@@ -10,7 +12,7 @@
 * **Criação**: [resumo da reunião de produto W44](meetings/2026-w44-produto.md).
 
 ## 2026-10-16
-* **Criação**: [rollback de cobranças Pix](runbooks/rollback-pix.md), lição do incidente de 2026-10-14.
+* **Criação**: [reconciliar cobranças de cartão](runbooks/reconciliar-cartao-falha-adquirente.md), lição do incidente de 2026-10-14.
 
 ## 2026-10-15
 * **Criação**: [postmortem do timeout na Cielo](incidents/2026-10-14-timeout-cielo.md).
