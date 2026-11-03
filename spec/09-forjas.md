@@ -1,6 +1,6 @@
 # 09 · Forjas (GitHub e GitLab)
 
-O núcleo não depende de forja: conceitos são Markdown com OKF, e `tools/validate.py` e `tools/build_graph.py` rodam sobre um clone git. O que muda de uma forja para outra são três peças finas, mantidas como adaptadores. **Toda regra que não pode falhar fica no validador**, nunca numa configuração da forja.
+O núcleo não depende de forja: conceitos são Markdown com OKF, e `tools/validate.py` e `tools/build_graph.py` rodam sobre um clone git. O que muda de uma forja para outra são três peças finas, mantidas como adaptadores. O validador se comporta igual em qualquer forja: erro para o que viola a OKF ou vaza segredo, aviso para nossas recomendações.
 
 ## O que é igual
 
@@ -21,21 +21,15 @@ O núcleo não depende de forja: conceitos são Markdown com OKF, e `tools/valid
 | Rodada semanal estrita | `schedule` no próprio workflow | Configurada na interface: *Build › Pipeline schedules* | Mesmo efeito: `tools/ci.sh --strict` |
 | Pedido de mudança | Pull request (`gh`) | Merge request (`glab` ou API REST) | A spec diz "PR" para os dois. Automações usam uma interface de forja (abaixo) |
 
-## Aprovação obrigatória do dono
+## Aprovação do dono
 
-| Forja | `CODEOWNERS` bloqueia o merge? |
+| Forja | `CODEOWNERS` pode bloquear o merge? |
 |---|---|
-| GitHub | Sim, com proteção de branch exigindo revisão de code owner |
+| GitHub | Sim, com proteção de branch exigindo revisão de code owner (repos privados: GitHub Pro ou superior) |
 | GitLab Premium/Ultimate | Sim, com a opção de aprovação de Code Owner no branch protegido |
 | GitLab Free | **Não.** O arquivo só mostra quem é dono |
 
-Por isso a garantia não depende da forja. O validador, que roda em qualquer CI, bloqueia sozinho:
-
-- `Decision` em `stable` sem `human:` em `generated.by` ou `verified`;
-- conceito com tag de risco (`security`, `compliance`, `money`, `external-source`) sem `verified` por `human:`;
-- segredos (incluindo tokens do GitHub e do GitLab).
-
-A forja acrescenta só **quem** precisa aprovar. No GitLab Free, compense com branch protegido (merge só por mantenedores) e revisão combinada no time.
+O validador, que roda igual em qualquer CI, só bloqueia o que viola a OKF e segredos (incluindo tokens do GitHub e do GitLab). As recomendações de revisão humana ([04](04-ciclo-de-vida.md#quando-pedir-revisão-humana)) aparecem como aviso no CI e são decididas pelo revisor do PR. Onde a forja permite, exigir aprovação do dono é a forma de garantir que alguém olhe esses avisos.
 
 ## Repos de projeto em outra forja
 

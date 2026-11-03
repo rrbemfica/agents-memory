@@ -1,8 +1,8 @@
-# Convenções do agents-memory — fonte de verdade para tools/validate.py.
-# Só OKF v0.2 (https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md), sem campos próprios.
-# O que está aqui são regras de USO do padrão (tipos, seções, quando exigir humano), não extensões do formato.
-# Mudanças aqui exigem PR revisado pelos donos de schema/ (ver CODEOWNERS) e atualização de spec/02 e spec/03.
-version: 0.3
+# Recomendações do agents-memory — lidas por tools/validate.py.
+# O formato é só OKF v0.2 (https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md).
+# Tudo aqui é RECOMENDAÇÃO de uso do padrão: o validador avisa, não bloqueia.
+# Só viram erro: violações da OKF e segredos (ver tools/validate.py).
+version: 0.4
 okf_version: "0.2"
 
 # Bundles OKF deste repo (cada um tem index.md raiz com okf_version)
@@ -10,25 +10,26 @@ bundles:
   - knowledge
   - examples/payments
 
-# Bundles em que --strict torna stale_after vencido um erro. Exemplos são fictícios e envelhecem: só avisam.
+# Bundles em que --strict (rodada agendada) torna stale_after vencido um erro. Exemplos fictícios só avisam.
 strict_bundles: [knowledge]
 
 enums:
   status: [draft, stable, deprecated]          # OKF §5.4 (ausente = stable)
   grader: [exact, contains, llm]
 
-# Campos de frontmatter da OKF v0.2 que usamos. Qualquer outro gera aviso (mantém o bundle sem extensões).
+# Campos de frontmatter da OKF v0.2 que usamos. Outro campo gera aviso (a OKF permite, nós preferimos não usar).
 okf_fields: [type, title, description, resource, tags, status, generated, verified, stale_after, sources]
 
-# Campos da OKF que tornamos obrigatórios (o padrão só exige `type`)
-required_fields: [type, title, description, generated, sources]
+# Campos da OKF que recomendamos preencher (a OKF só exige `type`)
+recommended_fields: [title, description, generated, sources]
 
+# Vocabulário recomendado de tipos (a OKF deixa cada produtor definir o seu)
 types:
   Decision:
     folder: decisions
     sections: [Contexto, Decisão, Alternativas rejeitadas, Consequências]
-    requires_quote: true          # ao menos uma nota de rodapé com trecho literal entre aspas
-    requires_human: true          # human: em generated.by ou verified (quando não for draft)
+    quote: true                   # ao menos uma nota de rodapé com trecho literal entre aspas
+    human_review: true            # human: em generated.by ou verified, fora de draft
   Business Rule:
     folder: rules
     sections: [Regra, Motivo]
@@ -37,7 +38,7 @@ types:
     sections: [Definição, Exemplo, Não confundir com]
   Service:
     folder: services
-    required: [resource]
+    recommended: [resource]
     sections: [Responsabilidade]
   Runbook:
     folder: runbooks
@@ -47,8 +48,7 @@ types:
     sections: [Resumo, Impacto, Causa, Lições]
   Meeting:
     folder: meetings
-    required: [stale_after]
+    recommended: [stale_after]
 
-# Tags que exigem revisão humana (verified por human:), exceto em status draft
-human_required_tags: [security, compliance, money, external-source]
-
+# Tags em que recomendamos revisão humana (verified por human:), fora de draft
+human_review_tags: [security, compliance, money, external-source]

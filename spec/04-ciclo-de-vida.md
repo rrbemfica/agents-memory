@@ -21,23 +21,23 @@ Não declaramos confiança: ela é **derivada** de `generated` e `verified` (OKF
 
 - Atores (OKF §7): `human:<id>` para pessoas, `process:<id>` para jobs (`process:memory-evals`, `process:memory-gardener`) e `<agente>/<versão>` para agentes (`claude-code/claude-opus-5-5`).
 - **Conceito escrito por pessoa** (`generated.by: human:…`) é confiável para quem o escreveu, mas só chega a "revisado por humano" quando aparece em `verified`. O normal é o revisor do PR se registrar ali.
-- **Conceito gerado por agente sem `verified` precisa de `stale_after`** (padrão: +30 dias). Se ninguém confirmar até lá, ele fica velho e sai.
+- **Conceito escrito por agente sem `verified`: recomendamos `stale_after`** (padrão: +30 dias). Se ninguém confirmar até lá, ele fica velho e sai.
 
-## Quando exigir humano
+## Quando pedir revisão humana
 
-Exigir revisão humana em tudo cria fila, e fila vira carimbo. Não exigir em nada abre espaço para memória envenenada. A regra é exigir humano **onde o erro é caro ou a verificação automática não alcança**:
+Revisão humana em tudo cria fila, e fila vira carimbo. Revisão em nada abre espaço para memória envenenada. A recomendação é pedir humano **onde o erro é caro ou a verificação automática não alcança**. Nenhuma linha abaixo bloqueia o CI: o validador avisa, e quem decide é o revisor do PR.
 
-| Situação | Exige humano? | Por quê | Como é garantido |
+| Situação | Revisão humana? | Por quê | Como é conferido |
 |---|---|---|---|
-| `Decision` `stable` | ✅ | Intenção e escolha não se verificam no código | Validador: `human:` em `generated.by` ou `verified`. Em `draft`, agentes podem propor. |
-| Tags `security`, `compliance`, `money` | ✅ | Erro caro | Validador: `verified` por `human:` (exceto em `draft`) |
-| Conteúdo de fonte externa (cliente, ticket público, web) | ✅ | Principal vetor de envenenamento | Validador: tag `external-source` exige `verified` por `human:` (exceto em `draft`) |
-| Descontinuar ou substituir conceito revisado por humano | ✅ | Perde histórico confiável | Revisão do PR pelo `CODEOWNERS` do domínio |
-| Conflito entre dois conceitos revisados por humano | ✅ | Nenhum sistema resolve bem conflitos | Revisão do PR |
-| `Term`, `Business Rule`, `Service`, `Runbook`, `Incident`, `Meeting` gerados por agente, com fonte | ❌ | Os evals verificam contra a fonte | Entram como não verificados, com `stale_after`, e sobem de nível pelos evals e pelo uso |
+| `Decision` `stable` | ✅ recomendada | Intenção e escolha não se verificam no código | Validador avisa sem `human:` em `generated.by` ou `verified`. Em `draft`, agentes podem propor. |
+| Tags `security`, `compliance`, `money` | ✅ recomendada | Erro caro | Validador avisa sem `verified` por `human:` (exceto em `draft`) |
+| Conteúdo de fonte externa (cliente, ticket público, web) | ✅ recomendada | Principal vetor de envenenamento | Tag `external-source`; validador avisa sem `verified` por `human:` (exceto em `draft`) |
+| Descontinuar ou substituir conceito revisado por humano | ✅ recomendada | Perde histórico confiável | Revisão do PR pelo `CODEOWNERS` do domínio |
+| Conflito entre dois conceitos revisados por humano | ✅ recomendada | Nenhum sistema resolve bem conflitos | Revisão do PR |
+| `Term`, `Business Rule`, `Service`, `Runbook`, `Incident`, `Meeting` escritos por agente, com fonte | ❌ | Os evals verificam contra a fonte | Entram como não verificados, com `stale_after`, e sobem de nível pelos evals e pelo uso |
 | Atualizar `Service` a partir do código | ❌ | Derivado do código | Regenerado; evals confirmam |
 
-`draft` é a forma de um agente propor algo que exige humano: o conceito existe, aparece como proposta e não vale como regra até alguém revisar.
+`draft` é a forma de um agente propor algo que pede humano: o conceito existe, aparece como proposta e não vale como regra até alguém revisar.
 
 Resultado esperado: a revisão humana fica concentrada em decisões e no que é arriscado, que deve ser uma fração pequena do volume.
 
@@ -101,7 +101,7 @@ Job agendado (📐 especificado; `stale_after` vencido já é checado pelo valid
 |---|---|---|
 | `Service` | +30 dias | +90 dias, ou quando a fonte mudar |
 | `Business Rule`, `Term` | +60 dias | +180 dias |
-| `Decision` | — (exige humano) | sem `stale_after`; só é substituída |
+| `Decision` | — (recomendamos humano) | sem `stale_after`; só é substituída |
 | `Runbook` | +60 dias | +180 dias, ou quando falhar em uso |
 | `Incident` | — | sem `stale_after` |
 | `Meeting` | +90 dias | +90 dias |

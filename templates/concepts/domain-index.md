@@ -1,6 +1,5 @@
 # <Domínio>
 
-* [Dono](../../../CODEOWNERS) - <time> (fonte da verdade: CODEOWNERS)
 * [Repo <nome>](<URL>) - <uma linha>
 
 # Serviços

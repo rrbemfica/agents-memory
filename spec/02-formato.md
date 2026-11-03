@@ -1,6 +1,6 @@
 # 02 · Formato (OKF v0.2)
 
-Todo conhecimento compartilhado é um **conceito**: um arquivo Markdown com frontmatter YAML, uma ideia por arquivo, no formato [Open Knowledge Format v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md). **Não usamos campos próprios**: só os do padrão. O que acrescentamos são regras de uso (quais campos e seções exigimos), resumidas [no fim desta página](#o-que-é-padrão-e-o-que-é-convenção-nossa).
+Todo conhecimento compartilhado é um **conceito**: um arquivo Markdown com frontmatter YAML, uma ideia por arquivo, no formato [Open Knowledge Format v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md). **Não usamos campos próprios**: só os do padrão. O que acrescentamos são **recomendações** de uso (quais campos e seções preencher). O validador só dá erro para o que viola a OKF; nossas recomendações viram aviso. Resumo [no fim desta página](#o-que-é-padrão-e-o-que-é-recomendação-nossa).
 
 ## Bundles
 
@@ -38,7 +38,8 @@ knowledge/                      # raiz do bundle
 
 - **ID do conceito** (OKF §2): o caminho do arquivo dentro do bundle, sem `.md`. Ex.: `/domains/payments/decisions/0057-pix-parcelado`.
 - Nomes de arquivo em `kebab-case`, sem acentos. ADRs e incidentes com prefixo ordenável (`0057-…`, `2026-10-14-…`).
-- **Links no corpo:** links Markdown normais. Use **links relativos** (`[ADR-0042](../decisions/0042-idempotencia-adquirente.md)`). A OKF recomenda `/` (relativo à raiz do bundle), mas GitHub e GitLab interpretam `/` como raiz do repo e o link quebra na navegação. O validador aceita as duas formas.
+- **Links no corpo:** links Markdown normais. Use **links relativos** (`[ADR-0042](../decisions/0042-idempotencia-adquirente.md)`). A OKF recomenda `/` (relativo à raiz do bundle), mas GitHub e GitLab interpretam `/` como raiz do repo e o link quebra na navegação. É o nosso único desvio consciente de uma recomendação da OKF; o validador aceita as duas formas.
+- **Não use link relativo que sai do bundle** (`../../CODEOWNERS`): o bundle é a unidade de distribuição da OKF e o link quebra se ele for distribuído sozinho. Para algo fora do bundle, use URL absoluta.
 - **IDs em `sources[].resource` internos:** use a forma relativa ao bundle, com `/` (`/domains/payments/terms/estorno`).
 
 ## Frontmatter
@@ -67,17 +68,17 @@ sources:
 
 ### Campos
 
-| Campo | OKF v0.2 | Nós exigimos? | Notas |
+| Campo | OKF v0.2 | Recomendamos? | Notas |
 |---|---|---|---|
 | `type` | obrigatório | ✅ | Ver [03-tipos.md](03-tipos.md) |
 | `title`, `description` | recomendados | ✅ | `description` aparece nos índices |
 | `resource` | recomendado | só em `Service` | URL do repo ou sistema |
-| `tags` | recomendado | — | Algumas tags exigem humano (ver [04](04-ciclo-de-vida.md#quando-exigir-humano)) |
+| `tags` | recomendado | — | Em algumas tags recomendamos revisão humana (ver [04](04-ciclo-de-vida.md#quando-pedir-revisão-humana)) |
 | `status` | opcional | — | `draft` · `stable` · `deprecated` |
 | `generated` | opcional | ✅ | `{by, at}`. `by` é um **ator**: `human:<id>`, `process:<id>` ou `<agente>/<versão>` |
 | `verified` | opcional | — | Lista de `{by, at}`. Define o **nível de confiança** (abaixo). Um único mapa vale como lista de um item. |
 | `stale_after` | opcional | em `Meeting` e em conceito gerado por agente sem `verified` | Data e hora absolutas (ISO 8601 com fuso) |
-| `sources` | opcional | ✅ (≥ 1) | Cada item exige `resource` |
+| `sources` | opcional | ✅ (≥ 1) | A OKF exige `resource` em cada item |
 
 Todas as datas e horas usam ISO 8601 **com fuso** (`2026-10-30T15:00:00Z`), como exige a OKF.
 
@@ -101,7 +102,7 @@ Derivados de `verified`, não declarados:
 
   [^reuniao-w44]: Reunião de produto W44: "abaixo de 100 reais o custo da operação não fecha"
   ```
-- **Trecho literal:** quando der, a nota de rodapé traz o trecho exato da fonte entre aspas. Em `Decision` é obrigatório. É o que permite checar a afirmação sem reler a fonte inteira, e o que o jardineiro usa para conferir se a fonte ainda diz o mesmo.
+- **Trecho literal:** quando der, a nota de rodapé traz o trecho exato da fonte entre aspas. Em `Decision` é fortemente recomendado. É o que permite checar a afirmação sem reler a fonte inteira, e o que o jardineiro usa para conferir se a fonte ainda diz o mesmo.
 
 ## Relações entre conceitos
 
@@ -129,7 +130,7 @@ Só links Markdown no corpo, como a OKF define. **Não usamos relações tipadas
 
 ## Corpo
 
-- Markdown estruturado (OKF §4.2), com as **seções do tipo** como cabeçalhos `#` (`# Contexto`, `# Decisão`…). Seções obrigatórias são convenção nossa: a OKF não exige nenhuma.
+- Markdown estruturado (OKF §4.2), com as **seções do tipo** como cabeçalhos `#` (`# Contexto`, `# Decisão`…). As seções de cada tipo são recomendação nossa: a OKF não exige nenhuma.
 - Não use `[[wikilinks]]` nem uma lista `# Citations` no corpo (a OKF v0.2 substituiu isso por `sources`).
 
 ## `index.md` (OKF §8)
@@ -140,8 +141,6 @@ Só links Markdown no corpo, como a OKF define. **Não usamos relações tipadas
 
 ```markdown
 # Pagamentos
-
-* [Dono](../../../CODEOWNERS) - pagamentos
 
 # Decisões vigentes
 
@@ -162,7 +161,7 @@ Sem frontmatter. Entradas agrupadas por data, mais recente primeiro, com a açã
 
 Ações usadas: **Criação** · **Atualização** · **Verificação** · **Descontinuação** · **Remoção**.
 
-## O que é padrão e o que é convenção nossa
+## O que é padrão e o que é recomendação nossa
 
 | Item | Situação | Por quê |
 |---|---|---|
@@ -172,11 +171,20 @@ Ações usadas: **Criação** · **Atualização** · **Verificação** · **Des
 | Dono por pasta | `CODEOWNERS` (GitHub e GitLab) | Memória sem dono apodrece; a OKF não define propriedade |
 | Seção `# Relacionados` com verbos | convenção de texto | Dá sentido aos links sem sair do padrão |
 | Trecho literal na nota de rodapé | convenção de texto | Permite conferir a fonte |
-| Seções obrigatórias por tipo | convenção local | Garante conceitos completos; a OKF não exige seções |
-| Campos que tornamos obrigatórios (`title`, `description`, `generated`, `sources`) | regra local, mais estrita | Sem eles não dá para medir confiança |
+| Seções por tipo | recomendação | Conceitos completos; a OKF não exige seções |
+| Campos que recomendamos preencher (`title`, `description`, `generated`, `sources`) | recomendação | Sem eles não dá para medir confiança |
 | `evals/*.yaml` | fora do escopo da OKF | Medir acurácia ([05](05-evals.md)); não afeta a conformidade |
 
 Nenhum conceito tem campo fora da OKF. Qualquer leitor do padrão lê o bundle inteiro sem perder nada.
+
+### O que o validador faz
+
+| Saída | Quando | Efeito |
+|---|---|---|
+| **ERRO** | Viola a OKF v0.2 (frontmatter, `type`, `index.md`, `log.md`, formato de `generated`, `verified`, `status`, `stale_after`, `sources`) ou há segredo no repo | CI falha |
+| **AVISO** | Não segue uma recomendação nossa (tipos, seções, campos recomendados, revisão humana por risco, trecho literal, `stale_after` no que o agente escreve) ou tem link quebrado, que a OKF manda tolerar | CI passa; o revisor decide |
+
+Exceção: na rodada semanal agendada (`--strict`), `stale_after` vencido no bundle `knowledge/` vira erro, para o time ser avisado.
 
 ## O que NÃO entra no bundle
 

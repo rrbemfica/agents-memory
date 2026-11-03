@@ -5,7 +5,7 @@ description: <uma frase: o que se definiu>
 tags: []
 status: stable
 generated: { by: <ator>, at: AAAA-MM-DDThh:mm:ssZ }
-stale_after: AAAA-MM-DDThh:mm:ssZ   # obrigatório; padrão +90 dias
+stale_after: AAAA-MM-DDThh:mm:ssZ   # recomendado; padrão +90 dias
 sources:
   - id: ata
     resource: <link da ata ou gravação, fora deste repo>

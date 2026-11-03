@@ -22,7 +22,7 @@ Agentes de código precisam de dois tipos de contexto: instruções sobre como t
 - Cada repo de projeto tem um `AGENTS.md` curto, proposto por agente e aprovado por uma pessoa no PR, apontando para o seu domínio.
 - O conhecimento compartilhado vive no bundle `knowledge/`, um diretório por domínio, no formato OKF v0.2.[^okf-spec] Usamos os campos do padrão para origem, confiança e frescor (`sources`, `generated`, `verified`, `status`, `stale_after`).
 - Só OKF, sem campos próprios. Dono por pasta no `CODEOWNERS`; ligações como links no corpo, com o verbo no texto; trecho literal da fonte na nota de rodapé.
-- Revisão humana é exigida para `Decision` estável, conteúdo de risco (segurança, compliance, dinheiro) e fonte externa. O resto entra sem verificação, com `stale_after`, e sobe de nível por evals e uso.
+- Revisão humana é recomendada para `Decision` estável, conteúdo de risco (segurança, compliance, dinheiro) e fonte externa. O resto entra sem verificação, com `stale_after`, e sobe de nível por evals e uso.
 - A qualidade deve ser medida por evals com resposta-ouro vinda da fonte. É uma camada nossa (nenhum dos dois padrões define), recomendada até existir o runner.
 
 # Alternativas rejeitadas

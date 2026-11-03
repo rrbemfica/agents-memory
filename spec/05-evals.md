@@ -25,14 +25,14 @@ Não avaliamos se uma nota *parece* boa (rubrica). Avaliamos se ela **produz a r
     - /domains/payments/rules/pix-parcelado-minimo
 ```
 
-| Campo | Obrigatório | Regra |
+| Campo | Necessário para o runner | Regra |
 |---|---|---|
 | `id` | ✅ | Único no repo |
 | `question` | ✅ | Pergunta como alguém do time faria |
 | `answer` | ✅ | Resposta-ouro, curta |
 | `grader` | ✅ | `exact` / `contains` sempre que possível; `llm` só para respostas abertas |
 | `source` | ✅ | De onde a resposta-ouro foi tirada (mesmo formato de `sources[].resource`) |
-| `concepts` | recomendado | IDs relativos ao bundle; o validador checa que existem |
+| `concepts` | recomendado | IDs relativos ao bundle; o validador avisa se não existem |
 
 ## Como rodar (runner — 📐 a implementar)
 

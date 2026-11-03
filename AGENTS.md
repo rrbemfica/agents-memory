@@ -5,7 +5,7 @@ Dono: plataforma
 
 ## Comandos
 - Instalar: `pip install -r tools/requirements.txt`
-- Validar: `python tools/validate.py` (rodar antes de todo commit)
+- Validar: `python tools/validate.py` (rodar antes de todo commit; erro = viola a OKF, aviso = recomendação, resolva os dois antes do PR)
 - Grafo (opcional, não versionado): `python tools/build_graph.py`
 - Tudo o que o CI roda (GitHub ou GitLab): `tools/ci.sh`
 

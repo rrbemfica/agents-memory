@@ -37,7 +37,7 @@ A memória compartilhada do time, feita para ser lida e escrita por **pessoas e 
 
 ```bash
 pip install -r tools/requirements.txt
-python tools/validate.py        # valida frontmatter, tipos, fontes, links, evals e segredos
+python tools/validate.py        # erro: viola a OKF ou vaza segredo · aviso: nossas recomendações
 python tools/build_graph.py     # opcional: gera graph/ localmente (não é commitado)
 ```
 

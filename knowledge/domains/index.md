@@ -1,3 +1,3 @@
 # Domínios
 
-* [Exemplo: Pagamentos](../../examples/payments/) - bundle fictício de referência (fica fora deste bundle); copie para criar o primeiro domínio
+* [Exemplo: Pagamentos](https://github.com/rrbemfica/agents-memory/tree/main/examples/payments) - bundle fictício de referência, em outro bundle; copie para criar o primeiro domínio

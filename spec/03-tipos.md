@@ -1,6 +1,8 @@
 # 03 · Tipos de conceito
 
-A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1). Estes são os nossos. A definição executável está em [`schema/ontology.yaml`](../schema/ontology.yaml), e cada tipo tem um template em [`templates/concepts/`](../templates/concepts/).
+A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1). Estes são os nossos. A definição está em [`schema/ontology.yaml`](../schema/ontology.yaml), e cada tipo tem um template em [`templates/concepts/`](../templates/concepts/).
+
+**Tudo nesta página é recomendação:** o validador avisa quando algo não é seguido, mas não bloqueia. Um conceito com outro `type` continua sendo OKF válido.
 
 | `type` | Pasta | Memória | É… | Envelhece como |
 |---|---|---|---|---|
@@ -16,12 +18,12 @@ A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1)
 
 ## Decision (ADR)
 
-- Seções obrigatórias: `# Contexto` · `# Decisão` · `# Alternativas rejeitadas` · `# Consequências`.
+- Seções recomendadas: `# Contexto` · `# Decisão` · `# Alternativas rejeitadas` · `# Consequências`.
 - Recomendada: `# Revisitar quando`, a condição que justificaria rever. Evita que "já foi rejeitado" vire dogma.
-- Sempre com ao menos uma nota de rodapé com o trecho literal da fonte entre aspas.
-- **Para ser `stable`, exige humano:** um ator `human:` em `generated.by` ou em `verified`. Agentes podem propor decisões em `draft`.
+- Recomendado: ao menos uma nota de rodapé com o trecho literal da fonte entre aspas.
+- **Para ser `stable`, recomendamos humano:** um ator `human:` em `generated.by` ou em `verified`. Agentes podem propor decisões em `draft`.
 - `status`: `draft` (proposta) → `stable` (aceita) → `deprecated` (substituída ou abandonada).
-- **Nunca edite o conteúdo de uma decisão `stable`.** Para mudar, crie uma nova com "Substitui [ADR-…]" em `# Relacionados`, marque a antiga como `deprecated` e acrescente nela "Substituída por […]".
+- **Não edite o conteúdo de uma decisão `stable`.** Para mudar, crie uma nova com "Substitui [ADR-…]" em `# Relacionados`, marque a antiga como `deprecated` e acrescente nela "Substituída por […]".
 - Vira ADR quando a decisão é difícil de reverter ou já gerou discussão repetida. Detalhe de implementação não vira ADR.
 
 ## Business Rule
@@ -36,7 +38,7 @@ A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1)
 
 ## Service
 
-- Campo obrigatório: `resource` (URL do repo ou do sistema externo).
+- Campo recomendado: `resource` (URL do repo ou do sistema externo).
 - Seções: `# Responsabilidade` · `# Interfaces` (entradas e saídas) · `# Armadilhas`.
 - Serviços externos (adquirente, banco central, SaaS) também são `Service`, com `tags: [external]`.
 - O esqueleto (`resource` e os "Depende de") deve ser **gerado do código** quando possível; o texto é curado.
@@ -53,7 +55,7 @@ A OKF não tem taxonomia fixa de tipos: cada produtor define os seus (OKF §4.1)
 
 ## Meeting
 
-- `stale_after` obrigatório (padrão: 90 dias depois da reunião).
+- `stale_after` recomendado (padrão: 90 dias depois da reunião).
 - Corpo curto: bullets com o que foi decidido ou definido, cada um apontando para o conceito gerado.
 - Primeiro bullet: `Participantes:`, com times, não pessoas.
 - **Nunca** a transcrição.

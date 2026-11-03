@@ -36,7 +36,7 @@ Ver a decisão completa em [knowledge/org/decisions/0001-agents-md-e-okf.md](../
 agents-memory/
 ├── AGENTS.md / CLAUDE.md     # como agentes trabalham NESTE repo
 ├── spec/                     # esta especificação
-├── schema/ontology.yaml      # tipos, seções e regras de humano (fonte do validador)
+├── schema/ontology.yaml      # recomendações de uso (lidas pelo validador)
 ├── templates/                # AGENTS.md de projeto + um template por tipo de conceito
 ├── knowledge/                # bundle OKF v0.2 (index.md raiz com okf_version)
 │   ├── org/                  #   padrões, termos e decisões transversais
@@ -57,13 +57,13 @@ agents-memory/
 |---|---|---|
 | 01 | [AGENTS.md](01-agents-md.md) | Padrão para repos de projeto |
 | 02 | [Formato](02-formato.md) | OKF v0.2: frontmatter, fontes, links, bundles, `index.md`, `log.md` |
-| 03 | [Tipos](03-tipos.md) | Cada tipo de conceito, campos e seções obrigatórias |
-| 04 | [Ciclo de vida](04-ciclo-de-vida.md) | Captura → verificação → manutenção → `stale_after`; níveis de confiança da OKF; quando exigir humano |
+| 03 | [Tipos](03-tipos.md) | Tipos de conceito recomendados, campos e seções |
+| 04 | [Ciclo de vida](04-ciclo-de-vida.md) | Captura → verificação → manutenção → `stale_after`; níveis de confiança da OKF; quando pedir revisão humana |
 | 05 | [Evals](05-evals.md) | Como medir acurácia (3 níveis) |
 | 06 | [Grafo e acesso](06-grafo-e-acesso.md) | Grafo gerado, MCP, canais de entrega |
-| 07 | [Governança](07-governanca.md) | Segurança, PII, o que exige humano |
+| 07 | [Governança](07-governanca.md) | Segurança, PII, o que pede humano |
 | 08 | [Adoção](08-adocao.md) | Piloto, métricas, critérios de parada |
-| 09 | [Forjas](09-forjas.md) | GitHub e GitLab: o que é igual, o que muda, aprovação obrigatória |
+| 09 | [Forjas](09-forjas.md) | GitHub e GitLab: o que é igual, o que muda, aprovação do dono |
 
 ## Referências que embasam este desenho
 
