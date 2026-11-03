@@ -49,6 +49,3 @@ types:
 # Tags que exigem revisão humana (verified por human:), exceto em status draft
 human_required_tags: [security, compliance, money, external-source]
 
-limits:
-  body_words_warn: 400
-  index_lines_warn: 60

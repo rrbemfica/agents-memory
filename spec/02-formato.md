@@ -130,14 +130,13 @@ Só links Markdown no corpo, como a OKF define. **Não usamos relações tipadas
 ## Corpo
 
 - Markdown estruturado (OKF §4.2), com as **seções do tipo** como cabeçalhos `#` (`# Contexto`, `# Decisão`…). Seções obrigatórias são convenção nossa: a OKF não exige nenhuma.
-- Limite de **~400 palavras** (o validador avisa acima disso).
 - Não use `[[wikilinks]]` nem uma lista `# Citations` no corpo (a OKF v0.2 substituiu isso por `sources`).
 
 ## `index.md` (OKF §8)
 
 - **Sem frontmatter.** A única exceção é o `index.md` da raiz do bundle, que pode ter só `okf_version: "0.2"`.
 - O corpo tem seções, cada uma com uma lista de itens `* [Título](link) - descrição`.
-- O `index.md` do domínio é a **porta de entrada**: é o que o agente lê primeiro. Mantenha abaixo de ~60 linhas.
+- O `index.md` do domínio é a **porta de entrada**: é o que o agente lê primeiro.
 
 ```markdown
 # Pagamentos

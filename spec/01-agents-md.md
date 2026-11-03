@@ -7,12 +7,11 @@ Um README para agentes: instruções curtas sobre **como trabalhar naquele repo*
 ## Regras
 
 1. **Todo repo de projeto tem um `AGENTS.md` na raiz**, a partir do [template](../templates/AGENTS.md).
-2. **Máximo de ~40 linhas por arquivo.** Passou disso, quebre por pasta ou mova o detalhe para um conceito no bundle.
-3. **Agente escreve, pessoa aprova.** O normal é um agente propor o arquivo ou as linhas novas no PR, e uma pessoa do time aprovar no review. Quem aprova corta toda linha que não passa no [teste abaixo](#teste-para-cada-linha). O que piora o desempenho dos agentes não é o autor ser um LLM, e sim o arquivo repetir o que o agente descobriria sozinho.
-4. **Uma linha de ponte** para o domínio: `Domínio: <nome> → <link para agents-memory/knowledge/domains/<nome>/index.md>`.
-5. **`CLAUDE.md` contém apenas `@AGENTS.md`** (sem duplicar conteúdo).
-6. **Arquivos aninhados** (`src/ledger/AGENTS.md`) só onde há regras realmente diferentes, e **o arquivo da raiz lista cada um** na seção "Regras por área" — nem toda ferramenta desce na árvore sozinha (o Codex só carrega da raiz até a pasta onde a sessão começou).
-7. **Muda junto com o código.** PR que altera comando, arquivo-chave ou cria armadilha nova atualiza o `AGENTS.md` no mesmo PR.
+2. **Agente escreve, pessoa aprova.** O normal é um agente propor o arquivo ou as linhas novas no PR, e uma pessoa do time aprovar no review. Quem aprova corta toda linha que não passa no [teste abaixo](#teste-para-cada-linha). O que piora o desempenho dos agentes não é o autor ser um LLM, e sim o arquivo repetir o que o agente descobriria sozinho.
+3. **Uma linha de ponte** para o domínio: `Domínio: <nome> → <link para agents-memory/knowledge/domains/<nome>/index.md>`.
+4. **`CLAUDE.md` contém apenas `@AGENTS.md`** (sem duplicar conteúdo).
+5. **Arquivos aninhados** (`src/ledger/AGENTS.md`) só onde há regras realmente diferentes, e **o arquivo da raiz lista cada um** na seção "Regras por área" — nem toda ferramenta desce na árvore sozinha (o Codex só carrega da raiz até a pasta onde a sessão começou).
+6. **Muda junto com o código.** PR que altera comando, arquivo-chave ou cria armadilha nova atualiza o `AGENTS.md` no mesmo PR.
 
 ## Seções
 

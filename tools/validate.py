@@ -178,13 +178,10 @@ def check_concepts(onto, docs, concepts, r: Report, strict: bool):
         if tdef.get("requires_quote") and not any(QUOTED.search(v) for v in defs.values()):
             r.error(w, f'{t} exige ao menos uma nota de rodapé com trecho literal entre aspas ([^id]: Título: "trecho")')
 
-        # seções e tamanho
+        # seções
         for section in tdef.get("sections", []):
             if not re.search(rf"^#{{1,2}}\s+{re.escape(section)}\s*$", d.body, re.MULTILINE):
                 r.error(w, f"seção obrigatória ausente: # {section}")
-        words = len(d.body.split())
-        if words > onto["limits"]["body_words_warn"]:
-            r.warn(w, f"corpo com {words} palavras; considere quebrar em conceitos menores")
 
         if t == "Decision" and status == "deprecated":
             links = {key_for_path(p, d.bundle) for _, p in body_links(d)}
@@ -196,8 +193,6 @@ def check_concepts(onto, docs, concepts, r: Report, strict: bool):
         for href, path in body_links(d):
             if not path.exists():
                 r.error(where(d), f"link quebrado no corpo: {href}")
-        if d.kind == "index.md" and len(d.body.splitlines()) > onto["limits"]["index_lines_warn"]:
-            r.warn(where(d), "index.md longo; mantenha a porta de entrada enxuta")
 
 
 def check_evals(onto, concepts, r: Report):
